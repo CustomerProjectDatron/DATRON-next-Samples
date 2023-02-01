@@ -1,3 +1,4 @@
 *.MetaData/
 *.svg
 Temp/
+.vscode/settings.json
