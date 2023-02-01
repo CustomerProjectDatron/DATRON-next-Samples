@@ -1,0 +1,126 @@
+﻿module Whatsapp
+
+@ MeasuringSystem = "Metric" @
+
+using Base
+using Socket
+using String
+
+# declare variable because it's ugly otherwise
+cr="
+"
+
+export program Main
+    #SetReciever phoneNumber=4915161423585 apiKey=4043160
+    answer = SendWhatsapp message="Hey Jo"  
+    Dialog message=answer
+endprogram
+
+@doc: Setup your credentials in the "savedvalues" of the machine control.
+Setup instructions:
+You need to get the api key from the bot before using the API:
+1. Add the phone number +34 611 01 16 37 to your Phone Contacts. (Name it it as you wish)
+2. Send this message "I allow callmebot to send me messages" to the new Contact created (using WhatsApp of course)
+3. Wait until you receive the message "API Activated for your phone number. Your APIKEY is 123123" from the bot.
+   Note: If you don't receive the ApiKey in 2 minutes, please try again after 24hs.
+4. The WhatsApp message from the bot will contain the apikey needed to send messages using the API.
+
+This is an example only for personal use. Show the notes on the Homepage from the callmebot service:
+"https://www.callmebot.com/blog/free-api-whatsapp-messages"@
+export program SetReceiver(
+    phoneNumber:number      @doc: the phone number from your WhatsApp account@
+    apiKey:number           @doc: the key from the message send to you from callmebot@
+    )
+    savevalueof phoneNumber
+    savevalueof apiKey
+endprogram
+
+@doc: This program send a WhatsApp message to a receiver.
+For this purpose, we use the "callmebot" service.
+
+You need to get the apikey form the bot before using the API:
+1. Add the phone number +34 611 01 16 37 to your Phone Contacts. (Name it it as you wish)
+2. Send this message "I allow callmebot to send me messages" to the new Contact created (using WhatsApp of course)
+3. Wait until you receive the message "API Activated for your phone number. Your APIKEY is 123123" from the bot.
+   Note: If you don't receive the ApiKey in 2 minutes, please try again after 24hs.
+4. The WhatsApp message from the bot will contain the apikey needed to send messages using the API.
+5. Ready to use, call "SendWhatsapp" program from your SimPL program and enjoy
+
+This is an example only for personal use. Show the notes on the Homepage from the callmebot service:
+"https://www.callmebot.com/blog/free-api-whatsapp-messages"@
+export program SendWhatsapp message:string returns string    
+    # load the reciever of the message
+    phoneNumber:number
+    apiKey:number
+    
+    if not phoneNumber hassavedvalue and not apiKey hassavedvalue
+        Dialog(
+            message="Please setup reciever  over the program ""SetReceiver""
+You need to get the apikey form the bot before using the API:
+1. Add the phone number +34 611 01 16 37 into your Phone Contacts. (Name it it as you wish)
+2. Send this message ""I allow callmebot to send me messages"" to the new Contact created (using WhatsApp of course)
+3. Wait until you receive the message ""API Activated for your phone number. Your APIKEY is 123123"" from the bot.
+   Note: If you don't receive the ApiKey in 2 minutes, please try again after 24hs.
+4. The WhatsApp message from the bot will contain the apikey needed to send messages using the API.
+
+This is an example only for personal use. Show the notes on the Homepage from the callmebot service:
+""https://www.callmebot.com/blog/free-api-whatsapp-messages"""
+            caption="No credentials found"
+            Error)
+        return ""
+    endif
+    loadvalueof phoneNumber
+    loadvalueof apiKey
+    
+    # replace whitespace
+    message = StringReplace(message," ", "+")
+
+    # Build the HTTP header for the request    
+    httpMessage = "GET /whatsapp.php?phone={0}&text={1}&apikey={2} HTTP/1.1
+Host: api.callmebot.com" + cr + cr
+
+    httpMessage = StringFormat(
+        baseString=httpMessage
+        p0=phoneNumber
+        p1=message
+        p2=apiKey)
+
+    # open a connection to the server
+    handle = SocketConnect address="api.callmebot.com" port=80 
+    SocketWriteString handle=handle value=httpMessage
+    
+    # wait for a result
+    while SocketReadAvailableBytes(handle=handle) == 0
+    endwhile  
+    
+    # read the result in a string 
+    result = ""
+    while SocketReadAvailableBytes(handle=handle) > 0
+        result = result + SocketReadByteAsString handle=handle
+    endwhile
+    
+    return ExtractContent message=result
+endprogram
+
+program ExtractContent message:string returns string
+   # extract the information from the result body
+    contentIndex = StringIndexOf(message, cr+cr)
+
+    content = StringSubString(
+        message, 
+        contentIndex + 4, 
+        StringLength(message) - contentIndex - 4)
+    
+    # parse the data for better readability
+    # remove all the html tags etc. 
+    lines = StringSplit(content,cr)
+    messageLine = lines[1]
+    messageLine = StringReplace(messageLine,"<p>",cr)
+    messageLine = StringSubString(messageLine,2,StringLength(messageLine) - 2)
+    messageLine = StringReplace(messageLine,"<b>",cr)
+    messageLine = StringReplace(messageLine,"</b>",cr)   
+    
+    return messageLine
+endprogram
+
+end

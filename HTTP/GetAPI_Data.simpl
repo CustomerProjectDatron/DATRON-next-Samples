@@ -1,0 +1,66 @@
+﻿module GetAPI_Data
+
+@ MeasuringSystem = "Metric" @
+
+using Base
+using Socket
+using String
+
+# declare variable because it's ugly otherwise
+cr="
+"
+
+export program Main
+    # Build the http header for the request
+    message = "GET /api/activity HTTP/1.1
+Host: www.boredapi.com
+
+"
+    # open a connection to the server
+    handle = SocketConnect address="www.boredapi.com" port=80 
+    SocketWriteString handle=handle value=message
+    
+    # wait for a result
+    while SocketReadAvailableBytes(handle=handle) == 0
+    endwhile  
+    
+    # read the result in a string 
+    result = ""
+    while SocketReadAvailableBytes(handle=handle) > 0
+        result = result + SocketReadByteAsString handle=handle
+    endwhile
+    
+    # extract the information from the result body
+    contentIndex = StringIndexOf(result,"
+
+")
+    content = StringSubString(
+        result, 
+        contentIndex + 4, 
+        StringLength(result) - contentIndex - 4)
+        
+    # make it better for display remove all the json stuff
+    message = content
+    message = StringReplace(message,"""","")
+    message = StringReplace(message,"{","")
+    message = StringReplace(message,"}","")
+
+    # make a MD Table for display
+    lines = StringSplit(message,",")
+    mdResultTable = "|Caption |Value|" + cr
+    mdResultTable = mdResultTable + "|--|--|" + cr
+    foreach element in lines
+        cols = StringSplit(element,":")
+        tableRow = StringFormat(
+            baseString=("|{0}|{1}|" + cr)
+            p0=cols[0]
+            p1=cols[1]
+            )            
+        mdResultTable = mdResultTable + tableRow
+    endforeach
+    
+    # Show dialog
+    Dialog message=mdResultTable caption="What to do?" enableMarkdown
+endprogram
+
+end
