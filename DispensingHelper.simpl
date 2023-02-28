@@ -1,0 +1,16 @@
+﻿module DispensingHelper
+
+@ MeasuringSystem = "Metric" @
+
+using Base
+
+export program CalculateDispensingHeightFromCrossSection widthToHeightRatio:number crossSection:number returns number
+
+    width = Sqrt(crossSection * widthToHeightRatio)
+    height = crossSection / width
+    
+    return height
+
+endprogram
+
+end

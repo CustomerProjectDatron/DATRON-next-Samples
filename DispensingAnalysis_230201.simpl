@@ -1,0 +1,82 @@
+﻿#
+#
+#
+#
+#
+#
+##
+module DispensingAnalysis2
+
+@ MeasuringSystem = "Metric" @
+
+
+using PathMath, DateTimeModule, Development, PathMeasuringField, Visualization, CommonTypes
+using Dispensing, DispensingUtilities, DispensingPersistance, CupParameters
+using CollectionTypes, CommonEnumerations
+using Base
+
+column: ColumnDefinition = { "amount", ColumnType.Number }
+columnNames = string[] = { "targetVelocity", "velocityFromCnc", "xAxisPosition", "directDistance"}
+columnTypes = ColumnType[] = { Number, Number, Number, Number }
+
+export program AnalyzeDispensing sensorName:string cellName:string optional tableName:string
+
+
+    data = GetScannedSensorData (
+        sensor=sensorName
+        columnNames = columnNames
+        columnTypes = columnTypes )
+    
+    data = AppendAmountToTable tab=data
+    
+    if tableName hasvalue
+       ShowTable instance = data cellName=tableName
+    endif   
+
+    mySeries1:Series={"Target", data, "index", "targetVelocity", Color.Red, "XAxis"}
+    mySeries2:Series={"Target", data, "index", "directDistance", Color.Green, "TimeAxis"}
+    mySeries3:Series={"Target", data, "index", "amount", Color.Blue, "TimeAxis2"}
+    seriesArray:Series[]={mySeries1, mySeries2}
+    series2Array:Series[]={mySeries3}
+       
+    ShowSeries cellName=cellName series=seriesArray
+    ShowSeries cellName="Fuck" series=series2Array
+endprogram
+
+program AppendAmountToTable tab:table returns table
+    amountArray:number[]= {}
+    
+    targetVelocity = GetColumn(instance=tab columnName="targetVelocity")
+    directDistance = GetColumn(instance=tab columnName="directDistance")
+
+    
+    amountColumnDef:ColumnDefinition = { "amount", ColumnType.Number }
+    amountColumnData = GetColumn(instance=tab columnName="targetVelocity")
+    
+    targetVelocityColumnDef:ColumnDefinition = { "targetVelocity", ColumnType.Number }
+    targetVelocityColumnData = GetColumn(instance=tab columnName="targetVelocity")
+    
+    directDistanceColumnDef:ColumnDefinition = { "directDistance", ColumnType.Number }
+    directDistanceColumnData = GetColumn(instance=tab columnName="directDistance")   
+    
+    tabRowCount = (GetRowCount instance=tab)
+    for i from 0 to tabRowCount - 1
+              
+        if directDistanceColumnData[i] <> 0
+            amountColumnData[i] = (targetVelocityColumnData[i] / 1000000) / directDistanceColumnData[i]
+            if amountColumnData[i] > 50
+                amountColumnData[i] = 50
+            endif
+            
+        else
+            amountColumnData[i] = 0
+        endif
+    endfor
+    
+    AppendColumn(instance=tab columnDefinition=amountColumnDef columnData=amountColumnData)
+
+    return tab
+        
+endprogram
+
+end

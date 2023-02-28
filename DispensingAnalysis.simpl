@@ -1,0 +1,280 @@
+﻿module DispensingAnalysis
+
+@ MeasuringSystem = "Metric" @
+
+using Base, CollectionTypes, CommonEnumerations, CommonTypes, DateTimeModule, Development, Dispensing
+using DispensingPersistance, File, PathMath, PathMeasuringField, Visualization
+import String
+
+sensor = "ABFaktorSensor"
+columnNames = string[] = {"targetVelocity", "velocityFromCnc", "xAxisPosition", "directDistance", 
+                          "position", "positionWithoutModulo", "torqueFeedback", "extruderRpm", "conveyingVolume"}
+columnTypes = ColumnType[] = { Number, Number, Number, Number, Number, Number, Number, Number, Number}
+
+torqueFeedbackTooHigh = false
+schleppfehler = false
+
+lastSavedFiles:string[]
+
+export structure FileNameData (
+    materialSubfolder:string,
+    cartridge_pressure:number,
+    slowFeed:number,
+    fastFeed:number
+)
+
+export program AnalyzeDispensing cellName:string optional fnData:FileNameData
+    
+    data = GetScannedSensorData sensor=sensor columnNames = columnNames columnTypes = columnTypes
+    data = AppendDataToTable tab=data
+    
+    CreateSeriesesAndShow data=table[]={data}
+    
+    if fnData hasvalue
+        filename = GenerateFilename fnData=fnData
+        WriteCSVData data=data filename=filename
+        #ExportPlotCell( cellName=cellName Pdf fileName=filename + "_PlotExport.pdf")
+    endif
+    
+    if schleppfehler
+        Dialog message="Schleppfehler!" Ok Error
+    endif
+    
+    if torqueFeedbackTooHigh
+        Dialog message="Motorstrom > 200" Ok Error
+    endif
+endprogram
+
+program CreateSeriesesAndShow data:table[]
+    
+    travelSpeedSeries:Series[] = {}
+    pumpRPMSeries:Series[] = {}
+    distanceAmountSeries:Series[] = {}
+    
+    for i from 0 to sizeof data - 1
+            append Series = {"Target", data[i], "distance", "actualFeed", Color.Green, "travelSpeed"} to travelSpeedSeries
+            append Series = {"Target", data[i], "distance", "schleppfehler", Color.Black, "schleppfehler"} to pumpRPMSeries
+            append Series = {"Target", data[i], "distance", "torqueFeedback", Color.Orange, "torqueFeedback"} to pumpRPMSeries
+            append Series = {"Target", data[i], "distance", "amount", Color.Black, "distAmount"} to distanceAmountSeries
+            append Series = {"Target", data[i], "distance", "extruderRpmCorrected", Color.Purple, "torqueFeedback"} to distanceAmountSeries
+    endfor
+    
+    ShowSeries cellName="Geschwindigkeit in mm/min" series=travelSpeedSeries
+    ShowSeries cellName="Pumpendrehzahl Soll/Ist" series=pumpRPMSeries
+    ShowSeries cellName="Ausbringmenge / Distanz" series=distanceAmountSeries
+    
+endprogram 
+
+program AppendDataToTable tab:table returns table
+    
+    amountColumnDef:ColumnDefinition = { "amount", ColumnType.Number }
+    amountColumnData = GetColumn(instance=tab columnName="targetVelocity")
+    
+    targetVelocityColumnDef:ColumnDefinition = { "targetVelocity", ColumnType.Number }
+    targetVelocityColumnData = GetColumn(instance=tab columnName="targetVelocity")
+    
+    directDistanceColumnDef:ColumnDefinition = { "directDistance", ColumnType.Number }
+    directDistanceColumnData = GetColumn(instance=tab columnName="directDistance")   
+    
+    distanceColumnDef:ColumnDefinition = { "distance", ColumnType.Number }
+    distanceColumnData = GetColumn(instance=tab columnName="directDistance")
+    
+    actualFeedColumnDef:ColumnDefinition = { "actualFeed", ColumnType.Number }
+    actualFeedColumnData = GetColumn(instance=tab columnName="directDistance")
+    
+    schleppfehlerColumnDef:ColumnDefinition = { "schleppfehler", ColumnType.Number }
+    schleppfehlerColumnData = GetColumn(instance=tab columnName="targetVelocity")
+    extruderRpmColumnData = GetColumn(instance=tab columnName="extruderRpm")
+    
+    tab = MultiplyScalars( instance=tab targetColumns=string[]={"torqueFeedback"} values=number[]={0.1})
+    
+    torqueFeedbackColumnDef:ColumnDefinition = { "torqueFeedback", ColumnType.Number }
+    torqueFeedbackColumnData = GetColumn(instance=tab columnName="torqueFeedback")
+    
+    extruderRpmCorrectedColumnDef:ColumnDefinition = { "extruderRpmCorrected", ColumnType.Number }
+    extruderRpmCorrectedColumnData = GetColumn(instance=tab columnName="extruderRpm")
+    
+    tabRowCount = (GetRowCount instance=tab)
+    for i from 0 to tabRowCount - 1
+        if directDistanceColumnData[i] <> 0
+        
+            if i > 50
+                amountColumnData[i] = (targetVelocityColumnData[i] / 1000) / directDistanceColumnData[i]
+            else
+                amountColumnData[i] = 0
+            endif
+        
+        else
+            amountColumnData[i] = 0
+        endif
+        
+        if i == 0
+            distanceColumnData[i] = distanceColumnData[i] + directDistanceColumnData[i] / 10000
+        else
+            distanceColumnData[i] = distanceColumnData[i-1] + directDistanceColumnData[i] / 10000
+        endif
+        
+        
+        schleppfehlerColumnData[i] = schleppfehlerColumnData[i] - extruderRpmColumnData[i]
+        if schleppfehlerColumnData[i] > 1
+            schleppfehler = true
+        else
+            schleppfehlerColumnData[i] = 0
+        endif
+        
+        if torqueFeedbackColumnData[i] > 200
+            torqueFeedbackTooHigh = true
+        endif 
+        
+        extruderRpmCorrectedColumnData[i] = extruderRpmCorrectedColumnData[i] * 0.000114
+        
+        actualFeedColumnData[i] = directDistanceColumnData[i] * 6
+        
+    endfor
+    
+    AppendColumn(instance=tab columnDefinition=extruderRpmCorrectedColumnDef columnData=extruderRpmCorrectedColumnData)
+    AppendColumn(instance=tab columnDefinition=amountColumnDef columnData=amountColumnData)
+    AppendColumn(instance=tab columnDefinition=actualFeedColumnDef columnData=actualFeedColumnData)
+    AppendColumn(instance=tab columnDefinition=distanceColumnDef columnData=distanceColumnData)
+    AppendColumn(instance=tab columnDefinition=schleppfehlerColumnDef columnData=schleppfehlerColumnData)
+    
+    return tab
+        
+endprogram
+
+program CalculateDeltaOfExtruderPositionWithoutModulo tab:table returns table
+ 
+    extruderPositionColumnDef:ColumnDefinition = { "positionDelta", ColumnType.Number }
+    extruderPositionColumnData = GetColumn(instance=tab columnName="positionWithoutModulo")
+    
+    extruderPositionDeltaColumnDef:ColumnDefinition = { "positionDelta", ColumnType.Number }
+    extruderPositionDeltaColumnData = GetColumn(instance=tab columnName="positionWithoutModulo")
+    
+    tabRowCount = (GetRowCount instance=tab)
+    for i from 0 to tabRowCount - 1
+        if i >= 1         
+            extruderPositionDeltaColumnData[i] = extruderPositionColumnData[i] - extruderPositionColumnData[i-1]
+        else
+            extruderPositionDeltaColumnData[i] = 0
+        endif
+    endfor
+    
+    AppendColumn(instance=tab columnDefinition=extruderPositionDeltaColumnDef columnData=extruderPositionDeltaColumnData)
+
+    return tab
+endprogram
+
+program WriteCSVData data:table filename:string
+    if FileExists filename=filename
+        #Dialog message="Datei existiert schon" Ok Cancel
+    endif    
+    
+    defaultValue:string[] = {"","","","",""}
+    loadvalueof lastSavedFiles defaultValue
+    SaveTableToCsv(instance=data fileName=filename indexColumn=0)
+    
+    for i from sizeof lastSavedFiles - 1 to 1 step -1
+        lastSavedFiles[i] = lastSavedFiles[i-1]
+    endfor
+    
+    lastSavedFiles[0] = filename
+    
+    savevalueof lastSavedFiles
+    
+endprogram
+
+program GenerateFilename fnData:FileNameData returns string
+    path = GetCurrentProgramPath
+
+    pFactor = ReadPlcVariable( variable="MAIN.Machine.Dispensing._pFactor" LREAL)
+    dFactor = ReadPlcVariable( variable="MAIN.Machine.Dispensing._dFactor" LREAL)
+    d2Factor = ReadPlcVariable( variable="MAIN.Machine.Dispensing._d2Factor" LREAL)
+    
+    date = String::StringReplace(GetDate, ".", "")  
+    time = String::StringReplace(GetTime, ":", "")
+    
+    filename = ( "machine:DispensingData\" +
+            fnData.materialSubfolder + "\" +
+            ValueToString(fnData.cartridge_pressure) + "bar_" +
+            "SF" + ValueToString(fnData.slowFeed) + "_" +
+            "FF" + ValueToString(fnData.fastFeed) + "_" +
+            "A" + ValueToString(RoundDecimals(CrossSection,2)) + "_" +
+            "P" + ValueToString(pFactor.realValue) + "_" +
+            "Dacc" + ValueToString(dFactor.realValue) + "_" +
+            "Ddec" + ValueToString(d2Factor.realValue) + "_" +
+            date + "_" + time 
+            + ".csv"
+            ) 
+
+    return filename
+endprogram
+
+export program ShowLastNDispensed optional numberOfLastDispensedToAnalyze:number optional filename:string
+    
+    importTableColumnDef:ColumnDefinition[] = {
+        ColumnDefinition = { "targetVelocity", ColumnType.Number },
+        ColumnDefinition = { "velocityFromCnc", ColumnType.Number },
+        ColumnDefinition = { "xAxisPosition", ColumnType.Number },
+        ColumnDefinition = { "directDistance", ColumnType.Number },
+        ColumnDefinition = { "position", ColumnType.Number },
+        ColumnDefinition = { "positionWithoutModulo", ColumnType.Number },
+        ColumnDefinition = { "torqueFeedback", ColumnType.Number },
+        ColumnDefinition = { "extruderRpm", ColumnType.Number },
+        ColumnDefinition = { "conveyingVolume", ColumnType.Number },
+        ColumnDefinition = { "extruderRpmCorrected", ColumnType.Number },
+        ColumnDefinition = { "amount", ColumnType.Number },
+        ColumnDefinition = { "actualFeed", ColumnType.Number },
+        ColumnDefinition = { "distance", ColumnType.Number },
+        ColumnDefinition = { "schleppfehler", ColumnType.Number }
+    }
+    
+    importedTables:table[]
+    
+    if not filename hasvalue and numberOfLastDispensedToAnalyze hasvalue
+        for i from 0 to numberOfLastDispensedToAnalyze - 1
+            loadvalueof lastSavedFiles string[]={""}
+            
+            if sizeof lastSavedFiles == 1
+                Dialog message="No last dispenses available to analyze" Ok Warning
+                exit      
+            endif
+            
+            if lastSavedFiles[i] <> ""
+                if FileExists(  filename=lastSavedFiles[i])
+                    createdTable = CreateTableFromCsv(
+                        Timestamp 
+                        columnDefinitions=importTableColumnDef 
+                        fileName=lastSavedFiles[i] 
+                        indexColumn=0
+                        skipFirstRows=1
+                    )
+                
+                if not importedTables hasvalue 
+                    importedTables = table[]={createdTable}
+                else
+                    append createdTable to importedTables
+                endif
+                
+                endif            
+            endif
+        endfor
+    endif
+    
+    if not numberOfLastDispensedToAnalyze hasvalue and filename hasvalue
+        
+        importedTables = {
+            CreateTableFromCsv(
+            Number 
+            columnDefinitions=importTableColumnDef 
+            fileName=filename 
+            indexColumn=0
+            skipFirstRows=1
+            )
+        }
+    endif
+
+    CreateSeriesesAndShow data=importedTables
+    
+endprogram
+
+end

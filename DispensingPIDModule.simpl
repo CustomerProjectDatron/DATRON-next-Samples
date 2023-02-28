@@ -1,0 +1,47 @@
+﻿module DispensingPIDModule
+
+@ MeasuringSystem = "Metric" @
+
+using Base
+import Development
+
+export program SetKp kp:number
+    
+    Development::WritePlcVariable(variable="MAIN.Machine.Dispensing.kp" value=kp LREAL)
+            
+endprogram
+
+export program SetTn tn:number
+    
+    Development::WritePlcVariable(variable="MAIN.Machine.Dispensing.tn" value=tn LREAL)
+            
+endprogram
+
+export program SetTv tv:number
+    
+    Development::WritePlcVariable(variable="MAIN.Machine.Dispensing.tv" value=tv LREAL)
+            
+endprogram
+
+export program SetTd td:number
+    
+    Development::WritePlcVariable(variable="MAIN.Machine.Dispensing.td" value=td LREAL)
+            
+endprogram
+
+@doc: PID Werte Dosierpumpe setzen @
+export program SetAllPIDParams(
+    kp:number @doc: fKp : Reglerverstärkung / Reglerbeiwert @
+    tn:number @doc: tTn : Nachstellzeit. Wenn diese zu T#0s parametriert ist, wird der I-Anteil deaktiviert. @
+    tv:number @doc: tTv : Vorhaltzeit. Wenn diese zu T#0s parametriert ist, wird der D-Anteil deaktiviert. @
+    td:number @doc: tTd : Dämpfungszeit @
+    )
+
+    Development::WritePlcVariable(variable="MAIN.Machine.Dispensing.kp" value=kp LREAL)
+    Development::WritePlcVariable(variable="MAIN.Machine.Dispensing.tn" value=tn LREAL)
+    Development::WritePlcVariable(variable="MAIN.Machine.Dispensing.tv" value=tv LREAL)
+    Development::WritePlcVariable(variable="MAIN.Machine.Dispensing.td" value=td LREAL)
+
+endprogram    
+
+end
