@@ -1,0 +1,100 @@
+﻿module ImportDXF
+
+@ MeasuringSystem = "Metric" @
+
+using Base
+import File
+import String
+import CommonTypes
+import CommonEnumerations
+import LinearAlgebraHelper
+using SimulationPrimitives
+
+# decalre the circle commands 
+circleEntity = "CIRCLE"
+xPosGroupCode = "10"
+yPosGroupCode = "20"
+radiusGroupCode = "40"
+
+structure Circle (xPos:number, yPos:number, radiusGroupCode:number)
+
+export program Main
+    rows = ReadDxfFile filename="DXF_Sample.dxf"
+    circles = ParseDxfCircles rows=rows
+ 
+    # Draw circles in Simulation
+    foreach circ in circles
+        DrawCircle circleCenter=LinearAlgebraHelper::NewPos(circ.xPos,circ.yPos,0) diameter=circ.radiusGroupCode * 2 Red
+    endforeach
+endprogram
+
+@doc: extract all the circle Informations from the dxdf file
+@
+export program ParseDxfCircles rows:string[] returns Circle[]
+
+    circles:Circle[] = {}
+
+    currentCircle = GetEmptyCircle()
+    for rowIndex from 0 to sizeof  rows -1
+        row = rows[rowIndex]
+        case row
+        is circleEntity
+            currentCircle = GetEmptyCircle()
+        is xPosGroupCode
+            currentCircle.xPos = String::StringToNumber(rows[rowIndex + 1])
+        is yPosGroupCode
+            currentCircle.yPos = String::StringToNumber(rows[rowIndex + 1])
+        is radiusGroupCode
+            currentCircle.radiusGroupCode = String::StringToNumber(rows[rowIndex + 1])  
+        endcase   
+        
+        if IsCircleFullDefined(currentCircle)
+            append currentCircle to circles
+            currentCircle = GetEmptyCircle
+        endif
+    endfor
+    
+    return circles
+endprogram
+
+@doc: Creates a Circle where all elements are nullvalue@
+program GetEmptyCircle returns Circle
+    return Circle={
+        nullvalueof number,
+        nullvalueof number,
+        nullvalueof number}
+endprogram
+
+@doc: Check if all pramterters of the cricle are read.@
+function IsCircleFullDefined( value:Circle) returns boolean
+    return value.xPos hasvalue and value.yPos hasvalue and value.radiusGroupCode hasvalue
+endfunction
+
+@doc: Read the file and split it in rows. Remove all Whitespaces at begin and end@
+program ReadDxfFile filename:string returns string[]
+    dxfContent = File::FileRead( filename=filename)
+    rows = String::StringSplit(dxfContent,"
+")
+    # remove whitespace
+    for rowNumber from 0 to sizeof rows - 1
+        rows[rowNumber] = String::StringTrim(rows[rowNumber])
+    endfor
+
+    return rows
+endprogram
+
+@doc: Draw a circle in the 3D simulation for debugging or highlighting.@
+export program DrawCircle circleCenter:CommonTypes::Position diameter:number color:CommonEnumerations::Color
+    posList:CommonTypes::Position[]={}
+    for gamma from 0 to 360
+        pos = LinearAlgebraHelper::NewPos(
+            circleCenter.X + diameter / 2 * CosDeg(gamma),
+            circleCenter.Y + diameter / 2 * SinDeg(gamma),
+            circleCenter.Z)
+        append pos to posList
+    endfor
+
+    DrawLineStrip positions=posList  color=color Line 
+endprogram
+
+end
