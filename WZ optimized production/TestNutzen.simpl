@@ -6,10 +6,12 @@ using Base
 import Pattern
 using File
 using String
+import System
 
 structure FileReader (rows:string[], currentRowNumber:number, output:string[])
 structure Token (isToken:boolean, keyName:string, content:string)
-operationNames:string[]={}
+#structure OperationElement(name:string,toolCall:string)
+operationNames:string[][]={}
 
 export program Main
     externalModulName = "AnhängerOberseite2.simpl" 
@@ -26,7 +28,7 @@ export program Main
         programName="ExportOperations")
 
     # Der Name "operations" muss genauso heißen wie der gespeicherte im Fräsprogramm
-    operations:string[]
+    operations:string[][]
     loadvalueof operations
     
     # Nun beginnt der Spaß mit der Ausführung  
@@ -41,10 +43,9 @@ export program Main
                 RunExternalProgram(
                     modulePath=newFilename
                     simulation 
-                    programName=prg)))
+                    programName=prg[0])))
     endforeach    
 endprogram
-
 
 ####################################################################################
 
@@ -56,7 +57,6 @@ program RewriteProgram filename:string newFilename:string
     ParseFile reader=ref reader
     WriteFile reader=ref reader resultFilename=newFilename
     
-   # WriteMarkdownFile reader=ref reader    
 endprogram
 
 program ParseFile ref reader:FileReader
@@ -65,7 +65,7 @@ program ParseFile ref reader:FileReader
         ParsePrograms reader=ref reader
         ParseEnd  reader=ref reader
 
-        if      reader.currentRowNumber < sizeof reader.rows
+        if reader.currentRowNumber < sizeof reader.rows
             append reader.rows[reader.currentRowNumber] to reader.output       
             reader.currentRowNumber = reader.currentRowNumber + 1           
         endif
@@ -77,11 +77,12 @@ program ParseEnd  ref reader:FileReader
     content = KeyWordContent(row=reader.rows[reader.currentRowNumber] keyWord="end" firstWord)
     if content.isToken and content.content == ""
         append "export program ExportOperations" to reader.output
-        append "    operations:string[]={" to reader.output
+        append "    operations:string[][]={" to reader.output
+        
         
         for operationIndex from 0 to sizeof operationNames -1
-            operation = operationNames[operationIndex]
-            operationLine = "    """ + operation + """"
+            operationName = operationNames[operationIndex]
+            operationLine = "    {""" + operationName[0] + """,""" + StringReplace(operationName[1],"""","""""") + """}"
             if operationIndex < sizeof operationNames - 1
                 operationLine = operationLine +","
             endif
@@ -101,8 +102,34 @@ program ParsePrograms ref reader:FileReader
     content = KeyWordContent(row=reader.rows[reader.currentRowNumber] keyWord="program" firstWord)
     if content.isToken
         append StringReplace(reader.rows[reader.currentRowNumber],"program", "export program") to reader.output
-        append content.content to operationNames
-        reader.currentRowNumber = reader.currentRowNumber + 1           
+        reader.currentRowNumber = reader.currentRowNumber + 1        
+        
+        # read until program end
+        programEnd = false
+        toolCall = ""
+        while not programEnd
+            parseEndProgram = KeyWordContent(row=reader.rows[reader.currentRowNumber] keyWord="endprogram" firstWord)
+            
+            if parseEndProgram.isToken
+                programEnd = true
+            endif
+            
+            # Parse ToolCall
+            parseTool = KeyWordContent(row=reader.rows[reader.currentRowNumber] keyWord="Tool" firstWord)            
+            if parseTool.isToken
+                toolCall = StringTrim(reader.rows[reader.currentRowNumber])
+            endif
+                        
+            if reader.currentRowNumber < sizeof reader.rows
+                append reader.rows[reader.currentRowNumber] to reader.output       
+                    reader.currentRowNumber = reader.currentRowNumber + 1   
+            else
+                System::RaiseError InvalidArgumentValue englishErrorDetails="No program end found!"        
+            endif
+        
+        endwhile
+    
+        append string[]={content.content, toolCall} to operationNames       
     endif
 endprogram
 

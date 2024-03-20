@@ -86,13 +86,13 @@ export program Operation_Fase__6
 endprogram # Operation_Fase__6
  
 export program ExportOperations
-    operations:string[]={
-    "Operation_Logo__1",
-    "Operation_2DContour3__2",
-    "Operation_Schrift__3",
-    "Operation_Kontur__4",
-    "Operation_Kontur2__5",
-    "Operation_Fase__6"
+    operations:string[][]={
+    {"Operation_Logo__1","Tool name=""2001_Graver_Graver"""},
+    {"Operation_2DContour3__2","Tool name=""2001_Graver_Graver"""},
+    {"Operation_Schrift__3","Tool name=""2001_Graver_Graver"""},
+    {"Operation_Kontur__4","Tool name=""2002_MillingEndFlat"""},
+    {"Operation_Kontur2__5","Tool name=""2002_MillingEndFlat"""},
+    {"Operation_Fase__6","Tool name=""2004_MillingRadius"""}
     }
     savevalueof operations
 endprogram
