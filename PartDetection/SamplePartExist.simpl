@@ -5,14 +5,14 @@ module SamplePartExist
 using Base
 using String
 
-# first copy the "PartExist.simpl" file in the Mashcine Library Folder and refresh the Library Folder.
-# include this in your program to get acces to the new command
+# first copy the "PartExist.simpl" file in the Maschine Library Folder and refresh the Library Folder.
+# include this in your program to get access to the new command
 using PartExist
 
 # sample usage of part detection
 export program Main
 
-    # Search realtive to the current position the serchdistance down.
+    # Search relative to the current position the searchdistance down.
     # if the part ist found => true 
     isPartExisting = CheckPart searchDistance=10
         message = StringFormat(

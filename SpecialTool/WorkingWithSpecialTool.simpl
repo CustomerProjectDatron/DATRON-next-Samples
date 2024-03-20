@@ -1,0 +1,157 @@
+﻿module WorkingWithSpecialTool
+
+@ MeasuringSystem = "Metric" @
+
+using Base
+using SpecialTool
+
+# define the ports where all the valves are wired up
+GripperSledDown = UserOutput.OUTPUT_1
+GripperVacuumOn = UserOutput.OUTPUT_2
+
+export program Main
+    CreateSampleSpecialTool name="Gripper"
+    
+    # Drive to start position with milling tool
+    SafeRapid X=0 Y=0 Z=0
+    @image: MillPart.png
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    @
+    
+    # Mill the part
+    # Working as usual call some NC Code etc
+    
+    # retract z axis for safe tool special tool down
+    MoveToSafetyPosition
+    @image:Retract.png
+    
+    
+    
+    
+    
+    
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    @
+        
+    # here you can post your user IO to control a Pneumatik sled for the gripper
+    SetUserOutput output=GripperSledDown On
+    @image:GripperDown.png
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    @
+    
+    # here come the code for the special tool. it's the same as for every other tool. Nothing special all magic is hidden ;-)
+    Tool type="Gripper"
+    
+    # Move to the origin of the part. It' easy like a normal tool.
+    SafeRapid X=0 Y=0 Z=0
+    @image:PlaceGripper.png
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    @
+    
+    # Now you can activate your user io for activating the suction etc.
+    SetUserOutput output=GripperVacuumOn On
+    Rapid Z=100
+    
+    @image:LiftPart.png
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    @
+    
+    # After all the work do all necessary stuff....
+    # Drop part ;-)
+    SetUserOutput output=GripperVacuumOn Off
+    #Lift Arm
+    SetUserOutput output=GripperSledDown Off
+    # Reset to normal tool 
+    DeactivateSpecialTool
+
+    # Next part... 
+    SafeRapid X=0 Y=0 Z=0
+    @image: MillPart.png
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    @    
+endprogram
+
+@doc: Only for simulation without error. It create a special tool in the tool management.@
+program CreateSampleSpecialTool name:string
+    if not SpecialToolExisting(name)
+        CreateSpecialTool toolName=name articleNumber=name toolDescription=name
+    endif
+endprogram
+
+
+end

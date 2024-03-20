@@ -1,0 +1,6077 @@
+# !File ; generated at 02.03.2016 - 07:16
+# bu2_ds
+ 
+module Platzhalter
+ 
+@ ToolDescription :  "Name":"2001_Graver_Graver", "Category":"Graver", "ArticleNr":"0068282", "ToolNumber":2001, "Vendor":"DATRON", "Diameter":3, "TipAngle":45, "TipDiameter":0, "FluteLength":2, "CornerRadius":0, "ShoulderLength":2, "ShoulderDiameter":3, "BodyLength":15, "NumberOfFlutes":1, "ThreadPitch":0, "ShaftDiameter":3, "OverallLength":21 @
+@ ToolDescription :  "Name":"2002_MillingEndFlat", "Category":"MillingEndFlat", "ArticleNr":"0068434E", "ToolNumber":2002, "Vendor":"DATRON", "Diameter":4, "TipAngle":0, "TipDiameter":0, "FluteLength":10, "CornerRadius":0, "ShoulderLength":10, "ShoulderDiameter":4, "BodyLength":25, "NumberOfFlutes":1, "ThreadPitch":0, "ShaftDiameter":6, "OverallLength":37 @
+@ ToolDescription :  "Name":"2004_MillingRadius", "Category":"MillingRadius", "ArticleNr":"0068411", "ToolNumber":2004, "Vendor":"DATRON", "Diameter":4, "TipAngle":0, "TipDiameter":0, "FluteLength":3, "CornerRadius":1, "ShoulderLength":3, "ShoulderDiameter":4, "BodyLength":25, "NumberOfFlutes":4, "ThreadPitch":0, "ShaftDiameter":6, "OverallLength":37 @
+ 
+# Workpiece dimensions
+# min:      X: +  0.000; Y: +  0.000; Z: -  3.000
+# max:      X: + 79.000; Y: + 22.000; Z: +  0.000
+# Part size X: + 79.000; Y: + 22.000; Z: +  3.000
+@ WorkpieceGeometry : "MinEdge":{"X":+0.000,"Y":+0.000,"Z":-3.000},"MaxEdge":{"X":+79.000,"Y":+22.000,"Z":+0.000}@
+ 
+@ EmbeddedSequences = true @
+sequence SEQUENCE_Logo__1
+sequence SEQUENCE_2DContour3__2
+sequence SEQUENCE_Schrift__3
+sequence SEQUENCE_Kontur__4
+sequence SEQUENCE_Kontur2__5
+sequence SEQUENCE_Fase__6
+ 
+using Base,CommonEnumerations
+ 
+# Die Methode habe ich händisch erzeugt. 
+# Sie dient zum abfragen der operation in dem Aufrufendne Programm
+export program ExportOperations
+    operations:string[]={
+        "Operation_Logo__1",
+        "Operation_2DContour3__2",
+        "Operation_Schrift__3",
+        "Operation_Kontur__4",
+        "Operation_Kontur2__5",
+        "Operation_Fase__6"}
+    savevalueof operations
+endprogram
+ 
+export program Main #  AnhngerOberseite MM
+  Operation_Logo__1
+  Operation_2DContour3__2
+  Operation_Schrift__3
+  Operation_Kontur__4
+  Operation_Kontur2__5
+  Operation_Fase__6
+  
+  Spindle Off
+  MoveToParkPosition
+endprogram # AnhngerOberseite MM
+
+export program Operation_Logo__1
+  # ZMIN = -0.1
+  Tool name="2001_Graver_Graver"
+  Rpm=40000
+  Coolant Alcohol
+  SpraySystem On
+  SetFeedTechnology roughing=3000 approach=3000
+  SEQUENCE_Logo__1 
+endprogram # Operation_Logo__1
+ 
+export program Operation_2DContour3__2
+  # ZMIN = -0.1
+  Tool name="2001_Graver_Graver"
+  Rpm=40000
+  SetFeedTechnology finishing=3000 approach=3000 plunge=400
+  SEQUENCE_2DContour3__2 
+endprogram # Operation_2DContour3__2
+ 
+export program Operation_Schrift__3
+  # ZMIN = -0.1
+  Tool name="2001_Graver_Graver"
+  Rpm=40000
+  SetFeedTechnology roughing=3000 approach=3000 plunge=400
+  SEQUENCE_Schrift__3 
+endprogram # Operation_Schrift__3
+ 
+export program Operation_Kontur__4
+  # ZMIN = -3.1
+  Tool name="2002_MillingEndFlat"
+  Rpm=38000
+  SetFeedTechnology finishing=1500 approach=3000 ramp=3000 plunge=600
+  SEQUENCE_Kontur__4 
+endprogram # Operation_Kontur__4
+ 
+export program Operation_Kontur2__5
+  # ZMIN = -2.7
+  Tool name="2002_MillingEndFlat"
+  Rpm=38000
+  SetFeedTechnology roughing=3000 finishing=1500 approach=3000 ramp=3000 plunge=600
+  SEQUENCE_Kontur2__5 
+endprogram # Operation_Kontur2__5
+ 
+export program Operation_Fase__6
+  # ZMIN = -0.9
+  Tool name="2004_MillingRadius"
+  Rpm=40000
+  SetFeedTechnology finishing=2000 approach=2000 plunge=1000
+  SEQUENCE_Fase__6 
+endprogram # Operation_Fase__6
+ 
+end
+# ##########################################################
+   
+$$$ SEQUENCE_Logo__1
+Spindle On
+Smoothing On allowedDeviation=0.0024
+Dynamic = 5
+PrePositioning X=30.73788 Y=7.85024 Z=15
+Rapid Z=2
+Feed Approach
+Line Z=0.11214
+Line X=30.73211 Z=0.05361
+Line X=30.71504 Z=-0.00267
+Line X=30.68731 Z=-0.05454
+Line X=30.65 Z=-0.1
+Feed Roughing
+Line X=24.65
+Feed Approach
+Line X=24.64853 Z=-0.09646
+Line Y=7.85524 Z=-0.09146
+Feed Roughing
+Line Y=7.89524
+Feed Approach
+Line Y=7.90023 Z=-0.09646
+Line X=24.65 Z=-0.1
+Feed Roughing
+Line X=30.65
+Feed Approach
+Line X=30.68731 Z=-0.05454
+Line X=30.71504 Z=-0.00267
+Line X=30.73211 Z=0.05361
+Line X=30.73788 Z=0.11214
+Rapid Z=5
+Rapid Y=12.69987
+Rapid Z=2
+Feed Approach
+Line Z=0.11214
+Line X=30.73211 Z=0.05361
+Line X=30.71504 Z=-0.00267
+Line X=30.68731 Z=-0.05454
+Line X=30.65 Z=-0.1
+Feed Roughing
+Line X=27.04994 Z=-0.09994
+Feed Approach
+Line X=27.04848 Z=-0.0964
+Line Y=12.70487 Z=-0.0914
+Feed Roughing
+Line Y=12.74487
+Feed Approach
+Line Y=12.74987 Z=-0.0964
+Line X=27.04994 Z=-0.09994
+Feed Roughing
+Line X=30.65 Z=-0.1
+Feed Approach
+Line X=30.65146 Z=-0.09646
+Line Y=12.75487 Z=-0.09146
+Feed Roughing
+Line Y=12.79486
+Feed Approach
+Line Y=12.79986 Z=-0.09646
+Line X=30.65 Z=-0.1
+Feed Roughing
+Line X=27.04994 Z=-0.09994
+Feed Approach
+Line X=27.04848 Z=-0.0964
+Line Y=12.80486 Z=-0.0914
+Feed Roughing
+Line Y=12.84486
+Feed Approach
+Line Y=12.84986 Z=-0.0964
+Line X=27.04994 Z=-0.09994
+Feed Roughing
+Line X=30.65 Z=-0.1
+Feed Approach
+Line X=30.65146 Z=-0.09646
+Line Y=12.85486 Z=-0.09146
+Feed Roughing
+Line Y=12.89486
+Feed Approach
+Line Y=12.89986 Z=-0.09646
+Line X=30.65 Z=-0.1
+Feed Roughing
+Line X=27.04994 Z=-0.09994
+Feed Approach
+Line X=27.04848 Z=-0.0964
+Line Y=12.90486 Z=-0.0914
+Feed Roughing
+Line Y=12.94485
+Feed Approach
+Line Y=12.94985 Z=-0.0964
+Line X=27.04994 Z=-0.09994
+Feed Roughing
+Line X=30.65 Z=-0.1
+Feed Approach
+Line X=30.65146 Z=-0.09646
+Line Y=12.95485 Z=-0.09146
+Feed Roughing
+Line Y=12.99485
+Feed Approach
+Line Y=12.99985 Z=-0.09646
+Line X=30.65 Z=-0.1
+Feed Roughing
+Line X=27.04994 Z=-0.09994
+Feed Approach
+Line X=27.04848 Z=-0.0964
+Line Y=13.00485 Z=-0.0914
+Feed Roughing
+Line Y=13.04484
+Feed Approach
+Line Y=13.04984 Z=-0.0964
+Line X=27.04994 Z=-0.09994
+Feed Roughing
+Line X=30.65 Z=-0.1
+Feed Approach
+Line X=30.65146 Z=-0.09646
+Line Y=13.05484 Z=-0.09146
+Feed Roughing
+Line Y=13.09484
+Feed Approach
+Line Y=13.09984 Z=-0.09646
+Line X=30.65 Z=-0.1
+Feed Roughing
+Line X=27.04994 Z=-0.09994
+Feed Approach
+Line X=27.04848 Z=-0.0964
+Line Y=13.10484 Z=-0.0914
+Feed Roughing
+Line Y=13.14484
+Feed Approach
+Line Y=13.14984 Z=-0.0964
+Line X=27.04994 Z=-0.09994
+Feed Roughing
+Line X=30.65 Z=-0.1
+Feed Approach
+Line X=30.65146 Z=-0.09646
+Line Y=13.15484 Z=-0.09146
+Feed Roughing
+Line Y=13.19483
+Feed Approach
+Line Y=13.19983 Z=-0.09646
+Line X=30.65 Z=-0.1
+Feed Roughing
+Line X=27.04994 Z=-0.09994
+Feed Approach
+Line X=27.04848 Z=-0.0964
+Line Y=13.20483 Z=-0.0914
+Feed Roughing
+Line Y=13.24483
+Feed Approach
+Line Y=13.24983 Z=-0.0964
+Line X=27.04994 Z=-0.09994
+Feed Roughing
+Line X=30.65 Z=-0.1
+Feed Approach
+Line X=30.65146 Z=-0.09646
+Line Y=13.25483 Z=-0.09146
+Feed Roughing
+Line Y=13.29483
+Feed Approach
+Line Y=13.29983 Z=-0.09646
+Line X=30.65 Z=-0.1
+Feed Roughing
+Line X=27.04994 Z=-0.09994
+Feed Approach
+Line X=27.04848 Z=-0.0964
+Line Y=13.30483 Z=-0.0914
+Feed Roughing
+Line Y=13.34482
+Feed Approach
+Line Y=13.34982 Z=-0.0964
+Line X=27.04994 Z=-0.09994
+Feed Roughing
+Line X=30.65 Z=-0.1
+Feed Approach
+Line X=30.65146 Z=-0.09646
+Line Y=13.35482 Z=-0.09146
+Feed Roughing
+Line Y=13.39482
+Feed Approach
+Line Y=13.39982 Z=-0.09646
+Line X=30.65 Z=-0.1
+Feed Roughing
+Line X=27.04994 Z=-0.09994
+Feed Approach
+Line X=27.04848 Z=-0.0964
+Line Y=13.40482 Z=-0.0914
+Feed Roughing
+Line Y=13.44481
+Feed Approach
+Line Y=13.44981 Z=-0.0964
+Line X=27.04994 Z=-0.09994
+Feed Roughing
+Line X=30.65 Z=-0.1
+Feed Approach
+Line X=30.65146 Z=-0.09646
+Line Y=13.45481 Z=-0.09146
+Feed Roughing
+Line Y=13.49481
+Feed Approach
+Line Y=13.49981 Z=-0.09646
+Line X=30.65 Z=-0.1
+Feed Roughing
+Line X=27.04994 Z=-0.09994
+Feed Approach
+Line X=27.04848 Z=-0.0964
+Line Y=13.50481 Z=-0.0914
+Feed Roughing
+Line Y=13.54481
+Feed Approach
+Line Y=13.54981 Z=-0.0964
+Line X=27.04994 Z=-0.09994
+Feed Roughing
+Line X=30.65 Z=-0.1
+Feed Approach
+Line X=30.65146 Z=-0.09646
+Line Y=13.55481 Z=-0.09146
+Feed Roughing
+Line Y=13.5948
+Feed Approach
+Line Y=13.5998 Z=-0.09646
+Line X=30.65 Z=-0.1
+Feed Roughing
+Line X=27.04994 Z=-0.09994
+Feed Approach
+Line X=27.04848 Z=-0.0964
+Line Y=13.6048 Z=-0.0914
+Feed Roughing
+Line Y=13.6448
+Feed Approach
+Line Y=13.6498 Z=-0.0964
+Line X=27.04994 Z=-0.09994
+Feed Roughing
+Line X=30.65 Z=-0.1
+Feed Approach
+Line X=30.65146 Z=-0.09646
+Line Y=13.6548 Z=-0.09146
+Feed Roughing
+Line Y=13.6948
+Feed Approach
+Line Y=13.6998 Z=-0.09646
+Line X=30.65 Z=-0.1
+Feed Roughing
+Line X=27.04994 Z=-0.09994
+Feed Approach
+Line X=27.04848 Z=-0.0964
+Line Y=13.7048 Z=-0.0914
+Feed Roughing
+Line Y=13.74479
+Feed Approach
+Line Y=13.74979 Z=-0.0964
+Line X=27.04994 Z=-0.09994
+Feed Roughing
+Line X=30.65 Z=-0.1
+Feed Approach
+Line X=30.65146 Z=-0.09646
+Line Y=13.75479 Z=-0.09146
+Feed Roughing
+Line Y=13.79479
+Feed Approach
+Line Y=13.79979 Z=-0.09646
+Line X=30.65 Z=-0.1
+Feed Roughing
+Line X=27.04994 Z=-0.09994
+Feed Approach
+Line X=27.04848 Z=-0.0964
+Line Y=13.80479 Z=-0.0914
+Feed Roughing
+Line Y=13.84478
+Feed Approach
+Line Y=13.84978 Z=-0.0964
+Line X=27.04994 Z=-0.09994
+Feed Roughing
+Line X=30.65 Z=-0.1
+Feed Approach
+Line X=30.65146 Z=-0.09646
+Line Y=13.85478 Z=-0.09146
+Feed Roughing
+Line Y=13.89478
+Feed Approach
+Line Y=13.89978 Z=-0.09646
+Line X=30.65 Z=-0.1
+Feed Roughing
+Line X=27.04994 Z=-0.09994
+Feed Approach
+Line X=27.04848 Z=-0.0964
+Line Y=13.90478 Z=-0.0914
+Feed Roughing
+Line Y=13.94478
+Feed Approach
+Line Y=13.94978 Z=-0.0964
+Line X=27.04994 Z=-0.09994
+Feed Roughing
+Line X=30.65 Z=-0.1
+Feed Approach
+Line X=30.65146 Z=-0.09646
+Line Y=13.95478 Z=-0.09146
+Feed Roughing
+Line Y=13.99477
+Feed Approach
+Line Y=13.99977 Z=-0.09646
+Line X=30.65 Z=-0.1
+Feed Roughing
+Line X=27.04994 Z=-0.09994
+Feed Approach
+Line X=27.04848 Z=-0.0964
+Line Y=14.00477 Z=-0.0914
+Feed Roughing
+Line Y=14.04477
+Feed Approach
+Line Y=14.04977 Z=-0.0964
+Line X=27.04994 Z=-0.09994
+Feed Roughing
+Line X=30.65 Z=-0.1
+Feed Approach
+Line X=30.65146 Z=-0.09646
+Line Y=14.05477 Z=-0.09146
+Feed Roughing
+Line Y=14.09476
+Feed Approach
+Line Y=14.09976 Z=-0.09646
+Line X=30.65 Z=-0.1
+Feed Roughing
+Line X=27.04994 Z=-0.09994
+Feed Approach
+Line X=27.04848 Z=-0.0964
+Line Y=14.10476 Z=-0.0914
+Feed Roughing
+Line Y=14.14476
+Feed Approach
+Line Y=14.14976 Z=-0.0964
+Line X=27.04994 Z=-0.09994
+Feed Roughing
+Line X=30.65 Z=-0.1
+Feed Approach
+Line X=30.68731 Z=-0.05454
+Line X=30.71504 Z=-0.00267
+Line X=30.73211 Z=0.05361
+Line X=30.73788 Z=0.11214
+Rapid Z=5
+Rapid X=26.53788 Y=12.69987
+Rapid Z=2
+Feed Approach
+Line Z=0.11214
+Line X=26.53211 Z=0.05361
+Line X=26.51504 Z=-0.00267
+Line X=26.48731 Z=-0.05454
+Line X=26.45 Z=-0.1
+Feed Roughing
+Line X=23.15
+Feed Approach
+Line X=23.14853 Z=-0.09646
+Line Y=12.70487 Z=-0.09146
+Feed Roughing
+Line Y=12.74487
+Feed Approach
+Line Y=12.74987 Z=-0.09646
+Line X=23.15 Z=-0.1
+Feed Roughing
+Line X=26.45
+Feed Approach
+Line X=26.45146 Z=-0.09646
+Line Y=12.75487 Z=-0.09146
+Feed Roughing
+Line Y=12.79486
+Feed Approach
+Line Y=12.79986 Z=-0.09646
+Line X=26.45 Z=-0.1
+Feed Roughing
+Line X=23.15
+Feed Approach
+Line X=23.14853 Z=-0.09646
+Line Y=12.80486 Z=-0.09146
+Feed Roughing
+Line Y=12.84486
+Feed Approach
+Line Y=12.84986 Z=-0.09646
+Line X=23.15 Z=-0.1
+Feed Roughing
+Line X=26.45
+Feed Approach
+Line X=26.45146 Z=-0.09646
+Line Y=12.85486 Z=-0.09146
+Feed Roughing
+Line Y=12.89486
+Feed Approach
+Line Y=12.89986 Z=-0.09646
+Line X=26.45 Z=-0.1
+Feed Roughing
+Line X=23.15
+Feed Approach
+Line X=23.14853 Z=-0.09646
+Line Y=12.90486 Z=-0.09146
+Feed Roughing
+Line Y=12.94485
+Feed Approach
+Line Y=12.94985 Z=-0.09646
+Line X=23.15 Z=-0.1
+Feed Roughing
+Line X=26.45
+Feed Approach
+Line X=26.45146 Z=-0.09646
+Line Y=12.95485 Z=-0.09146
+Feed Roughing
+Line Y=12.99485
+Feed Approach
+Line Y=12.99985 Z=-0.09646
+Line X=26.45 Z=-0.1
+Feed Roughing
+Line X=23.15
+Feed Approach
+Line X=23.14853 Z=-0.09646
+Line Y=13.00485 Z=-0.09146
+Feed Roughing
+Line Y=13.04484
+Feed Approach
+Line Y=13.04984 Z=-0.09646
+Line X=23.15 Z=-0.1
+Feed Roughing
+Line X=26.45
+Feed Approach
+Line X=26.45146 Z=-0.09646
+Line Y=13.05484 Z=-0.09146
+Feed Roughing
+Line Y=13.09484
+Feed Approach
+Line Y=13.09984 Z=-0.09646
+Line X=26.45 Z=-0.1
+Feed Roughing
+Line X=23.15
+Feed Approach
+Line X=23.14853 Z=-0.09646
+Line Y=13.10484 Z=-0.09146
+Feed Roughing
+Line Y=13.14484
+Feed Approach
+Line Y=13.14984 Z=-0.09646
+Line X=23.15 Z=-0.1
+Feed Roughing
+Line X=26.45
+Feed Approach
+Line X=26.45146 Z=-0.09646
+Line Y=13.15484 Z=-0.09146
+Feed Roughing
+Line Y=13.19483
+Feed Approach
+Line Y=13.19983 Z=-0.09646
+Line X=26.45 Z=-0.1
+Feed Roughing
+Line X=23.15
+Feed Approach
+Line X=23.14853 Z=-0.09646
+Line Y=13.20483 Z=-0.09146
+Feed Roughing
+Line Y=13.24483
+Feed Approach
+Line Y=13.24983 Z=-0.09646
+Line X=23.15 Z=-0.1
+Feed Roughing
+Line X=26.45
+Feed Approach
+Line X=26.45146 Z=-0.09646
+Line Y=13.25483 Z=-0.09146
+Feed Roughing
+Line Y=13.29483
+Feed Approach
+Line Y=13.29983 Z=-0.09646
+Line X=26.45 Z=-0.1
+Feed Roughing
+Line X=23.15
+Feed Approach
+Line X=23.14853 Z=-0.09646
+Line Y=13.30483 Z=-0.09146
+Feed Roughing
+Line Y=13.34482
+Feed Approach
+Line Y=13.34982 Z=-0.09646
+Line X=23.15 Z=-0.1
+Feed Roughing
+Line X=26.45
+Feed Approach
+Line X=26.45146 Z=-0.09646
+Line Y=13.35482 Z=-0.09146
+Feed Roughing
+Line Y=13.39482
+Feed Approach
+Line Y=13.39982 Z=-0.09646
+Line X=26.45 Z=-0.1
+Feed Roughing
+Line X=23.15
+Feed Approach
+Line X=23.14853 Z=-0.09646
+Line Y=13.40482 Z=-0.09146
+Feed Roughing
+Line Y=13.44481
+Feed Approach
+Line Y=13.44981 Z=-0.09646
+Line X=23.15 Z=-0.1
+Feed Roughing
+Line X=26.45
+Feed Approach
+Line X=26.45146 Z=-0.09646
+Line Y=13.45481 Z=-0.09146
+Feed Roughing
+
+Line Y=13.49481
+Feed Approach
+Line Y=13.49981 Z=-0.09646
+Line X=26.45 Z=-0.1
+Feed Roughing
+Line X=23.15
+Feed Approach
+Line X=23.14853 Z=-0.09646
+Line Y=13.50481 Z=-0.09146
+Feed Roughing
+Line Y=13.54481
+Feed Approach
+Line Y=13.54981 Z=-0.09646
+Line X=23.15 Z=-0.1
+Feed Roughing
+Line X=26.45
+Feed Approach
+Line X=26.45146 Z=-0.09646
+Line Y=13.55481 Z=-0.09146
+Feed Roughing
+Line Y=13.5948
+Feed Approach
+Line Y=13.5998 Z=-0.09646
+Line X=26.45 Z=-0.1
+Feed Roughing
+Line X=23.15
+Feed Approach
+Line X=23.14853 Z=-0.09646
+Line Y=13.6048 Z=-0.09146
+Feed Roughing
+Line Y=13.6448
+Feed Approach
+Line Y=13.6498 Z=-0.09646
+Line X=23.15 Z=-0.1
+Feed Roughing
+Line X=26.45
+Feed Approach
+Line X=26.45146 Z=-0.09646
+Line Y=13.6548 Z=-0.09146
+Feed Roughing
+Line Y=13.6948
+Feed Approach
+Line Y=13.6998 Z=-0.09646
+Line X=26.45 Z=-0.1
+Feed Roughing
+Line X=23.15
+Feed Approach
+Line X=23.14853 Z=-0.09646
+Line Y=13.7048 Z=-0.09146
+Feed Roughing
+Line Y=13.74479
+Feed Approach
+Line Y=13.74979 Z=-0.09646
+Line X=23.15 Z=-0.1
+Feed Roughing
+Line X=26.45
+Feed Approach
+Line X=26.45146 Z=-0.09646
+Line Y=13.75479 Z=-0.09146
+Feed Roughing
+Line Y=13.79479
+Feed Approach
+Line Y=13.79979 Z=-0.09646
+Line X=26.45 Z=-0.1
+Feed Roughing
+Line X=23.15
+Feed Approach
+Line X=23.14853 Z=-0.09646
+Line Y=13.80479 Z=-0.09146
+Feed Roughing
+Line Y=13.84478
+Feed Approach
+Line Y=13.84978 Z=-0.09646
+Line X=23.15 Z=-0.1
+Feed Roughing
+Line X=26.45
+Feed Approach
+Line X=26.45146 Z=-0.09646
+Line Y=13.85478 Z=-0.09146
+Feed Roughing
+Line Y=13.89478
+Feed Approach
+Line Y=13.89978 Z=-0.09646
+Line X=26.45 Z=-0.1
+Feed Roughing
+Line X=23.15
+Feed Approach
+Line X=23.14853 Z=-0.09646
+Line Y=13.90478 Z=-0.09146
+Feed Roughing
+Line Y=13.94478
+Feed Approach
+Line Y=13.94978 Z=-0.09646
+Line X=23.15 Z=-0.1
+Feed Roughing
+Line X=26.45
+Feed Approach
+Line X=26.45146 Z=-0.09646
+Line Y=13.95478 Z=-0.09146
+Feed Roughing
+Line Y=13.99477
+Feed Approach
+Line Y=13.99977 Z=-0.09646
+Line X=26.45 Z=-0.1
+Feed Roughing
+Line X=23.15
+Feed Approach
+Line X=23.14853 Z=-0.09646
+Line Y=14.00477 Z=-0.09146
+Feed Roughing
+Line Y=14.04477
+Feed Approach
+Line Y=14.04977 Z=-0.09646
+Line X=23.15 Z=-0.1
+Feed Roughing
+Line X=26.45
+Feed Approach
+Line X=26.45146 Z=-0.09646
+Line Y=14.05477 Z=-0.09146
+Feed Roughing
+Line Y=14.09476
+Feed Approach
+Line Y=14.09976 Z=-0.09646
+Line X=26.45 Z=-0.1
+Feed Roughing
+Line X=23.15
+Feed Approach
+Line X=23.14853 Z=-0.09646
+Line Y=14.10476 Z=-0.09146
+Feed Roughing
+Line Y=14.14476
+Feed Approach
+Line Y=14.14976 Z=-0.09646
+Line X=23.15 Z=-0.1
+Feed Roughing
+Line X=26.45
+Feed Approach
+Line X=26.48731 Z=-0.05454
+Line X=26.51504 Z=-0.00267
+Line X=26.53211 Z=0.05361
+Line X=26.53788 Z=0.11214
+Rapid Z=5
+Rapid X=24.13788 Y=10.25006
+Rapid Z=2
+Feed Approach
+Line Z=0.11214
+Line X=24.13212 Z=0.05361
+Line X=24.11504 Z=-0.00267
+Line X=24.08731 Z=-0.05454
+Line X=24.05 Z=-0.1
+Feed Roughing
+Line X=23.15
+Feed Approach
+Line X=23.14853 Z=-0.09646
+Line Y=10.25506 Z=-0.09146
+Feed Roughing
+Line Y=10.29505
+Feed Approach
+Line Y=10.30005 Z=-0.09646
+Line X=23.15 Z=-0.1
+Feed Roughing
+Line X=24.05
+Feed Approach
+Line X=24.05147 Z=-0.09646
+Line Y=10.30505 Z=-0.09146
+Feed Roughing
+Line Y=10.34505
+Feed Approach
+Line Y=10.35005 Z=-0.09646
+Line X=24.05 Z=-0.1
+Feed Roughing
+Line X=23.15
+Feed Approach
+Line X=23.14853 Z=-0.09646
+Line Y=10.35505 Z=-0.09146
+Feed Roughing
+Line Y=10.39505
+Feed Approach
+Line Y=10.40005 Z=-0.09646
+Line X=23.15 Z=-0.1
+Feed Roughing
+Line X=24.05
+Feed Approach
+Line X=24.05147 Z=-0.09646
+Line Y=10.40505 Z=-0.09146
+Feed Roughing
+Line Y=10.44504
+Feed Approach
+Line Y=10.45004 Z=-0.09646
+Line X=24.05 Z=-0.1
+Feed Roughing
+Line X=23.15
+Feed Approach
+Line X=23.14853 Z=-0.09646
+Line Y=10.45504 Z=-0.09146
+Feed Roughing
+Line Y=10.49504
+Feed Approach
+Line Y=10.50004 Z=-0.09646
+Line X=23.15 Z=-0.1
+Feed Roughing
+Line X=24.05
+Feed Approach
+Line X=24.05147 Z=-0.09646
+Line Y=10.50504 Z=-0.09146
+Feed Roughing
+Line Y=10.54503
+Feed Approach
+Line Y=10.55003 Z=-0.09646
+Line X=24.05 Z=-0.1
+Feed Roughing
+Line X=23.15
+Feed Approach
+Line X=23.14853 Z=-0.09646
+Line Y=10.55503 Z=-0.09146
+Feed Roughing
+Line Y=10.59503
+Feed Approach
+Line Y=10.60003 Z=-0.09646
+Line X=23.15 Z=-0.1
+Feed Roughing
+Line X=24.05
+Feed Approach
+Line X=24.05147 Z=-0.09646
+Line Y=10.60503 Z=-0.09146
+Feed Roughing
+Line Y=10.64503
+Feed Approach
+Line Y=10.65003 Z=-0.09646
+Line X=24.05 Z=-0.1
+Feed Roughing
+Line X=23.15
+Feed Approach
+Line X=23.14853 Z=-0.09646
+Line Y=10.65503 Z=-0.09146
+Feed Roughing
+Line Y=10.69502
+Feed Approach
+Line Y=10.70002 Z=-0.09646
+Line X=23.15 Z=-0.1
+Feed Roughing
+Line X=24.05
+Feed Approach
+Line X=24.05147 Z=-0.09646
+Line Y=10.70502 Z=-0.09146
+Feed Roughing
+Line Y=10.74502
+Feed Approach
+Line Y=10.75002 Z=-0.09646
+Line X=24.05 Z=-0.1
+Feed Roughing
+Line X=23.15
+Feed Approach
+Line X=23.14853 Z=-0.09646
+Line Y=10.75502 Z=-0.09146
+Feed Roughing
+Line Y=10.79502
+Feed Approach
+Line Y=10.80002 Z=-0.09646
+Line X=23.15 Z=-0.1
+Feed Roughing
+Line X=24.05
+Feed Approach
+Line X=24.05147 Z=-0.09646
+Line Y=10.80502 Z=-0.09146
+Feed Roughing
+Line Y=10.84501
+Feed Approach
+Line Y=10.85001 Z=-0.09646
+Line X=24.05 Z=-0.1
+Feed Roughing
+Line X=23.15
+Feed Approach
+Line X=23.14853 Z=-0.09646
+Line Y=10.85501 Z=-0.09146
+Feed Roughing
+Line Y=10.89501
+Feed Approach
+Line Y=10.90001 Z=-0.09646
+Line X=23.15 Z=-0.1
+Feed Roughing
+Line X=24.05
+Feed Approach
+Line X=24.05147 Z=-0.09646
+Line Y=10.90501 Z=-0.09146
+Feed Roughing
+Line Y=10.945
+Feed Approach
+Line Y=10.95 Z=-0.09646
+Line X=24.05 Z=-0.1
+Feed Roughing
+Line X=23.15
+Feed Approach
+Line X=23.14853 Z=-0.09646
+Line Y=10.955 Z=-0.09146
+Feed Roughing
+Line Y=10.995
+Feed Approach
+Line Y=11 Z=-0.09646
+Line X=23.15 Z=-0.1
+Feed Roughing
+Line X=24.05
+Feed Approach
+Line X=24.05147 Z=-0.09646
+Line Y=11.005 Z=-0.09146
+Feed Roughing
+Line Y=11.045
+Feed Approach
+Line Y=11.05 Z=-0.09646
+Line X=24.05 Z=-0.1
+Feed Roughing
+Line X=23.15
+Feed Approach
+Line X=23.14853 Z=-0.09646
+Line Y=11.055 Z=-0.09146
+Feed Roughing
+Line Y=11.09499
+Feed Approach
+Line Y=11.09999 Z=-0.09646
+Line X=23.15 Z=-0.1
+Feed Roughing
+Line X=24.05
+Feed Approach
+Line X=24.05147 Z=-0.09646
+Line Y=11.10499 Z=-0.09146
+Feed Roughing
+Line Y=11.14499
+Feed Approach
+Line Y=11.14999 Z=-0.09646
+Line X=24.05 Z=-0.1
+Feed Roughing
+Line X=23.15
+Feed Approach
+Line X=23.14853 Z=-0.09646
+Line Y=11.15499 Z=-0.09146
+Feed Roughing
+Line Y=11.19498
+Feed Approach
+Line Y=11.19998 Z=-0.09646
+Line X=23.15 Z=-0.1
+Feed Roughing
+Line X=24.05
+Feed Approach
+Line X=24.05147 Z=-0.09646
+Line Y=11.20498 Z=-0.09146
+Feed Roughing
+Line Y=11.24498
+Feed Approach
+Line Y=11.24998 Z=-0.09646
+Line X=24.05 Z=-0.1
+Feed Roughing
+Line X=23.15
+Feed Approach
+Line X=23.14853 Z=-0.09646
+Line Y=11.25498 Z=-0.09146
+Feed Roughing
+Line Y=11.29498
+Feed Approach
+Line Y=11.29998 Z=-0.09646
+Line X=23.15 Z=-0.1
+Feed Roughing
+Line X=24.05
+Feed Approach
+Line X=24.05147 Z=-0.09646
+Line Y=11.30498 Z=-0.09146
+Feed Roughing
+Line Y=11.34497
+Feed Approach
+Line Y=11.34997 Z=-0.09646
+Line X=24.05 Z=-0.1
+Feed Roughing
+Line X=23.15
+Feed Approach
+Line X=23.14853 Z=-0.09646
+Line Y=11.35497 Z=-0.09146
+Feed Roughing
+Line Y=11.39497
+Feed Approach
+Line Y=11.39997 Z=-0.09646
+Line X=23.15 Z=-0.1
+Feed Roughing
+Line X=24.05
+Feed Approach
+Line X=24.05147 Z=-0.09646
+Line Y=11.40497 Z=-0.09146
+Feed Roughing
+Line Y=11.44497
+Feed Approach
+Line Y=11.44997 Z=-0.09646
+Line X=24.05 Z=-0.1
+Feed Roughing
+Line X=23.15
+Feed Approach
+Line X=23.14853 Z=-0.09646
+Line Y=11.45497 Z=-0.09146
+Feed Roughing
+Line Y=11.49496
+Feed Approach
+Line Y=11.49996 Z=-0.09646
+Line X=23.15 Z=-0.1
+Feed Roughing
+Line X=24.05
+Feed Approach
+Line X=24.05147 Z=-0.09646
+Line Y=11.50496 Z=-0.09146
+Feed Roughing
+Line Y=11.54496
+Feed Approach
+Line Y=11.54996 Z=-0.09646
+Line X=24.05 Z=-0.1
+Feed Roughing
+Line X=23.15
+Feed Approach
+Line X=23.14853 Z=-0.09646
+Line Y=11.55496 Z=-0.09146
+Feed Roughing
+Line Y=11.59495
+Feed Approach
+Line Y=11.59995 Z=-0.09646
+Line X=23.15 Z=-0.1
+Feed Roughing
+Line X=24.05
+Feed Approach
+Line X=24.05147 Z=-0.09646
+Line Y=11.60495 Z=-0.09146
+Feed Roughing
+Line Y=11.64495
+Feed Approach
+Line Y=11.64995 Z=-0.09646
+Line X=24.05 Z=-0.1
+Feed Roughing
+Line X=23.15
+Feed Approach
+Line X=23.14853 Z=-0.09646
+Line Y=11.65495 Z=-0.09146
+Feed Roughing
+Line Y=11.69495
+Feed Approach
+Line Y=11.69995 Z=-0.09646
+Line X=23.15 Z=-0.1
+Feed Roughing
+Line X=24.05
+Feed Approach
+Line X=24.05147 Z=-0.09646
+Line Y=11.70495 Z=-0.09146
+Feed Roughing
+Line Y=11.74494
+Feed Approach
+Line Y=11.74994 Z=-0.09646
+Line X=24.05 Z=-0.1
+Feed Roughing
+Line X=23.15
+Feed Approach
+Line X=23.14853 Z=-0.09646
+Line Y=11.75494 Z=-0.09146
+Feed Roughing
+Line Y=11.79494
+Feed Approach
+Line Y=11.79994 Z=-0.09646
+Line X=23.15 Z=-0.1
+Feed Roughing
+Line X=24.05
+Feed Approach
+Line X=24.05147 Z=-0.09646
+Line Y=11.80494 Z=-0.09146
+Feed Roughing
+Line Y=11.84494
+Feed Approach
+Line Y=11.84994 Z=-0.09646
+Line X=24.05 Z=-0.1
+Feed Roughing
+Line X=23.15
+Feed Approach
+Line X=23.14853 Z=-0.09646
+Line Y=11.85494 Z=-0.09146
+Feed Roughing
+Line Y=11.89493
+Feed Approach
+Line Y=11.89993 Z=-0.09646
+Line X=23.15 Z=-0.1
+Feed Roughing
+Line X=24.05
+Feed Approach
+Line X=24.05147 Z=-0.09646
+Line Y=11.90493 Z=-0.09146
+Feed Roughing
+Line Y=11.94493
+Feed Approach
+Line Y=11.94993 Z=-0.09646
+Line X=24.05 Z=-0.1
+Feed Roughing
+Line X=23.15
+Feed Approach
+Line X=23.14853 Z=-0.09646
+Line Y=11.95493 Z=-0.09146
+Feed Roughing
+Line Y=11.99492
+Feed Approach
+Line Y=11.99992 Z=-0.09646
+
+Line X=23.15 Z=-0.1
+
+Feed Roughing
+Line X=24.05
+Feed Approach
+Line X=24.05147 Z=-0.09646
+Line Y=12.00492 Z=-0.09146
+Feed Roughing
+Line Y=12.04492
+Feed Approach
+Line Y=12.04992 Z=-0.09646
+Line X=24.05 Z=-0.1
+Feed Roughing
+Line X=23.15
+Feed Approach
+Line X=23.11269 Z=-0.05454
+Line X=23.08496 Z=-0.00267
+Line X=23.06789 Z=0.05361
+Line X=23.06212 Z=0.11214
+Rapid Z=5
+Rapid Y=7.85024
+Rapid Z=2
+Feed Approach
+Line Z=0.11214
+Line X=23.06789 Z=0.05361
+Line X=23.08496 Z=-0.00267
+Line X=23.11269 Z=-0.05454
+Line X=23.15 Z=-0.1
+Feed Roughing
+Line X=24.05
+Feed Approach
+Line X=24.05147 Z=-0.09646
+Line Y=7.85524 Z=-0.09146
+Feed Roughing
+Line Y=7.89524
+Feed Approach
+Line Y=7.90023 Z=-0.09646
+Line X=24.05 Z=-0.1
+Feed Roughing
+Line X=23.15
+Feed Approach
+Line X=23.14853 Z=-0.09646
+Line Y=7.90523 Z=-0.09146
+Feed Roughing
+Line Y=7.94523
+Feed Approach
+Line Y=7.95023 Z=-0.09646
+Line X=23.15 Z=-0.1
+Feed Roughing
+Line X=24.05
+Feed Approach
+Line X=24.05147 Z=-0.09646
+Line Y=7.95523 Z=-0.09146
+Feed Roughing
+Line Y=7.99523
+Feed Approach
+Line Y=8.00023 Z=-0.09646
+Line X=24.05 Z=-0.1
+Feed Roughing
+Line X=23.15
+Feed Approach
+Line X=23.14853 Z=-0.09646
+Line Y=8.00523 Z=-0.09146
+Feed Roughing
+Line Y=8.04522
+Feed Approach
+Line Y=8.05022 Z=-0.09646
+Line X=23.15 Z=-0.1
+Feed Roughing
+Line X=24.05
+Feed Approach
+Line X=24.05147 Z=-0.09646
+Line Y=8.05522 Z=-0.09146
+Feed Roughing
+Line Y=8.09522
+Feed Approach
+Line Y=8.10022 Z=-0.09646
+Line X=24.05 Z=-0.1
+Feed Roughing
+Line X=23.15
+Feed Approach
+Line X=23.14853 Z=-0.09646
+Line Y=8.10522 Z=-0.09146
+Feed Roughing
+Line Y=8.14522
+Feed Approach
+Line Y=8.15022 Z=-0.09646
+Line X=23.15 Z=-0.1
+Feed Roughing
+Line X=24.05
+Feed Approach
+Line X=24.05147 Z=-0.09646
+Line Y=8.15522 Z=-0.09146
+Feed Roughing
+Line Y=8.19521
+Feed Approach
+Line Y=8.20021 Z=-0.09646
+Line X=24.05 Z=-0.1
+Feed Roughing
+Line X=23.15
+Feed Approach
+Line X=23.14853 Z=-0.09646
+Line Y=8.20521 Z=-0.09146
+Feed Roughing
+Line Y=8.24521
+Feed Approach
+Line Y=8.25021 Z=-0.09646
+Line X=23.15 Z=-0.1
+Feed Roughing
+Line X=24.05
+Feed Approach
+Line X=24.05147 Z=-0.09646
+Line Y=8.25521 Z=-0.09146
+Feed Roughing
+Line Y=8.2952
+Feed Approach
+Line Y=8.3002 Z=-0.09646
+Line X=24.05 Z=-0.1
+Feed Roughing
+Line X=23.15
+Feed Approach
+Line X=23.14853 Z=-0.09646
+Line Y=8.3052 Z=-0.09146
+Feed Roughing
+Line Y=8.3452
+Feed Approach
+Line Y=8.3502 Z=-0.09646
+Line X=23.15 Z=-0.1
+Feed Roughing
+Line X=24.05
+Feed Approach
+Line X=24.05147 Z=-0.09646
+Line Y=8.3552 Z=-0.09146
+Feed Roughing
+Line Y=8.3952
+Feed Approach
+Line Y=8.4002 Z=-0.09646
+Line X=24.05 Z=-0.1
+Feed Roughing
+Line X=23.15
+Feed Approach
+Line X=23.14853 Z=-0.09646
+Line Y=8.4052 Z=-0.09146
+Feed Roughing
+Line Y=8.44519
+Feed Approach
+Line Y=8.45019 Z=-0.09646
+Line X=23.15 Z=-0.1
+Feed Roughing
+Line X=24.05
+Feed Approach
+Line X=24.05147 Z=-0.09646
+Line Y=8.45519 Z=-0.09146
+Feed Roughing
+Line Y=8.49519
+Feed Approach
+Line Y=8.50019 Z=-0.09646
+Line X=24.05 Z=-0.1
+Feed Roughing
+Line X=23.15
+Feed Approach
+Line X=23.14853 Z=-0.09646
+Line Y=8.50519 Z=-0.09146
+Feed Roughing
+Line Y=8.54519
+Feed Approach
+Line Y=8.55019 Z=-0.09646
+Line X=23.15 Z=-0.1
+Feed Roughing
+Line X=24.05
+Feed Approach
+Line X=24.05147 Z=-0.09646
+Line Y=8.55519 Z=-0.09146
+Feed Roughing
+Line Y=8.59518
+Feed Approach
+Line Y=8.60018 Z=-0.09646
+Line X=24.05 Z=-0.1
+Feed Roughing
+Line X=23.15
+Feed Approach
+Line X=23.14853 Z=-0.09646
+Line Y=8.60518 Z=-0.09146
+Feed Roughing
+Line Y=8.64518
+Feed Approach
+Line Y=8.65018 Z=-0.09646
+Line X=23.15 Z=-0.1
+Feed Roughing
+Line X=24.05
+Feed Approach
+Line X=24.05147 Z=-0.09646
+Line Y=8.65518 Z=-0.09146
+Feed Roughing
+Line Y=8.69517
+Feed Approach
+Line Y=8.70017 Z=-0.09646
+Line X=24.05 Z=-0.1
+Feed Roughing
+Line X=23.15
+Feed Approach
+Line X=23.14853 Z=-0.09646
+Line Y=8.70517 Z=-0.09146
+Feed Roughing
+Line Y=8.74517
+Feed Approach
+Line Y=8.75017 Z=-0.09646
+Line X=23.15 Z=-0.1
+Feed Roughing
+Line X=24.05
+Feed Approach
+Line X=24.05147 Z=-0.09646
+Line Y=8.75517 Z=-0.09146
+Feed Roughing
+Line Y=8.79517
+Feed Approach
+Line Y=8.80017 Z=-0.09646
+Line X=24.05 Z=-0.1
+Feed Roughing
+Line X=23.15
+Feed Approach
+Line X=23.14853 Z=-0.09646
+Line Y=8.80517 Z=-0.09146
+Feed Roughing
+Line Y=8.84516
+Feed Approach
+Line Y=8.85016 Z=-0.09646
+Line X=23.15 Z=-0.1
+Feed Roughing
+Line X=24.05
+Feed Approach
+Line X=24.05147 Z=-0.09646
+Line Y=8.85516 Z=-0.09146
+Feed Roughing
+Line Y=8.89516
+Feed Approach
+Line Y=8.90016 Z=-0.09646
+Line X=24.05 Z=-0.1
+Feed Roughing
+Line X=23.15
+Feed Approach
+Line X=23.14853 Z=-0.09646
+Line Y=8.90516 Z=-0.09146
+Feed Roughing
+Line Y=8.94516
+Feed Approach
+Line Y=8.95016 Z=-0.09646
+Line X=23.15 Z=-0.1
+Feed Roughing
+Line X=24.05
+Feed Approach
+Line X=24.05147 Z=-0.09646
+Line Y=8.95516 Z=-0.09146
+Feed Roughing
+Line Y=8.99515
+Feed Approach
+Line Y=9.00015 Z=-0.09646
+Line X=24.05 Z=-0.1
+Feed Roughing
+Line X=23.15
+Feed Approach
+Line X=23.14853 Z=-0.09646
+Line Y=9.00515 Z=-0.09146
+Feed Roughing
+Line Y=9.04515
+Feed Approach
+Line Y=9.05015 Z=-0.09646
+Line X=23.15 Z=-0.1
+Feed Roughing
+Line X=24.05
+Feed Approach
+Line X=24.05147 Z=-0.09646
+Line Y=9.05515 Z=-0.09146
+Feed Roughing
+Line Y=9.09514
+Feed Approach
+Line Y=9.10014 Z=-0.09646
+Line X=24.05 Z=-0.1
+Feed Roughing
+Line X=23.15
+Feed Approach
+Line X=23.14853 Z=-0.09646
+Line Y=9.10514 Z=-0.09146
+Feed Roughing
+Line Y=9.14514
+Feed Approach
+Line Y=9.15014 Z=-0.09646
+Line X=23.15 Z=-0.1
+Feed Roughing
+Line X=24.05
+Feed Approach
+Line X=24.05147 Z=-0.09646
+Line Y=9.15514 Z=-0.09146
+Feed Roughing
+Line Y=9.19514
+Feed Approach
+Line Y=9.20014 Z=-0.09646
+Line X=24.05 Z=-0.1
+Feed Roughing
+Line X=23.15
+Feed Approach
+Line X=23.14853 Z=-0.09646
+Line Y=9.20514 Z=-0.09146
+Feed Roughing
+Line Y=9.24513
+Feed Approach
+Line Y=9.25013 Z=-0.09646
+Line X=23.15 Z=-0.1
+Feed Roughing
+Line X=24.05
+Feed Approach
+Line X=24.05147 Z=-0.09646
+Line Y=9.25513 Z=-0.09146
+Feed Roughing
+Line Y=9.29513
+Feed Approach
+Line Y=9.30013 Z=-0.09646
+Line X=24.05 Z=-0.1
+Feed Roughing
+Line X=23.15
+Feed Approach
+Line X=23.14853 Z=-0.09646
+Line Y=9.30513 Z=-0.09146
+Feed Roughing
+Line Y=9.34513
+Feed Approach
+Line Y=9.35013 Z=-0.09646
+Line X=23.15 Z=-0.1
+Feed Roughing
+Line X=24.05
+Feed Approach
+Line X=24.05147 Z=-0.09646
+Line Y=9.35513 Z=-0.09146
+Feed Roughing
+Line Y=9.39512
+Feed Approach
+Line Y=9.40012 Z=-0.09646
+Line X=24.05 Z=-0.1
+Feed Roughing
+Line X=23.15
+Feed Approach
+Line X=23.14853 Z=-0.09646
+Line Y=9.40512 Z=-0.09146
+Feed Roughing
+Line Y=9.44512
+Feed Approach
+Line Y=9.45012 Z=-0.09646
+Line X=23.15 Z=-0.1
+Feed Roughing
+Line X=24.05
+Feed Approach
+Line X=24.05147 Z=-0.09646
+Line Y=9.45512 Z=-0.09146
+Feed Roughing
+Line Y=9.49511
+Feed Approach
+Line Y=9.50011 Z=-0.09646
+Line X=24.05 Z=-0.1
+Feed Roughing
+Line X=23.15
+Feed Approach
+Line X=23.14853 Z=-0.09646
+Line Y=9.50511 Z=-0.09146
+Feed Roughing
+Line Y=9.54511
+Feed Approach
+Line Y=9.55011 Z=-0.09646
+Line X=23.15 Z=-0.1
+Feed Roughing
+Line X=24.05
+Feed Approach
+Line X=24.05147 Z=-0.09646
+Line Y=9.55511 Z=-0.09146
+Feed Roughing
+Line Y=9.59511
+Feed Approach
+Line Y=9.60011 Z=-0.09646
+Line X=24.05 Z=-0.1
+Feed Roughing
+Line X=23.15
+Feed Approach
+Line X=23.11269 Z=-0.05454
+Line X=23.08496 Z=-0.00267
+Line X=23.06789 Z=0.05361
+Line X=23.06212 Z=0.11214
+Rapid Z=5
+Rapid X=24.56212 Y=7.95023
+Rapid Z=2
+Feed Approach
+Line Z=0.11214
+Line X=24.56789 Z=0.05361
+Line X=24.58496 Z=-0.00267
+Line X=24.61269 Z=-0.05454
+Line X=24.65 Z=-0.1
+Feed Roughing
+Line X=30.65
+Feed Approach
+Line X=30.65146 Z=-0.09646
+Line Y=7.95523 Z=-0.09146
+Feed Roughing
+Line Y=7.99523
+Feed Approach
+Line Y=8.00023 Z=-0.09646
+Line X=30.65 Z=-0.1
+Feed Roughing
+Line X=24.65
+Feed Approach
+Line X=24.64853 Z=-0.09646
+Line Y=8.00523 Z=-0.09146
+Feed Roughing
+Line Y=8.04522
+Feed Approach
+Line Y=8.05022 Z=-0.09646
+Line X=24.65 Z=-0.1
+Feed Roughing
+Line X=30.65
+Feed Approach
+Line X=30.65146 Z=-0.09646
+Line Y=8.05522 Z=-0.09146
+Feed Roughing
+Line Y=8.09522
+Feed Approach
+Line Y=8.10022 Z=-0.09646
+Line X=30.65 Z=-0.1
+Feed Roughing
+Line X=24.65
+Feed Approach
+Line X=24.64853 Z=-0.09646
+Line Y=8.10522 Z=-0.09146
+Feed Roughing
+Line Y=8.14522
+Feed Approach
+Line Y=8.15022 Z=-0.09646
+Line X=24.65 Z=-0.1
+Feed Roughing
+Line X=30.65
+Feed Approach
+Line X=30.65146 Z=-0.09646
+Line Y=8.15522 Z=-0.09146
+Feed Roughing
+Line Y=8.19521
+Feed Approach
+Line Y=8.20021 Z=-0.09646
+Line X=30.65 Z=-0.1
+Feed Roughing
+Line X=24.65
+Feed Approach
+Line X=24.64853 Z=-0.09646
+Line Y=8.20521 Z=-0.09146
+Feed Roughing
+Line Y=8.24521
+Feed Approach
+Line Y=8.25021 Z=-0.09646
+Line X=24.65 Z=-0.1
+Feed Roughing
+Line X=30.65
+Feed Approach
+Line X=30.65146 Z=-0.09646
+Line Y=8.25521 Z=-0.09146
+Feed Roughing
+Line Y=8.2952
+Feed Approach
+Line Y=8.3002 Z=-0.09646
+Line X=30.65 Z=-0.1
+Feed Roughing
+Line X=24.65
+Feed Approach
+Line X=24.64853 Z=-0.09646
+Line Y=8.3052 Z=-0.09146
+Feed Roughing
+Line Y=8.3452
+Feed Approach
+Line Y=8.3502 Z=-0.09646
+Line X=24.65 Z=-0.1
+Feed Roughing
+Line X=30.65
+Feed Approach
+Line X=30.65146 Z=-0.09646
+Line Y=8.3552 Z=-0.09146
+Feed Roughing
+Line Y=8.3952
+Feed Approach
+Line Y=8.4002 Z=-0.09646
+Line X=30.65 Z=-0.1
+Feed Roughing
+Line X=24.65
+Feed Approach
+Line X=24.64853 Z=-0.09646
+Line Y=8.4052 Z=-0.09146
+Feed Roughing
+Line Y=8.44519
+Feed Approach
+Line Y=8.45019 Z=-0.09646
+Line X=24.65 Z=-0.1
+Feed Roughing
+Line X=30.65
+Feed Approach
+Line X=30.65146 Z=-0.09646
+Line Y=8.45519 Z=-0.09146
+Feed Roughing
+
+Line Y=8.49519
+Feed Approach
+
+Line Y=8.50019 Z=-0.09646
+Line X=30.65 Z=-0.1
+Feed Roughing
+Line X=24.65
+Feed Approach
+Line X=24.64853 Z=-0.09646
+Line Y=8.50519 Z=-0.09146
+Feed Roughing
+Line Y=8.54519
+Feed Approach
+Line Y=8.55019 Z=-0.09646
+Line X=24.65 Z=-0.1
+Feed Roughing
+Line X=30.65
+Feed Approach
+Line X=30.65146 Z=-0.09646
+Line Y=8.55519 Z=-0.09146
+Feed Roughing
+Line Y=8.59518
+Feed Approach
+Line Y=8.60018 Z=-0.09646
+Line X=30.65 Z=-0.1
+Feed Roughing
+Line X=24.65
+Feed Approach
+Line X=24.64853 Z=-0.09646
+Line Y=8.60518 Z=-0.09146
+Feed Roughing
+Line Y=8.64518
+Feed Approach
+Line Y=8.65018 Z=-0.09646
+Line X=24.65 Z=-0.1
+Feed Roughing
+Line X=30.65
+Feed Approach
+Line X=30.65146 Z=-0.09646
+Line Y=8.65518 Z=-0.09146
+Feed Roughing
+Line Y=8.69517
+Feed Approach
+Line Y=8.70017 Z=-0.09646
+Line X=30.65 Z=-0.1
+Feed Roughing
+Line X=24.65
+Feed Approach
+Line X=24.64853 Z=-0.09646
+Line Y=8.70517 Z=-0.09146
+Feed Roughing
+Line Y=8.74517
+Feed Approach
+Line Y=8.75017 Z=-0.09646
+Line X=24.65 Z=-0.1
+Feed Roughing
+Line X=30.65
+Feed Approach
+Line X=30.65146 Z=-0.09646
+Line Y=8.75517 Z=-0.09146
+Feed Roughing
+Line Y=8.79517
+Feed Approach
+Line Y=8.80017 Z=-0.09646
+Line X=30.65 Z=-0.1
+Feed Roughing
+Line X=24.65
+Feed Approach
+Line X=24.64853 Z=-0.09646
+Line Y=8.80517 Z=-0.09146
+Feed Roughing
+Line Y=8.84516
+Feed Approach
+Line Y=8.85016 Z=-0.09646
+Line X=24.65 Z=-0.1
+Feed Roughing
+Line X=30.65
+Feed Approach
+Line X=30.65146 Z=-0.09646
+Line Y=8.85516 Z=-0.09146
+Feed Roughing
+Line Y=8.89516
+Feed Approach
+Line Y=8.90016 Z=-0.09646
+Line X=30.65 Z=-0.1
+Feed Roughing
+Line X=24.65
+Feed Approach
+Line X=24.64853 Z=-0.09646
+Line Y=8.90516 Z=-0.09146
+Feed Roughing
+Line Y=8.94516
+Feed Approach
+Line Y=8.95016 Z=-0.09646
+Line X=24.65 Z=-0.1
+Feed Roughing
+Line X=30.65
+Feed Approach
+Line X=30.65146 Z=-0.09646
+Line Y=8.95516 Z=-0.09146
+Feed Roughing
+Line Y=8.99515
+Feed Approach
+Line Y=9.00015 Z=-0.09646
+Line X=30.65 Z=-0.1
+Feed Roughing
+Line X=24.65
+Feed Approach
+Line X=24.64853 Z=-0.09646
+Line Y=9.00515 Z=-0.09146
+Feed Roughing
+Line Y=9.04515
+Feed Approach
+Line Y=9.05015 Z=-0.09646
+Line X=24.65 Z=-0.1
+Feed Roughing
+Line X=30.65
+Feed Approach
+Line X=30.65146 Z=-0.09646
+Line Y=9.05515 Z=-0.09146
+Feed Roughing
+Line Y=9.09514
+Feed Approach
+Line Y=9.10014 Z=-0.09646
+Line X=30.65 Z=-0.1
+Feed Roughing
+Line X=24.65
+Feed Approach
+Line X=24.64853 Z=-0.09646
+Line Y=9.10514 Z=-0.09146
+Feed Roughing
+Line Y=9.14514
+Feed Approach
+Line Y=9.15014 Z=-0.09646
+Line X=24.65 Z=-0.1
+Feed Roughing
+Line X=30.65
+Feed Approach
+Line X=30.65146 Z=-0.09646
+Line Y=9.15514 Z=-0.09146
+Feed Roughing
+Line Y=9.19514
+Feed Approach
+Line Y=9.20014 Z=-0.09646
+Line X=30.65 Z=-0.1
+Feed Roughing
+Line X=24.65
+Feed Approach
+Line X=24.64853 Z=-0.09646
+Line Y=9.20514 Z=-0.09146
+Feed Roughing
+Line Y=9.24513
+Feed Approach
+Line Y=9.25013 Z=-0.09646
+Line X=24.65 Z=-0.1
+Feed Roughing
+Line X=30.65
+Feed Approach
+Line X=30.65146 Z=-0.09646
+Line Y=9.25513 Z=-0.09146
+Feed Roughing
+Line Y=9.29513
+Feed Approach
+Line Y=9.30013 Z=-0.09646
+Line X=30.65 Z=-0.1
+Feed Roughing
+Line X=24.65
+Feed Approach
+Line X=24.64853 Z=-0.09646
+Line Y=9.30513 Z=-0.09146
+Feed Roughing
+Line Y=9.34513
+Feed Approach
+Line Y=9.35013 Z=-0.09646
+Line X=24.65 Z=-0.1
+Feed Roughing
+Line X=30.65
+Feed Approach
+Line X=30.65146 Z=-0.09646
+Line Y=9.35513 Z=-0.09146
+Feed Roughing
+Line Y=9.39512
+Feed Approach
+Line Y=9.40012 Z=-0.09646
+Line X=30.65 Z=-0.1
+Feed Roughing
+Line X=24.65
+Feed Approach
+Line X=24.64853 Z=-0.09646
+Line Y=9.40512 Z=-0.09146
+Feed Roughing
+Line Y=9.44512
+Feed Approach
+Line Y=9.45012 Z=-0.09646
+Line X=24.65 Z=-0.1
+Feed Roughing
+Line X=30.65
+Feed Approach
+Line X=30.65146 Z=-0.09646
+Line Y=9.45512 Z=-0.09146
+Feed Roughing
+Line Y=9.49511
+Feed Approach
+Line Y=9.50011 Z=-0.09646
+Line X=30.65 Z=-0.1
+Feed Roughing
+Line X=24.65
+Feed Approach
+Line X=24.64853 Z=-0.09646
+Line Y=9.50511 Z=-0.09146
+Feed Roughing
+Line Y=9.54511
+Feed Approach
+Line Y=9.55011 Z=-0.09646
+Line X=24.65 Z=-0.1
+Feed Roughing
+Line X=30.65
+Feed Approach
+Line X=30.65146 Z=-0.09646
+Line Y=9.55511 Z=-0.09146
+Feed Roughing
+Line Y=9.59511
+Feed Approach
+Line Y=9.60011 Z=-0.09646
+Line X=30.65 Z=-0.1
+Feed Roughing
+Line X=24.65
+Feed Approach
+Line X=24.64853 Z=-0.09646
+Line Y=9.60511 Z=-0.09146
+Feed Roughing
+Line Y=9.6451
+Feed Approach
+Line Y=9.6501 Z=-0.09646
+Line X=24.65 Z=-0.1
+Feed Roughing
+Line X=30.65
+Feed Approach
+Line X=30.65146 Z=-0.09646
+Line Y=9.6551 Z=-0.09146
+Feed Roughing
+Line Y=9.6951
+Feed Approach
+Line Y=9.7001 Z=-0.09646
+Line X=30.65 Z=-0.1
+Feed Roughing
+Line X=24.65
+Feed Approach
+Line X=24.64853 Z=-0.09646
+Line Y=9.7051 Z=-0.09146
+Feed Roughing
+Line Y=9.74509
+Feed Approach
+Line Y=9.75009 Z=-0.09646
+Line X=24.65 Z=-0.1
+Feed Roughing
+Line X=30.65
+Feed Approach
+Line X=30.65146 Z=-0.09646
+Line Y=9.75509 Z=-0.09146
+Feed Roughing
+Line Y=9.79509
+Feed Approach
+Line Y=9.80009 Z=-0.09646
+Line X=30.65 Z=-0.1
+Feed Roughing
+Line X=24.65
+Feed Approach
+Line X=24.64853 Z=-0.09646
+Line Y=9.80509 Z=-0.09146
+Feed Roughing
+Line Y=9.84509
+Feed Approach
+Line Y=9.85009 Z=-0.09646
+Line X=24.65 Z=-0.1
+Feed Roughing
+Line X=30.65
+Feed Approach
+Line X=30.65146 Z=-0.09646
+Line Y=9.85509 Z=-0.09146
+Feed Roughing
+Line Y=9.89508
+Feed Approach
+Line Y=9.90008 Z=-0.09646
+Line X=30.65 Z=-0.1
+Feed Roughing
+Line X=24.65
+Feed Approach
+Line X=24.64853 Z=-0.09646
+Line Y=9.90508 Z=-0.09146
+Feed Roughing
+Line Y=9.94508
+Feed Approach
+Line Y=9.95008 Z=-0.09646
+Line X=24.65 Z=-0.1
+Feed Roughing
+Line X=30.65
+Feed Approach
+Line X=30.65146 Z=-0.09646
+Line Y=9.95508 Z=-0.09146
+Feed Roughing
+Line Y=9.99508
+Feed Approach
+Line Y=10.00008 Z=-0.09646
+Line X=30.65 Z=-0.1
+Feed Roughing
+Line X=24.65
+Feed Approach
+Line X=24.64853 Z=-0.09646
+Line Y=10.00508 Z=-0.09146
+Feed Roughing
+Line Y=10.04507
+Feed Approach
+Line Y=10.05007 Z=-0.09646
+Line X=24.65 Z=-0.1
+Feed Roughing
+Line X=30.65
+Feed Approach
+Line X=30.65146 Z=-0.09646
+Line Y=10.05507 Z=-0.09146
+Feed Roughing
+Line Y=10.09507
+Feed Approach
+Line Y=10.10007 Z=-0.09646
+Line X=30.65 Z=-0.1
+Feed Roughing
+Line X=24.65
+Feed Approach
+Line X=24.64853 Z=-0.09646
+Line Y=10.10507 Z=-0.09146
+Feed Roughing
+Line Y=10.14506
+Feed Approach
+Line Y=10.15006 Z=-0.09646
+Line X=24.65 Z=-0.1
+Feed Roughing
+Line X=30.65
+Feed Approach
+Line X=30.65146 Z=-0.09646
+Line Y=10.15506 Z=-0.09146
+Feed Roughing
+Line Y=10.19506
+Feed Approach
+Line Y=10.20006 Z=-0.09646
+Line X=30.65 Z=-0.1
+Feed Roughing
+Line X=24.65
+Feed Approach
+Line X=24.64853 Z=-0.09646
+Line Y=10.20506 Z=-0.09146
+Feed Roughing
+Line Y=10.24506
+Feed Approach
+Line Y=10.25006 Z=-0.09646
+Line X=24.65 Z=-0.1
+Feed Roughing
+Line X=30.65
+Feed Approach
+Line X=30.65146 Z=-0.09646
+Line Y=10.25506 Z=-0.09146
+Feed Roughing
+Line Y=10.29505
+Feed Approach
+Line Y=10.30005 Z=-0.09646
+Line X=30.65 Z=-0.1
+Feed Roughing
+Line X=24.65
+Feed Approach
+Line X=24.64853 Z=-0.09646
+Line Y=10.30505 Z=-0.09146
+Feed Roughing
+Line Y=10.34505
+Feed Approach
+Line Y=10.35005 Z=-0.09646
+Line X=24.65 Z=-0.1
+Feed Roughing
+Line X=30.65
+Feed Approach
+Line X=30.65146 Z=-0.09646
+Line Y=10.35505 Z=-0.09146
+Feed Roughing
+Line Y=10.39505
+Feed Approach
+Line Y=10.40005 Z=-0.09646
+Line X=30.65 Z=-0.1
+Feed Roughing
+Line X=24.65
+Feed Approach
+Line X=24.64853 Z=-0.09646
+Line Y=10.40505 Z=-0.09146
+Feed Roughing
+Line Y=10.44504
+Feed Approach
+Line Y=10.45004 Z=-0.09646
+Line X=24.65 Z=-0.1
+Feed Roughing
+Line X=30.65
+Feed Approach
+Line X=30.65146 Z=-0.09646
+Line Y=10.45504 Z=-0.09146
+Feed Roughing
+Line Y=10.49504
+Feed Approach
+Line Y=10.50004 Z=-0.09646
+Line X=30.65 Z=-0.1
+Feed Roughing
+Line X=24.65
+Feed Approach
+Line X=24.64853 Z=-0.09646
+Line Y=10.50504 Z=-0.09146
+Feed Roughing
+Line Y=10.54503
+Feed Approach
+Line Y=10.55003 Z=-0.09646
+Line X=24.65 Z=-0.1
+Feed Roughing
+Line X=30.65
+Feed Approach
+Line X=30.65146 Z=-0.09646
+Line Y=10.55503 Z=-0.09146
+Feed Roughing
+Line Y=10.59503
+Feed Approach
+Line Y=10.60003 Z=-0.09646
+Line X=30.65 Z=-0.1
+Feed Roughing
+Line X=24.65
+Feed Approach
+Line X=24.64853 Z=-0.09646
+Line Y=10.60503 Z=-0.09146
+Feed Roughing
+Line Y=10.64503
+Feed Approach
+Line Y=10.65003 Z=-0.09646
+Line X=24.65 Z=-0.1
+Feed Roughing
+Line X=30.65
+Feed Approach
+Line X=30.65146 Z=-0.09646
+Line Y=10.65503 Z=-0.09146
+Feed Roughing
+Line Y=10.69502
+Feed Approach
+Line Y=10.70002 Z=-0.09646
+Line X=30.65 Z=-0.1
+Feed Roughing
+Line X=24.65
+Feed Approach
+Line X=24.64853 Z=-0.09646
+Line Y=10.70502 Z=-0.09146
+Feed Roughing
+Line Y=10.74502
+Feed Approach
+Line Y=10.75002 Z=-0.09646
+Line X=24.65 Z=-0.1
+Feed Roughing
+Line X=30.65
+Feed Approach
+Line X=30.65146 Z=-0.09646
+Line Y=10.75502 Z=-0.09146
+Feed Roughing
+Line Y=10.79502
+Feed Approach
+Line Y=10.80002 Z=-0.09646
+Line X=30.65 Z=-0.1
+Feed Roughing
+Line X=24.65
+Feed Approach
+Line X=24.64853 Z=-0.09646
+Line Y=10.80502 Z=-0.09146
+Feed Roughing
+Line Y=10.84501
+Feed Approach
+Line Y=10.85001 Z=-0.09646
+Line X=24.65 Z=-0.1
+Feed Roughing
+Line X=30.65
+Feed Approach
+Line X=30.65146 Z=-0.09646
+Line Y=10.85501 Z=-0.09146
+Feed Roughing
+Line Y=10.89501
+Feed Approach
+Line Y=10.90001 Z=-0.09646
+Line X=30.65 Z=-0.1
+Feed Roughing
+Line X=24.65
+Feed Approach
+Line X=24.64853 Z=-0.09646
+Line Y=10.90501 Z=-0.09146
+Feed Roughing
+Line Y=10.945
+Feed Approach
+Line Y=10.95 Z=-0.09646
+Line X=24.65 Z=-0.1
+Feed Roughing
+Line X=30.65
+Feed Approach
+Line X=30.65146 Z=-0.09646
+Line Y=10.955 Z=-0.09146
+
+Feed Roughing
+Line Y=10.995
+Feed Approach
+
+Line Y=11 Z=-0.09646
+Line X=30.65 Z=-0.1
+Feed Roughing
+Line X=24.65
+Feed Approach
+Line X=24.64853 Z=-0.09646
+Line Y=11.005 Z=-0.09146
+Feed Roughing
+Line Y=11.045
+Feed Approach
+Line Y=11.05 Z=-0.09646
+Line X=24.65 Z=-0.1
+Feed Roughing
+Line X=30.65
+Feed Approach
+Line X=30.65146 Z=-0.09646
+Line Y=11.055 Z=-0.09146
+Feed Roughing
+Line Y=11.09499
+Feed Approach
+Line Y=11.09999 Z=-0.09646
+Line X=30.65 Z=-0.1
+Feed Roughing
+Line X=24.65
+Feed Approach
+Line X=24.64853 Z=-0.09646
+Line Y=11.10499 Z=-0.09146
+Feed Roughing
+Line Y=11.14499
+Feed Approach
+Line Y=11.14999 Z=-0.09646
+Line X=24.65 Z=-0.1
+Feed Roughing
+Line X=30.65
+Feed Approach
+Line X=30.65146 Z=-0.09646
+Line Y=11.15499 Z=-0.09146
+Feed Roughing
+Line Y=11.19498
+Feed Approach
+Line Y=11.19998 Z=-0.09646
+Line X=30.65 Z=-0.1
+Feed Roughing
+Line X=24.65
+Feed Approach
+Line X=24.64853 Z=-0.09646
+Line Y=11.20498 Z=-0.09146
+Feed Roughing
+Line Y=11.24498
+Feed Approach
+Line Y=11.24998 Z=-0.09646
+Line X=24.65 Z=-0.1
+Feed Roughing
+Line X=30.65
+Feed Approach
+Line X=30.65146 Z=-0.09646
+Line Y=11.25498 Z=-0.09146
+Feed Roughing
+Line Y=11.29498
+Feed Approach
+Line Y=11.29998 Z=-0.09646
+Line X=30.65 Z=-0.1
+Feed Roughing
+Line X=24.65
+Feed Approach
+Line X=24.64853 Z=-0.09646
+Line Y=11.30498 Z=-0.09146
+Feed Roughing
+Line Y=11.34497
+Feed Approach
+Line Y=11.34997 Z=-0.09646
+Line X=24.65 Z=-0.1
+Feed Roughing
+Line X=30.65
+Feed Approach
+Line X=30.65146 Z=-0.09646
+Line Y=11.35497 Z=-0.09146
+Feed Roughing
+Line Y=11.39497
+Feed Approach
+Line Y=11.39997 Z=-0.09646
+Line X=30.65 Z=-0.1
+Feed Roughing
+Line X=24.65
+Feed Approach
+Line X=24.64853 Z=-0.09646
+Line Y=11.40497 Z=-0.09146
+Feed Roughing
+Line Y=11.44497
+Feed Approach
+Line Y=11.44997 Z=-0.09646
+Line X=24.65 Z=-0.1
+Feed Roughing
+Line X=30.65
+Feed Approach
+Line X=30.65146 Z=-0.09646
+Line Y=11.45497 Z=-0.09146
+Feed Roughing
+Line Y=11.49496
+Feed Approach
+Line Y=11.49996 Z=-0.09646
+Line X=30.65 Z=-0.1
+Feed Roughing
+Line X=24.65
+Feed Approach
+Line X=24.64853 Z=-0.09646
+Line Y=11.50496 Z=-0.09146
+Feed Roughing
+Line Y=11.54496
+Feed Approach
+Line Y=11.54996 Z=-0.09646
+Line X=24.65 Z=-0.1
+Feed Roughing
+Line X=30.65
+Feed Approach
+Line X=30.65146 Z=-0.09646
+Line Y=11.55496 Z=-0.09146
+Feed Roughing
+Line Y=11.59495
+Feed Approach
+Line Y=11.59995 Z=-0.09646
+Line X=30.65 Z=-0.1
+Feed Roughing
+Line X=24.65
+Feed Approach
+Line X=24.64853 Z=-0.09646
+Line Y=11.60495 Z=-0.09146
+Feed Roughing
+Line Y=11.64495
+Feed Approach
+Line Y=11.64995 Z=-0.09646
+Line X=24.65 Z=-0.1
+Feed Roughing
+Line X=30.65
+Feed Approach
+Line X=30.65146 Z=-0.09646
+Line Y=11.65495 Z=-0.09146
+Feed Roughing
+Line Y=11.69495
+Feed Approach
+Line Y=11.69995 Z=-0.09646
+Line X=30.65 Z=-0.1
+Feed Roughing
+Line X=24.65
+Feed Approach
+Line X=24.64853 Z=-0.09646
+Line Y=11.70495 Z=-0.09146
+Feed Roughing
+Line Y=11.74494
+Feed Approach
+Line Y=11.74994 Z=-0.09646
+Line X=24.65 Z=-0.1
+Feed Roughing
+Line X=30.65
+Feed Approach
+Line X=30.65146 Z=-0.09646
+Line Y=11.75494 Z=-0.09146
+Feed Roughing
+Line Y=11.79494
+Feed Approach
+Line Y=11.79994 Z=-0.09646
+Line X=30.65 Z=-0.1
+Feed Roughing
+Line X=24.65
+Feed Approach
+Line X=24.64853 Z=-0.09646
+Line Y=11.80494 Z=-0.09146
+Feed Roughing
+Line Y=11.84494
+Feed Approach
+Line Y=11.84994 Z=-0.09646
+Line X=24.65 Z=-0.1
+Feed Roughing
+Line X=30.65
+Feed Approach
+Line X=30.65146 Z=-0.09646
+Line Y=11.85494 Z=-0.09146
+Feed Roughing
+Line Y=11.89493
+Feed Approach
+Line Y=11.89993 Z=-0.09646
+Line X=30.65 Z=-0.1
+Feed Roughing
+Line X=24.65
+Feed Approach
+Line X=24.64853 Z=-0.09646
+Line Y=11.90493 Z=-0.09146
+Feed Roughing
+Line Y=11.94493
+Feed Approach
+Line Y=11.94993 Z=-0.09646
+Line X=24.65 Z=-0.1
+Feed Roughing
+Line X=30.65
+Feed Approach
+Line X=30.65146 Z=-0.09646
+Line Y=11.95493 Z=-0.09146
+Feed Roughing
+Line Y=11.99492
+Feed Approach
+Line Y=11.99992 Z=-0.09646
+Line X=30.65 Z=-0.1
+Feed Roughing
+Line X=24.65
+Feed Approach
+Line X=24.64853 Z=-0.09646
+Line Y=12.00492 Z=-0.09146
+Feed Roughing
+Line Y=12.04492
+Feed Approach
+Line Y=12.04992 Z=-0.09646
+Line X=24.65 Z=-0.1
+Feed Roughing
+Line X=30.65
+Feed Approach
+Line X=30.68731 Z=-0.05454
+Line X=30.71504 Z=-0.00267
+Line X=30.73211 Z=0.05361
+Line X=30.73788 Z=0.11214
+Rapid Z=15
+MoveToSafetyPosition
+ToolCompensation Off
+   
+$$$ SEQUENCE_2DContour3__2
+Spindle On
+Smoothing On allowedDeviation=0.0024
+Dynamic = 5
+PrePositioning X=30.55 Y=9.9 Z=15
+Rapid Z=5
+Feed Approach
+Line Z=1
+Feed Plunge
+Line Z=-0.05
+Line X=30.5567 Z=-0.075
+Line X=30.575 Z=-0.0933
+Line X=30.6 Z=-0.1
+Feed Approach
+Arc CCW X=30.65 Y=9.95 dX=0 dY=0.05
+Feed Finishing
+Line Y=12.05
+Line X=24.65
+Line Y=7.85
+Line X=30.65
+Line Y=9.95
+Feed Approach
+Arc CCW X=30.6 Y=10 dX=-0.05 dY=0
+Line X=30.575 Z=-0.0933
+Line X=30.5567 Z=-0.075
+Line X=30.55 Z=-0.05
+Rapid Z=5
+Rapid Y=13.35
+Feed Approach
+Line Z=1
+Feed Plunge
+Line Z=-0.05
+Line X=30.5567 Z=-0.075
+Line X=30.575 Z=-0.0933
+Line X=30.6 Z=-0.1
+Feed Approach
+Arc CCW X=30.65 Y=13.4 dX=0 dY=0.05
+Feed Finishing
+Line Y=14.15
+Line X=27.05
+Line Y=12.65
+Line X=30.65
+Line Y=13.4
+Feed Approach
+Arc CCW X=30.6 Y=13.45 dX=-0.05 dY=0
+Line X=30.575 Z=-0.0933
+Line X=30.5567 Z=-0.075
+Line X=30.55 Z=-0.05
+Rapid Z=5
+Rapid X=26.35 Y=13.35
+Feed Approach
+Line Z=1
+Feed Plunge
+Line Z=-0.05
+Line X=26.3567 Z=-0.075
+Line X=26.375 Z=-0.0933
+Line X=26.4 Z=-0.1
+Feed Approach
+Arc CCW X=26.45 Y=13.4 dX=0 dY=0.05
+Feed Finishing
+Line Y=14.15
+Line X=23.15
+Line Y=12.65
+Line X=26.45
+Line Y=13.4
+Feed Approach
+Arc CCW X=26.4 Y=13.45 dX=-0.05 dY=0
+Line X=26.375 Z=-0.0933
+Line X=26.3567 Z=-0.075
+Line X=26.35 Z=-0.05
+Rapid Z=5
+Rapid X=23.95 Y=11.55
+Feed Approach
+Line Z=1
+Feed Plunge
+Line Z=-0.05
+Line X=23.9567 Z=-0.075
+Line X=23.975 Z=-0.0933
+Line X=24 Z=-0.1
+Feed Approach
+Arc CCW X=24.05 Y=11.6 dX=0 dY=0.05
+Feed Finishing
+Line Y=12.05
+Line X=23.15
+Line Y=10.25
+Line X=24.05
+Line Y=11.6
+Feed Approach
+Arc CCW X=24 Y=11.65 dX=-0.05 dY=0
+Line X=23.975 Z=-0.0933
+Line X=23.9567 Z=-0.075
+Line X=23.95 Z=-0.05
+Rapid Z=5
+Rapid Y=8.25
+Feed Approach
+Line Z=1
+Feed Plunge
+Line Z=-0.05
+Line X=23.9567 Z=-0.075
+Line X=23.975 Z=-0.0933
+Line X=24 Z=-0.1
+Feed Approach
+Arc CCW X=24.05 Y=8.3 dX=0 dY=0.05
+Feed Finishing
+Line Y=9.65
+Line X=23.15
+Line Y=7.85
+Line X=24.05
+Line Y=8.3
+Feed Approach
+Arc CCW X=24 Y=8.35 dX=-0.05 dY=0
+Line X=23.975 Z=-0.0933
+Line X=23.9567 Z=-0.075
+Line X=23.95 Z=-0.05
+Rapid Z=15
+MoveToSafetyPosition
+ToolCompensation Off
+   
+$$$ SEQUENCE_Schrift__3
+Spindle On
+Smoothing On allowedDeviation=0.0024
+Dynamic = 5
+PrePositioning X=43.40179 Y=8.44149 Z=15
+Rapid Z=5
+Feed Plunge
+Line Z=2.5
+Line Z=-0.1
+Feed Roughing
+Line X=43.40786 Y=8.43729
+Line X=43.41419 Y=8.43351
+Arc CW X=43.43589 Y=8.41954 dX=-0.1 dY=-0.18
+Arc CCW X=43.45759 Y=8.40557 dX=0.12 dY=0.16
+Arc CW X=43.47929 Y=8.3916 dX=-0.1 dY=-0.18
+Arc CCW X=43.50099 Y=8.37763 dX=0.12 dY=0.16
+Arc CCW X=43.51291 Y=8.37161 dX=0.08 dY=0.15
+Arc CW X=43.52502 Y=8.36597 dX=-0.36 dY=-0.78
+Arc CW X=43.53703 Y=8.36014 dX=-0.35 dY=-0.73
+Arc CCW X=43.54905 Y=8.35431 dX=0.36 dY=0.72
+Line X=43.55004 Y=8.35598
+Line X=43.38435 Y=8.47613
+Arc CW X=43.28551 Y=8.57289 dX=0.28 dY=0.39
+Line X=43.16536 Y=8.73138
+Line X=43.16376 Y=8.7304
+Line X=43.16586 Y=8.72598
+Line X=43.16811 Y=8.72163
+Arc CW X=43.17463 Y=8.70848 dX=-0.12 dY=-0.07
+Arc CCW X=43.18116 Y=8.69533 dX=0.13 dY=0.05
+Arc CCW X=43.19727 Y=8.67065 dX=0.2 dY=0.11
+Arc CW X=43.20936 Y=8.65214 dX=-0.13 dY=-0.1
+Arc CCW X=43.22145 Y=8.63363 dX=0.14 dY=0.08
+Arc CW X=43.23354 Y=8.61512 dX=-0.13 dY=-0.1
+Arc CCW X=43.24562 Y=8.59661 dX=0.14 dY=0.08
+Arc CCW X=43.25787 Y=8.58208 dX=0.15 dY=0.11
+Arc CW X=43.27061 Y=8.56798 dX=-0.4 dY=-0.37
+Arc CW X=43.29408 Y=8.54076 dX=-2.21 dY=-1.93
+Arc CCW X=43.31755 Y=8.51354 dX=2.23 dY=1.9
+Line X=43.31829 Y=8.5128
+Arc CCW X=43.33176 Y=8.50149 dX=0.46 dY=0.53
+Arc CW X=43.34524 Y=8.49018 dX=-0.44 dY=-0.54
+Arc CW X=43.35917 Y=8.47776 dX=-0.35 dY=-0.41
+Arc CCW X=43.37352 Y=8.46583 dX=0.12 dY=0.13
+Arc CW X=43.38765 Y=8.45366 dX=-0.08 dY=-0.11
+Arc CCW X=43.40179 Y=8.44149 dX=0.09 dY=0.1
+Rapid Z=5
+Rapid X=36.51636 Y=13.53397
+Feed Plunge
+Line Z=2.5
+Line Z=-0.1
+Feed Roughing
+Line X=36.64885 Y=13.63189
+Arc CW X=36.66333 Y=13.6419 dX=0.17 dY=-0.22
+Arc CW X=36.67818 Y=13.65137 dX=0.8 dY=-1.23
+Line X=36.67726 Y=13.65302
+Line X=36.67503 Y=13.65194
+Line X=36.67285 Y=13.6508
+Line X=36.66458 Y=13.64662
+Line X=36.65631 Y=13.64245
+Arc CW X=36.63152 Y=13.62993 dX=-0.12 dY=0.21
+Arc CCW X=36.60672 Y=13.61741 dX=0.1 dY=-0.22
+Arc CCW X=36.58122 Y=13.60041 dX=0.12 dY=-0.21
+Arc CW X=36.5621 Y=13.58765 dX=-0.1 dY=0.13
+Arc CCW X=36.54298 Y=13.57489 dX=0.08 dY=-0.15
+Arc CW X=36.52386 Y=13.56214 dX=-0.1 dY=0.13
+Arc CCW X=36.50474 Y=13.54938 dX=0.08 dY=-0.15
+Arc CCW X=36.48916 Y=13.53608 dX=0.12 dY=-0.16
+Arc CW X=36.47404 Y=13.52226 dX=-0.42 dY=0.44
+Line X=36.44334 Y=13.49513
+Arc CW X=36.43042 Y=13.4841 dX=-0.33 dY=0.37
+Arc CCW X=36.41788 Y=13.47263 dX=0.11 dY=-0.13
+Arc CCW X=36.40707 Y=13.46049 dX=0.11 dY=-0.11
+Arc CW X=36.39669 Y=13.44798 dX=-0.37 dY=0.3
+Arc CW X=36.38282 Y=13.43237 dX=-0.47 dY=0.41
+Arc CCW X=36.36948 Y=13.41631 dX=0.15 dY=-0.14
+Arc CW X=36.35588 Y=13.40048 dX=-0.12 dY=0.09
+Arc CCW X=36.34228 Y=13.38465 dX=0.11 dY=-0.11
+Arc CCW X=36.33392 Y=13.37177 dX=0.09 dY=-0.07
+Arc CW X=36.3193 Y=13.34924 dX=-0.19 dY=0.11
+Arc CCW X=36.30468 Y=13.3267 dX=0.17 dY=-0.13
+Arc CW X=36.29005 Y=13.30417 dX=-0.19 dY=0.11
+Arc CCW X=36.27543 Y=13.28164 dX=0.17 dY=-0.13
+Arc CCW X=36.27006 Y=13.27121 dX=0.14 dY=-0.08
+Arc CW X=36.26501 Y=13.26062 dX=-0.88 dY=0.41
+Arc CW X=36.2598 Y=13.25012 dX=-0.55 dY=0.27
+Arc CCW X=36.25459 Y=13.23961 dX=0.54 dY=-0.28
+Line X=36.25628 Y=13.23862
+Line X=36.26089 Y=13.24548
+Line X=36.26563 Y=13.25225
+Line X=36.38852 Y=13.41535
+Arc CW X=36.48444 Y=13.51039 dX=0.37 dY=-0.28
+Line X=36.51636 Y=13.53397
+Arc CW X=36.55283 Y=13.53574 dX=0.02 dY=-0.03
+Arc CCW X=36.58929 Y=13.53751 dX=0.02 dY=0.03
+Line X=36.67292 Y=13.59931
+Arc CW X=36.76956 Y=13.65302 dX=0.25 dY=-0.35
+Line X=36.97856 Y=13.73602
+Arc CW X=37.05875 Y=13.75913 dX=0.16 dY=-0.4
+Line X=37.31515 Y=13.80663
+Arc CW X=37.37206 Y=13.81329 dX=0.08 dY=-0.42
+Line X=37.7 Y=13.82901
+Line X=41.31973 Y=13.82856
+Line X=41.65596 Y=13.81266
+Arc CW X=41.69216 Y=13.80781 dX=-0.04 dY=-0.43
+Line X=41.95306 Y=13.76151
+Arc CW X=42.03403 Y=13.73877 dX=-0.07 dY=-0.42
+Line X=42.24293 Y=13.65727
+Arc CW X=42.34341 Y=13.60155 dX=-0.16 dY=-0.4
+Line X=42.50452 Y=13.48145
+Arc CW X=42.5953 Y=13.3895 dX=-0.26 dY=-0.34
+Line X=42.7131 Y=13.2272
+Arc CW X=42.76709 Y=13.12719 dX=-0.35 dY=-0.25
+Line X=42.84589 Y=12.91919
+Arc CW X=42.86754 Y=12.8397 dX=-0.4 dY=-0.15
+Line X=42.91164 Y=12.5825
+Arc CW X=42.91739 Y=12.52894 dX=-0.42 dY=-0.07
+Line X=42.93151 Y=12.2
+Line Y=10.91524
+Line X=42.92943 Y=9.78846
+Line X=42.93547 Y=9.54603
+Line X=42.95422 Y=9.31859
+Line X=42.98503 Y=9.11805
+Arc CCW X=42.98739 Y=9.10712 dX=0.29 dY=0.06
+Arc CCW X=42.99025 Y=9.0963 dX=0.2 dY=0.05
+Arc CW X=42.99939 Y=9.05823 dX=-0.38 dY=-0.11
+Arc CCW X=43.00853 Y=9.02017 dX=0.39 dY=0.07
+Arc CW X=43.01766 Y=8.9821 dX=-0.38 dY=-0.11
+Arc CCW X=43.0268 Y=8.94404 dX=0.39 dY=0.07
+Line X=43.02977 Y=8.93469
+Line X=43.03325 Y=8.9255
+Arc CW X=43.04452 Y=8.89307 dX=-0.28 dY=-0.11
+Arc CCW X=43.05579 Y=8.86064 dX=0.29 dY=0.08
+Arc CW X=43.06707 Y=8.8282 dX=-0.28 dY=-0.11
+Arc CCW X=43.07834 Y=8.79577 dX=0.29 dY=0.08
+Line X=43.08186 Y=8.78787
+Line X=43.08585 Y=8.7802
+Arc CW X=43.09898 Y=8.75295 dX=-0.2 dY=-0.12
+Arc CCW X=43.11212 Y=8.7257 dX=0.22 dY=0.09
+Arc CW X=43.12526 Y=8.69845 dX=-0.2 dY=-0.12
+Arc CCW X=43.13839 Y=8.6712 dX=0.22 dY=0.09
+Arc CCW X=43.1469 Y=8.65817 dX=0.1 dY=0.06
+Arc CW X=43.16179 Y=8.63537 dX=-0.16 dY=-0.12
+Arc CCW X=43.17668 Y=8.61256 dX=0.17 dY=0.1
+Arc CW X=43.19157 Y=8.58976 dX=-0.16 dY=-0.12
+Arc CCW X=43.20646 Y=8.56696 dX=0.17 dY=0.1
+Arc CCW X=43.21926 Y=8.55177 dX=0.15 dY=0.11
+Arc CW X=43.23257 Y=8.53704 dX=-0.42 dY=-0.39
+Arc CW X=43.25736 Y=8.5083 dX=-2.41 dY=-2.1
+Arc CCW X=43.28215 Y=8.47956 dX=2.44 dY=2.08
+Line X=43.28456 Y=8.47717
+Arc CCW X=43.29892 Y=8.46511 dX=0.51 dY=0.59
+Arc CW X=43.31326 Y=8.45305 dX=-0.5 dY=-0.6
+Arc CW X=43.32783 Y=8.44006 dX=-0.37 dY=-0.43
+Arc CCW X=43.34283 Y=8.42759 dX=0.13 dY=0.14
+Arc CW X=43.35762 Y=8.41486 dX=-0.08 dY=-0.11
+
+Arc CCW X=43.37241 Y=8.40213 dX=0.1 dY=0.1
+Line X=43.37881 Y=8.3977
+Line X=43.38549 Y=8.3937
+Arc CW X=43.4084 Y=8.37896 dX=-0.1 dY=-0.19
+
+Arc CCW X=43.4313 Y=8.36421 dX=0.13 dY=0.17
+Arc CW X=43.45421 Y=8.34947 dX=-0.1 dY=-0.19
+Arc CCW X=43.47712 Y=8.33472 dX=0.13 dY=0.17
+Line X=43.48481 Y=8.33078
+Line X=43.49274 Y=8.3273
+Arc CW X=43.52007 Y=8.31432 dX=-0.1 dY=-0.25
+Arc CCW X=43.5474 Y=8.30133 dX=0.13 dY=0.23
+Arc CW X=43.57473 Y=8.28835 dX=-0.1 dY=-0.25
+Arc CCW X=43.60206 Y=8.27536 dX=0.13 dY=0.23
+Line X=43.61124 Y=8.27194
+Line X=43.62059 Y=8.26902
+Arc CW X=43.65302 Y=8.25791 dX=-0.1 dY=-0.34
+Arc CCW X=43.68546 Y=8.24681 dX=0.13 dY=0.33
+Arc CW X=43.71788 Y=8.2357 dX=-0.1 dY=-0.34
+Arc CCW X=43.75031 Y=8.2246 dX=0.13 dY=0.33
+Arc CCW X=43.76109 Y=8.22179 dX=0.06 dY=0.2
+Arc CCW X=43.77198 Y=8.21948 dX=0.07 dY=0.29
+Arc CW X=43.80989 Y=8.21052 dX=-0.09 dY=-0.46
+Arc CCW X=43.8478 Y=8.20156 dX=0.13 dY=0.45
+Arc CW X=43.88572 Y=8.1926 dX=-0.09 dY=-0.46
+Arc CCW X=43.92363 Y=8.18364 dX=0.13 dY=0.45
+Line X=44.12305 Y=8.1536
+Arc CCW X=44.15647 Y=8.1506 dX=0.08 dY=0.65
+Arc CW X=44.18993 Y=8.14817 dX=-0.12 dY=-1.95
+Line X=44.25681 Y=8.14274
+Arc CW X=44.30273 Y=8.13869 dX=-0.26 dY=-3.25
+Arc CCW X=44.34871 Y=8.13529 dX=0.1 dY=1.08
+Line X=44.60524 Y=8.12902
+Line X=52.4 Y=8.12906
+Arc CW X=52.4334 Y=8.12877 dX=0 dY=-1.88
+Arc CCW X=52.46679 Y=8.12906 dX=0.01 dY=0.63
+Arc CCW X=52.49023 Y=8.13052 dX=-0.02 dY=0.44
+Arc CW X=52.51365 Y=8.13239 dX=0.12 dY=-1.32
+Line X=52.8746 Y=8.15802
+Line X=53.23039 Y=8.233
+Line X=53.54522 Y=8.34224
+Line X=53.84037 Y=8.48626
+Arc CCW X=53.85642 Y=8.49631 dX=-0.11 dY=0.19
+Arc CW X=53.87216 Y=8.50685 dX=0.43 dY=-0.62
+Line X=53.96751 Y=8.56861
+Line X=53.96656 Y=8.57026
+Line X=53.74724 Y=8.45734
+Arc CW X=53.71517 Y=8.44328 dX=-0.19 dY=0.39
+Line X=53.46693 Y=8.34667
+Arc CW X=53.44523 Y=8.33978 dX=-0.14 dY=0.41
+Line X=53.20803 Y=8.27134
+Arc CW X=53.17317 Y=8.26285 dX=-0.12 dY=0.41
+Line X=52.93657 Y=8.21557
+Arc CW X=52.90297 Y=8.21023 dX=-0.08 dY=0.42
+Line X=52.65149 Y=8.18092
+Line X=52.4 Y=8.17099
+Line X=44.57941 Y=8.17148
+Line X=44.2604 Y=8.18704
+Arc CW X=44.21862 Y=8.19251 dX=0.03 dY=0.43
+Line X=43.96312 Y=8.2388
+Arc CW X=43.88377 Y=8.26123 dX=0.08 dY=0.42
+Line X=43.67487 Y=8.34267
+Arc CW X=43.5781 Y=8.39562 dX=0.16 dY=0.4
+Line X=43.4132 Y=8.51574
+Arc CW X=43.32449 Y=8.60258 dX=0.25 dY=0.35
+Line X=43.20089 Y=8.76488
+Arc CW X=43.145 Y=8.86268 dX=0.34 dY=0.26
+Line X=43.0601 Y=9.07069
+Arc CW X=43.03587 Y=9.15253 dX=0.4 dY=0.16
+Line X=42.98687 Y=9.40976
+Arc CW X=42.97984 Y=9.4682 dX=0.42 dY=0.08
+Line X=42.96362 Y=9.78932
+Line X=42.96349 Y=10.30016
+Arc CW X=42.96437 Y=10.32188 dX=0.28 dY=0
+Arc CCW X=42.96579 Y=10.34356 dX=-0.8 dY=0.06
+Line Y=12.19413
+Line X=42.95901 Y=12.44139
+Arc CCW X=42.95676 Y=12.46891 dX=-0.59 dY=-0.03
+Arc CW X=42.95407 Y=12.49639 dX=1.76 dY=0.19
+Line X=42.94912 Y=12.55139
+Arc CW X=42.94695 Y=12.5784 dX=1.48 dY=0.13
+Arc CCW X=42.94427 Y=12.60537 dX=-0.49 dY=-0.04
+Arc CW X=42.94184 Y=12.63236 dX=0.37 dY=0.05
+Arc CCW X=42.93942 Y=12.65935 dX=-0.37 dY=-0.02
+Arc CCW X=42.93592 Y=12.68369 dX=-0.73 dY=-0.09
+Arc CCW X=42.93145 Y=12.70786 dX=-0.53 dY=-0.08
+Arc CW X=42.92547 Y=12.74425 dX=0.42 dY=0.09
+Arc CCW X=42.9195 Y=12.78063 dX=-0.43 dY=-0.05
+Arc CW X=42.91352 Y=12.81701 dX=0.42 dY=0.09
+Arc CCW X=42.90755 Y=12.8534 dX=-0.43 dY=-0.05
+Arc CCW X=42.90397 Y=12.86813 dX=-0.23 dY=-0.05
+Arc CW X=42.90009 Y=12.88279 dX=0.68 dY=0.19
+Arc CW X=42.89583 Y=12.90047 dX=0.71 dY=0.18
+Arc CCW X=42.89114 Y=12.91803 dX=-0.24 dY=-0.05
+Arc CW X=42.88443 Y=12.94446 dX=0.26 dY=0.08
+Arc CCW X=42.87772 Y=12.97089 dX=-0.27 dY=-0.05
+Arc CW X=42.87101 Y=12.99733 dX=0.26 dY=0.08
+Arc CCW X=42.8643 Y=13.02376 dX=-0.27 dY=-0.05
+Line X=42.8612 Y=13.03307
+Line X=42.85762 Y=13.04221
+Arc CW X=42.84592 Y=13.07451 dX=0.28 dY=0.12
+Arc CCW X=42.83422 Y=13.1068 dX=-0.29 dY=-0.09
+Arc CW X=42.82252 Y=13.1391 dX=0.28 dY=0.12
+Arc CCW X=42.81082 Y=13.17139 dX=-0.29 dY=-0.09
+Arc CCW X=42.8062 Y=13.18107 dX=-0.12 dY=-0.05
+Arc CW X=42.80131 Y=13.19062 dX=0.34 dY=0.18
+Arc CW X=42.79487 Y=13.20415 dX=0.43 dY=0.21
+Arc CCW X=42.78802 Y=13.21747 dX=-0.15 dY=-0.07
+Arc CW X=42.77806 Y=13.2376 dX=0.16 dY=0.09
+Arc CCW X=42.7681 Y=13.25774 dX=-0.17 dY=-0.07
+Arc CW X=42.75814 Y=13.27787 dX=0.16 dY=0.09
+Arc CCW X=42.74818 Y=13.298 dX=-0.17 dY=-0.07
+Arc CCW X=42.73926 Y=13.31152 dX=-0.11 dY=-0.07
+Arc CW X=42.72364 Y=13.33518 dX=0.17 dY=0.13
+Arc CCW X=42.70803 Y=13.35884 dX=-0.19 dY=-0.11
+Arc CW X=42.69242 Y=13.38249 dX=0.17 dY=0.13
+Arc CCW X=42.6768 Y=13.40615 dX=-0.19 dY=-0.11
+Arc CCW X=42.66416 Y=13.42119 dX=-0.16 dY=-0.12
+Arc CW X=42.65102 Y=13.4358 dX=0.43 dY=0.4
+Line X=42.62523 Y=13.46546
+Arc CW X=42.61802 Y=13.47404 dX=0.25 dY=0.22
+Arc CCW X=42.61052 Y=13.48238 dX=-0.09 dY=-0.07
+Arc CW X=42.60316 Y=13.49084 dX=0.06 dY=0.06
+Arc CCW X=42.5958 Y=13.4993 dX=-0.07 dY=-0.05
+Arc CCW X=42.58735 Y=13.50697 dX=-0.08 dY=-0.08
+Arc CW X=42.57864 Y=13.51435 dX=0.21 dY=0.26
+Arc CW X=42.56935 Y=13.52278 dX=0.25 dY=0.28
+Arc CCW X=42.55978 Y=13.5309 dX=-0.09 dY=-0.09
+Arc CW X=42.54562 Y=13.54331 dX=0.09 dY=0.11
+Arc CCW X=42.53148 Y=13.55572 dX=-0.1 dY=-0.1
+Arc CW X=42.51733 Y=13.56813 dX=0.09 dY=0.11
+Arc CCW X=42.50317 Y=13.58054 dX=-0.1 dY=-0.1
+Arc CCW X=42.48972 Y=13.5895 dX=-0.07 dY=-0.1
+Arc CW X=42.46616 Y=13.60517 dX=0.11 dY=0.2
+Arc CCW X=42.44261 Y=13.62084 dX=-0.14 dY=-0.18
+Arc CW X=42.41906 Y=13.63651 dX=0.11 dY=0.2
+Arc CCW X=42.39551 Y=13.65218 dX=-0.14 dY=-0.18
+Arc CCW X=42.38445 Y=13.65792 dX=-0.07 dY=-0.12
+Arc CW X=42.37321 Y=13.66332 dX=0.17 dY=0.37
+Line X=42.30631 Y=13.69673
+Arc CW X=42.28801 Y=13.7062 dX=0.33 dY=0.65
+Arc CCW X=42.26945 Y=13.71514 dX=-0.11 dY=-0.21
+Line X=42.26035 Y=13.71874
+Line X=42.25108 Y=13.72185
+Arc CW X=42.21894 Y=13.73358 dX=0.1 dY=0.33
+Arc CCW X=42.1868 Y=13.74532 dX=-0.13 dY=-0.32
+Arc CW X=42.15466 Y=13.75705 dX=0.1 dY=0.33
+Arc CCW X=42.12252 Y=13.76879 dX=-0.13 dY=-0.32
+Arc CCW X=42.1068 Y=13.77302 dX=-0.06 dY=-0.21
+Arc CW X=42.09098 Y=13.77686 dX=0.15 dY=0.64
+Line X=41.99636 Y=13.80108
+Arc CW X=41.97453 Y=13.80692 dX=0.26 dY=1.01
+Arc CCW X=41.95257 Y=13.81229 dX=-0.09 dY=-0.34
+Arc CCW X=41.92845 Y=13.81679 dX=-0.11 dY=-0.52
+Arc CCW X=41.90417 Y=13.82031 dX=-0.12 dY=-0.72
+Arc CW X=41.86787 Y=13.82633 dX=0.06 dY=0.5
+Arc CCW X=41.83157 Y=13.83234 dX=-0.1 dY=-0.49
+Arc CW X=41.79528 Y=13.83836 dX=0.06 dY=0.5
+Arc CCW X=41.75898 Y=13.84437 dX=-0.1 dY=-0.49
+Arc CCW X=41.73417 Y=13.84686 dX=-0.06 dY=-0.45
+Arc CW X=41.70932 Y=13.84888 dX=0.1 dY=1.35
+Line X=41.65966 Y=13.85338
+Arc CW X=41.63007 Y=13.8563 dX=0.17 dY=1.89
+Arc CCW X=41.60045 Y=13.85876 dX=-0.07 dY=-0.63
+Arc CW X=41.57085 Y=13.86144 dX=0.03 dY=0.47
+Arc CCW X=41.54124 Y=13.86413 dX=-0.06 dY=-0.47
+Line X=41.29405 Y=13.87099
+Line X=37.70582
+Line X=37.45197 Y=13.8641
+Arc CCW X=37.42686 Y=13.86207 dX=0.03 dY=-0.55
+Arc CW X=37.4018 Y=13.85966 dX=-0.17 dY=1.64
+Line X=37.35162 Y=13.85521
+Arc CW X=37.32096 Y=13.85278 dX=-0.15 dY=1.67
+Arc CCW X=37.29034 Y=13.84978 dX=0.04 dY=-0.56
+Arc CW X=37.25971 Y=13.84707 dX=-0.05 dY=0.42
+Arc CCW X=37.22907 Y=13.84435 dX=0.02 dY=-0.42
+Arc CCW X=37.20434 Y=13.84082 dX=0.09 dY=-0.74
+Arc CCW X=37.17978 Y=13.83631 dX=0.09 dY=-0.54
+Arc CW X=37.14281 Y=13.83027 dX=-0.09 dY=0.43
+Arc CCW X=37.10584 Y=13.82423 dX=0.05 dY=-0.43
+Arc CW X=37.06887 Y=13.8182 dX=-0.09 dY=0.43
+Arc CCW X=37.03191 Y=13.81216 dX=0.05 dY=-0.43
+Line X=37.0248 Y=13.81045
+Line X=37.01774 Y=13.80858
+Arc CW X=36.99794 Y=13.80384 dX=-0.2 dY=0.79
+Arc CCW X=36.97826 Y=13.7986 dX=0.06 dY=-0.26
+Arc CW X=36.94865 Y=13.79111 dX=-0.09 dY=0.29
+Arc CCW X=36.91904 Y=13.78363 dX=0.06 dY=-0.3
+Arc CW X=36.88943 Y=13.77614 dX=-0.09 dY=0.29
+Arc CCW X=36.85983 Y=13.76865 dX=0.06 dY=-0.3
+Line X=36.85049 Y=13.76555
+Line X=36.84134 Y=13.76195
+Arc CW X=36.80899 Y=13.75022 dX=-0.12 dY=0.28
+Arc CCW X=36.77665 Y=13.73849 dX=0.09 dY=-0.29
+Arc CW X=36.7443 Y=13.72676 dX=-0.12 dY=0.28
+Arc CCW X=36.71195 Y=13.71503 dX=0.09 dY=-0.29
+Line X=36.70657 Y=13.71244
+Line X=36.70126 Y=13.70971
+Arc CW X=36.68678 Y=13.70279 dX=-0.23 dY=0.45
+Arc CCW X=36.67253 Y=13.69541 dX=0.07 dY=-0.15
+Arc CW X=36.651 Y=13.68469 dX=-0.1 dY=0.16
+Arc CCW X=36.62946 Y=13.67397 dX=0.07 dY=-0.18
+Arc CW X=36.60791 Y=13.66325 dX=-0.1 dY=0.16
+Arc CCW X=36.58637 Y=13.65253 dX=0.07 dY=-0.18
+Arc CCW X=36.57307 Y=13.64366 dX=0.06 dY=-0.11
+Arc CW X=36.5498 Y=13.62813 dX=-0.13 dY=0.16
+Arc CCW X=36.52652 Y=13.61261 dX=0.1 dY=-0.18
+Arc CW X=36.50325 Y=13.59708 dX=-0.13 dY=0.16
+Arc CCW X=36.47998 Y=13.58155 dX=0.1 dY=-0.18
+Arc CCW X=36.46387 Y=13.5678 dX=0.13 dY=-0.17
+Arc CW X=36.44825 Y=13.55352 dX=-0.43 dY=0.45
+Line X=36.41652 Y=13.52548
+Arc CW X=36.40254 Y=13.51355 dX=-0.35 dY=0.4
+Arc CCW X=36.38897 Y=13.50114 dX=0.11 dY=-0.14
+Arc CCW X=36.37724 Y=13.48795 dX=0.12 dY=-0.12
+Arc CW X=36.36597 Y=13.47437 dX=-0.4 dY=0.32
+Arc CW X=36.35165 Y=13.45826 dX=-0.49 dY=0.42
+Arc CCW X=36.33788 Y=13.44168 dX=0.16 dY=-0.15
+Arc CW X=36.32383 Y=13.42533 dX=-0.13 dY=0.1
+Arc CCW X=36.30978 Y=13.40898 dX=0.11 dY=-0.11
+Arc CCW X=36.30107 Y=13.39555 dX=0.1 dY=-0.07
+Arc CW X=36.28582 Y=13.37205 dX=-0.2 dY=0.11
+Arc CCW X=36.27057 Y=13.34856 dX=0.18 dY=-0.13
+Arc CW X=36.25533 Y=13.32506 dX=-0.2 dY=0.11
+Arc CCW X=36.24007 Y=13.30156 dX=0.18 dY=-0.13
+Arc CCW X=36.23309 Y=13.28769 dX=0.14 dY=-0.08
+Arc CW X=36.22655 Y=13.27361 dX=-0.45 dY=0.2
+Line X=36.18596 Y=13.18975
+Line X=36.18241 Y=13.18267
+Line X=36.17906 Y=13.17549
+Line X=36.17557 Y=13.16635
+Line X=36.17256 Y=13.15703
+Arc CW X=36.16119 Y=13.12473 dX=-0.33 dY=0.1
+Arc CCW X=36.14981 Y=13.09242 dX=0.32 dY=-0.13
+Arc CW X=36.13844 Y=13.06011 dX=-0.33 dY=0.1
+Arc CCW X=36.12706 Y=13.02781 dX=0.32 dY=-0.13
+Arc CCW X=36.12218 Y=13.00892 dX=0.25 dY=-0.08
+Arc CW X=36.11777 Y=12.98991 dX=-0.78 dY=0.17
+Line X=36.08991 Y=12.87623
+Arc CW X=36.08743 Y=12.86654 dX=-0.46 dY=0.11
+Arc CCW X=36.08515 Y=12.85681 dX=0.15 dY=-0.04
+Arc CCW X=36.08083 Y=12.83251 dX=0.54 dY=-0.11
+Arc CCW X=36.07745 Y=12.80806 dX=0.75 dY=-0.12
+Arc CW X=36.07167 Y=12.77149 dX=-0.52 dY=0.06
+Arc CCW X=36.06589 Y=12.73493 dX=0.51 dY=-0.1
+Arc CW X=36.06011 Y=12.69837 dX=-0.52 dY=0.06
+Arc CCW X=36.05434 Y=12.66181 dX=0.51 dY=-0.1
+Arc CCW X=36.0516 Y=12.63293 dX=0.54 dY=-0.07
+Arc CW X=36.04937 Y=12.604 dX=-1.63 dY=0.11
+Line X=36.04441 Y=12.54619
+Arc CW X=36.042 Y=12.52034 dX=-1.74 dY=0.15
+Arc CCW X=36.03997 Y=12.49445 dX=0.58 dY=-0.06
+Arc CW X=36.03775 Y=12.46858 dX=-0.44 dY=0.02
+Arc CCW X=36.03553 Y=12.44271 dX=0.43 dY=-0.05
+Line X=36.02901 Y=12.19437
+Line X=36.02856 Y=8.13176
+Line X=36.03175 Y=8.12857
+Line X=36.06754
+Line X=36.07073 Y=8.13176
+Line X=36.06374 Y=12.21126
+Line X=36.08056 Y=12.54309
+Arc CW X=36.08649 Y=12.58625 dX=0.43 dY=-0.04
+Line X=36.13488 Y=12.84175
+Arc CW X=36.15879 Y=12.92301 dX=0.42 dY=-0.08
+Line X=36.24299 Y=13.13081
+Arc CW X=36.29797 Y=13.22788 dX=0.4 dY=-0.16
+Line X=36.42087 Y=13.39098
+Arc CW X=36.50852 Y=13.47781 dX=0.34 dY=-0.26
+Line X=36.58929 Y=13.53751
+Arc CW X=36.61946 Y=13.53897 dX=0.02 dY=-0.02
+Arc CCW X=36.64964 Y=13.54044 dX=0.01 dY=0.02
+Line X=36.69283 Y=13.57236
+Arc CW X=36.78193 Y=13.62187 dX=0.24 dY=-0.32
+Line X=36.99092 Y=13.70487
+Arc CW X=37.06486 Y=13.72618 dX=0.15 dY=-0.37
+Line X=37.32125 Y=13.77368
+Arc CW X=37.37372 Y=13.77981 dX=0.07 dY=-0.39
+Line X=37.7 Y=13.7955
+Line X=41.31818 Y=13.79508
+Line X=41.65294 Y=13.77928
+Arc CW X=41.68631 Y=13.77482 dX=-0.04 dY=-0.39
+Line X=41.94721 Y=13.72852
+Arc CW X=42.02185 Y=13.70755 dX=-0.07 dY=-0.39
+Line X=42.23075 Y=13.62605
+Arc CW X=42.32339 Y=13.57468 dX=-0.14 dY=-0.37
+Line X=42.48449 Y=13.45458
+Arc CW X=42.56818 Y=13.36982 dX=-0.24 dY=-0.32
+Line X=42.68598 Y=13.20752
+Arc CW X=42.73575 Y=13.11532 dX=-0.32 dY=-0.23
+Line X=42.81455 Y=12.90732
+Arc CW X=42.83451 Y=12.83404 dX=-0.37 dY=-0.14
+Line X=42.87861 Y=12.57684
+Arc CW X=42.88391 Y=12.52746 dX=-0.39 dY=-0.07
+Line X=42.898 Y=12.2
+Line Y=10.91531
+Line X=42.89593 Y=9.78763
+Line X=42.902 Y=9.54423
+Line X=42.92092 Y=9.31467
+Line X=42.95212 Y=9.11158
+Arc CCW X=42.95452 Y=9.10046 dX=0.3 dY=0.06
+Arc CCW X=42.95743 Y=9.08946 dX=0.21 dY=0.05
+Arc CW X=42.96672 Y=9.05075 dX=-0.39 dY=-0.11
+Arc CCW X=42.97601 Y=9.01203 dX=0.4 dY=0.07
+Arc CW X=42.98531 Y=8.97332 dX=-0.39 dY=-0.11
+Arc CCW X=42.9946 Y=8.9346 dX=0.4 dY=0.07
+Arc CCW X=42.99764 Y=8.92504 dX=0.21 dY=0.06
+Arc CCW X=43.00119 Y=8.91565 dX=0.16 dY=0.05
+Arc CW X=43.00696 Y=8.89906 dX=-0.14 dY=-0.06
+Arc CCW X=43.01273 Y=8.88247 dX=0.15 dY=0.04
+Arc CW X=43.02137 Y=8.85759 dX=-0.21 dY=-0.09
+Arc CCW X=43.03002 Y=8.83271 dX=0.22 dY=0.06
+Arc CW X=43.03867 Y=8.80783 dX=-0.21 dY=-0.09
+Arc CCW X=43.04732 Y=8.78295 dX=0.22 dY=0.06
+Line X=43.05094 Y=8.77481
+Line X=43.05505 Y=8.76692
+Arc CW X=43.06181 Y=8.75289 dX=-0.1 dY=-0.06
+Arc CCW X=43.06857 Y=8.73886 dX=0.11 dY=0.05
+Arc CW X=43.07872 Y=8.71782 dX=-0.16 dY=-0.09
+Arc CCW X=43.08886 Y=8.69678 dX=0.17 dY=0.07
+Arc CW X=43.099 Y=8.67574 dX=-0.16 dY=-0.09
+Arc CCW X=43.10915 Y=8.65469 dX=0.17 dY=0.07
+Arc CCW X=43.11797 Y=8.64119 dX=0.11 dY=0.06
+Arc CW X=43.13339 Y=8.61756 dX=-0.16 dY=-0.12
+Arc CCW X=43.14882 Y=8.59394 dX=0.18 dY=0.1
+Arc CW X=43.16425 Y=8.57031 dX=-0.16 dY=-0.12
+Arc CCW X=43.17968 Y=8.54668 dX=0.18 dY=0.1
+Arc CCW X=43.19285 Y=8.53105 dX=0.16 dY=0.12
+Arc CW X=43.20656 Y=8.51588 dX=-0.43 dY=-0.4
+Arc CW X=43.23252 Y=8.48581 dX=-2.64 dY=-2.31
+Arc CCW X=43.25848 Y=8.45573 dX=2.67 dY=2.28
+Line X=43.26089 Y=8.45333
+Arc CCW X=43.27615 Y=8.44049 dX=0.58 dY=0.67
+Arc CW X=43.2914 Y=8.42765 dX=-0.56 dY=-0.68
+Arc CW X=43.3064 Y=8.41428 dX=-0.38 dY=-0.44
+Arc CCW X=43.32185 Y=8.40143 dX=0.13 dY=0.14
+Arc CW X=43.33708 Y=8.38832 dX=-0.09 dY=-0.12
+Arc CCW X=43.35231 Y=8.37521 dX=0.1 dY=0.1
+Line X=43.35894 Y=8.37062
+Line X=43.36587 Y=8.36648
+Arc CW X=43.3896 Y=8.35121 dX=-0.11 dY=-0.19
+Arc CCW X=43.41333 Y=8.33593 dX=0.13 dY=0.18
+Arc CW X=43.43706 Y=8.32066 dX=-0.11 dY=-0.19
+Arc CCW X=43.46079 Y=8.30538 dX=0.13 dY=0.18
+Line X=43.46872 Y=8.30132
+Line X=43.47687 Y=8.29774
+Arc CW X=43.505 Y=8.28438 dX=-0.1 dY=-0.25
+Arc CCW X=43.53313 Y=8.27101 dX=0.13 dY=0.24
+Arc CW X=43.56127 Y=8.25764 dX=-0.1 dY=-0.25
+Arc CCW X=43.58941 Y=8.24428 dX=0.13 dY=0.24
+Arc CCW X=43.59879 Y=8.24078 dX=0.06 dY=0.15
+Arc CCW X=43.60835 Y=8.23779 dX=0.07 dY=0.21
+Arc CW X=43.64152 Y=8.22643 dX=-0.1 dY=-0.34
+Arc CCW X=43.67468 Y=8.21507 dX=0.13 dY=0.33
+Arc CW X=43.70784 Y=8.20372 dX=-0.1 dY=-0.34
+Arc CCW X=43.74101 Y=8.19236 dX=0.13 dY=0.33
+Arc CCW X=43.75196 Y=8.18951 dX=0.06 dY=0.21
+Arc CCW X=43.76304 Y=8.18716 dX=0.07 dY=0.29
+Arc CW X=43.8016 Y=8.17804 dX=-0.09 dY=-0.47
+Arc CCW X=43.84015 Y=8.16893 dX=0.13 dY=0.46
+Arc CW X=43.87871 Y=8.15982 dX=-0.09 dY=-0.47
+Arc CCW X=43.91727 Y=8.1507 dX=0.13 dY=0.46
+Line X=44.1192 Y=8.12029
+Arc CCW X=44.1529 Y=8.11726 dX=0.08 dY=0.65
+Arc CW X=44.18665 Y=8.11481 dX=-0.13 dY=-1.97
+Line X=44.2541 Y=8.10934
+Arc CW X=44.30049 Y=8.10525 dX=-0.27 dY=-3.28
+Arc CCW X=44.34694 Y=8.10181 dX=0.1 dY=1.09
+Line X=44.60483 Y=8.09551
+Line X=52.40001 Y=8.09555
+Arc CW X=52.43399 Y=8.09525 dX=0 dY=-1.92
+Arc CCW X=52.46797 Y=8.09555 dX=0.01 dY=0.64
+Arc CCW X=52.49157 Y=8.09702 dX=-0.02 dY=0.44
+Arc CW X=52.51513 Y=8.0989 dX=0.12 dY=-1.33
+Line X=52.87926 Y=8.12476
+Line X=53.23938 Y=8.20064
+Line X=53.55811 Y=8.31124
+Line X=53.85693 Y=8.45705
+Line X=54.15636 Y=8.65226
+Arc CCW X=54.17241 Y=8.66569 dX=-0.12 dY=0.16
+Arc CW X=54.188 Y=8.67966 dX=0.42 dY=-0.45
+Line X=54.47176 Y=8.92537
+Line X=59.44846 Y=13.90241
+Line X=59.4474 Y=13.90495
+Line X=59.38751
+Line X=59.38038 Y=13.902
+Line X=54.46286 Y=8.98388
+Arc CW X=54.44294 Y=8.96528 dX=-0.28 dY=0.28
+Line X=54.25129 Y=8.79839
+Arc CW X=54.21176 Y=8.76829 dX=-0.26 dY=0.3
+Line X=53.9987 Y=8.62629
+Arc CW X=53.96321 Y=8.6057 dX=-0.22 dY=0.33
+Line X=53.73254 Y=8.48746
+Arc CW X=53.70298 Y=8.4745 dX=-0.17 dY=0.36
+Line X=53.45595 Y=8.37833
+Arc CW X=53.43594 Y=8.37198 dX=-0.13 dY=0.37
+Line X=53.19874 Y=8.30354
+Arc CW X=53.1666 Y=8.29571 dX=-0.11 dY=0.38
+Line X=52.93 Y=8.24843
+Arc CW X=52.89902 Y=8.24351 dX=-0.08 dY=0.39
+Line X=52.64912 Y=8.21434
+Line X=52.4 Y=8.2045
+Line X=44.58102 Y=8.20496
+Line X=44.26311 Y=8.22045
+Arc CW X=44.22459 Y=8.22549 dX=0.03 dY=0.39
+Line X=43.96909 Y=8.27178
+Arc CW X=43.89594 Y=8.29245 dX=0.07 dY=0.39
+Line X=43.68705 Y=8.37389
+Arc CW X=43.59784 Y=8.4227 dX=0.14 dY=0.37
+Line X=43.43293 Y=8.54282
+Arc CW X=43.35115 Y=8.62288 dX=0.23 dY=0.32
+Line X=43.22755 Y=8.78518
+Arc CW X=43.17603 Y=8.87535 dX=0.31 dY=0.24
+Line X=43.09113 Y=9.08335
+Arc CW X=43.06879 Y=9.1588 dX=0.37 dY=0.15
+Line X=43.01979 Y=9.41603
+Arc CW X=43.01331 Y=9.46991 dX=0.39 dY=0.07
+Line X=42.997 Y=9.8
+Line Y=10.30009
+Arc CW X=42.99788 Y=10.32095 dX=0.26 dY=0
+Arc CCW X=42.9993 Y=10.34179 dX=-0.74 dY=0.06
+Line Y=12.19458
+Line X=42.99249 Y=12.44335
+Arc CCW X=42.99021 Y=12.47113 dX=-0.6 dY=-0.03
+Arc CW X=42.9875 Y=12.49887 dX=1.78 dY=0.19
+Line X=42.9825 Y=12.55439
+Arc CW X=42.9803 Y=12.58171 dX=1.49 dY=0.13
+Arc CCW X=42.97759 Y=12.60898 dX=-0.5 dY=-0.04
+Arc CW X=42.97514 Y=12.63628 dX=0.37 dY=0.05
+Arc CCW X=42.97268 Y=12.66357 dX=-0.37 dY=-0.02
+Arc CCW X=42.96914 Y=12.68824 dX=-0.74 dY=-0.09
+Arc CCW X=42.96461 Y=12.71274 dX=-0.53 dY=-0.09
+Arc CW X=42.95855 Y=12.74962 dX=0.43 dY=0.09
+Arc CCW X=42.9525 Y=12.7865 dX=-0.43 dY=-0.05
+Arc CW X=42.94644 Y=12.82337 dX=0.43 dY=0.09
+Arc CCW X=42.94038 Y=12.86025 dX=-0.43 dY=-0.05
+Arc CCW X=42.93664 Y=12.87568 dX=-0.24 dY=-0.05
+Arc CW X=42.93256 Y=12.89104 dX=0.71 dY=0.2
+Arc CW X=42.92826 Y=12.90891 dX=0.72 dY=0.18
+Arc CCW X=42.92352 Y=12.92668 dX=-0.24 dY=-0.06
+Arc CW X=42.91673 Y=12.95341 dX=0.27 dY=0.08
+Arc CCW X=42.90995 Y=12.98015 dX=-0.27 dY=-0.06
+Arc CW X=42.90316 Y=13.00688 dX=0.27 dY=0.08
+Arc CCW X=42.89637 Y=13.03361 dX=-0.27 dY=-0.06
+Arc CCW X=42.89321 Y=13.04314 dX=-0.21 dY=-0.06
+Arc CCW X=42.88954 Y=13.05248 dX=-0.16 dY=-0.06
+Arc CW X=42.87758 Y=13.0855 dX=0.29 dY=0.12
+Arc CCW X=42.86562 Y=13.11852 dX=-0.3 dY=-0.09
+Arc CW X=42.85365 Y=13.15155 dX=0.29 dY=0.12
+Arc CCW X=42.84169 Y=13.18457 dX=-0.3 dY=-0.09
+Arc CCW X=42.83666 Y=13.1951 dX=-0.13 dY=-0.05
+Arc CW X=42.83134 Y=13.20549 dX=0.37 dY=0.2
+Arc CW X=42.8248 Y=13.21924 dX=0.44 dY=0.22
+Arc CCW X=42.81783 Y=13.2328 dX=-0.15 dY=-0.07
+Arc CW X=42.8077 Y=13.25328 dX=0.16 dY=0.09
+Arc CCW X=42.79756 Y=13.27376 dX=-0.17 dY=-0.07
+Arc CW X=42.78743 Y=13.29424 dX=0.16 dY=0.09
+Arc CCW X=42.77729 Y=13.31472 dX=-0.17 dY=-0.07
+Arc CCW X=42.76807 Y=13.32869 dX=-0.12 dY=-0.07
+Arc CW X=42.75195 Y=13.35314 dX=0.18 dY=0.13
+Arc CCW X=42.73581 Y=13.37758 dX=-0.19 dY=-0.11
+Arc CW X=42.71968 Y=13.40202 dX=0.18 dY=0.13
+Arc CCW X=42.70355 Y=13.42646 dX=-0.19 dY=-0.11
+Arc CCW X=42.69054 Y=13.44193 dX=-0.16 dY=-0.12
+Arc CW X=42.67704 Y=13.45695 dX=0.45 dY=0.42
+Line X=42.65052 Y=13.48744
+Arc CW X=42.64294 Y=13.49646 dX=0.26 dY=0.23
+Arc CCW X=42.63506 Y=13.50522 dX=-0.09 dY=-0.07
+Arc CW X=42.62733 Y=13.51411 dX=0.06 dY=0.06
+Arc CCW X=42.6196 Y=13.523 dX=-0.07 dY=-0.05
+Arc CCW X=42.61031 Y=13.53143 dX=-0.09 dY=-0.09
+Arc CW X=42.60074 Y=13.53955 dX=0.24 dY=0.29
+Arc CW X=42.59124 Y=13.54816 dX=0.25 dY=0.29
+Arc CCW X=42.58146 Y=13.55646 dX=-0.09 dY=-0.09
+Arc CW X=42.56699 Y=13.56915 dX=0.09 dY=0.11
+Arc CCW X=42.55252 Y=13.58183 dX=-0.1 dY=-0.1
+Arc CW X=42.53806 Y=13.59452 dX=0.09 dY=0.11
+Arc CCW X=42.5236 Y=13.60721 dX=-0.1 dY=-0.1
+Arc CCW X=42.50969 Y=13.61646 dX=-0.08 dY=-0.1
+Arc CW X=42.48535 Y=13.63266 dX=0.12 dY=0.2
+Arc CCW X=42.46101 Y=13.64885 dX=-0.14 dY=-0.19
+Arc CW X=42.43668 Y=13.66504 dX=0.12 dY=0.2
+Arc CCW X=42.41234 Y=13.68123 dX=-0.14 dY=-0.19
+Arc CCW X=42.40105 Y=13.6871 dX=-0.07 dY=-0.12
+Arc CW X=42.38958 Y=13.6926 dX=0.17 dY=0.37
+Line X=42.32128 Y=13.72671
+Arc CW X=42.30214 Y=13.73661 dX=0.34 dY=0.68
+Arc CCW X=42.28272 Y=13.74597 dX=-0.12 dY=-0.22
+Arc CCW X=42.27342 Y=13.74965 dX=-0.07 dY=-0.15
+Arc CCW X=42.26394 Y=13.75283 dX=-0.07 dY=-0.2
+Arc CW X=42.23106 Y=13.76483 dX=0.1 dY=0.34
+Arc CCW X=42.19819 Y=13.77683 dX=-0.14 dY=-0.32
+Arc CW X=42.16532 Y=13.78883 dX=0.1 dY=0.34
+Arc CCW X=42.13245 Y=13.80084 dX=-0.14 dY=-0.32
+Arc CCW X=42.11652 Y=13.80512 dX=-0.07 dY=-0.21
+Arc CW X=42.1005 Y=13.80901 dX=0.15 dY=0.65
+Line X=42.00467 Y=13.83355
+Arc CW X=41.98214 Y=13.83957 dX=0.27 dY=1.05
+Arc CCW X=41.95948 Y=13.84512 dX=-0.1 dY=-0.35
+Arc CCW X=41.94725 Y=13.84739 dX=-0.06 dY=-0.26
+Arc CCW X=41.93495 Y=13.84918 dX=-0.06 dY=-0.36
+
+Arc CW X=41.89202 Y=13.85629 dX=0.07 dY=0.59
+Arc CCW X=41.84909 Y=13.86341 dX=-0.12 dY=-0.58
+Arc CW X=41.80616 Y=13.87052 dX=0.07 dY=0.59
+Arc CCW X=41.76324 Y=13.87764 dX=-0.12 dY=-0.58
+Arc CCW X=41.73812 Y=13.88015 dX=-0.06 dY=-0.45
+
+Arc CW X=41.71296 Y=13.8822 dX=0.1 dY=1.37
+Line X=41.66269 Y=13.88676
+Arc CW X=41.63284 Y=13.8897 dX=0.17 dY=1.9
+Arc CCW X=41.60295 Y=13.89218 dX=-0.07 dY=-0.63
+Arc CW X=41.57309 Y=13.89489 dX=0.03 dY=0.48
+Arc CCW X=41.54322 Y=13.8976 dX=-0.06 dY=-0.47
+Line X=41.29451 Y=13.9045
+Line X=37.70536
+Line X=37.45004 Y=13.89757
+Arc CCW X=37.42467 Y=13.89552 dX=0.03 dY=-0.55
+Arc CW X=37.39935 Y=13.89308 dX=-0.17 dY=1.65
+Line X=37.34866 Y=13.88859
+Arc CW X=37.3177 Y=13.88614 dX=-0.15 dY=1.68
+Arc CCW X=37.28677 Y=13.88311 dX=0.04 dY=-0.56
+Arc CW X=37.25583 Y=13.88037 dX=-0.05 dY=0.42
+Arc CCW X=37.22488 Y=13.87763 dX=0.02 dY=-0.42
+Line X=37.02509 Y=13.84501
+Line X=37.01728 Y=13.84312
+Line X=37.00953 Y=13.84107
+Arc CW X=36.98952 Y=13.83628 dX=-0.2 dY=0.8
+Arc CCW X=36.96964 Y=13.83098 dX=0.06 dY=-0.27
+Arc CW X=36.93972 Y=13.82342 dX=-0.09 dY=0.29
+Arc CCW X=36.90981 Y=13.81586 dX=0.06 dY=-0.3
+Arc CW X=36.87989 Y=13.80829 dX=-0.09 dY=0.29
+Arc CCW X=36.84998 Y=13.80073 dX=0.06 dY=-0.3
+Arc CCW X=36.84044 Y=13.79755 dX=0.06 dY=-0.21
+Arc CCW X=36.83107 Y=13.79387 dX=0.06 dY=-0.16
+Arc CW X=36.81453 Y=13.78787 dX=-0.06 dY=0.14
+Arc CCW X=36.79799 Y=13.78187 dX=0.04 dY=-0.15
+Arc CW X=36.77317 Y=13.77288 dX=-0.09 dY=0.21
+Arc CCW X=36.74836 Y=13.76388 dX=0.07 dY=-0.22
+Arc CW X=36.72354 Y=13.75488 dX=-0.09 dY=0.21
+Arc CCW X=36.69873 Y=13.74588 dX=0.07 dY=-0.22
+Line X=36.69248 Y=13.74288
+Line X=36.68633 Y=13.73971
+Arc CW X=36.67161 Y=13.73267 dX=-0.23 dY=0.46
+Arc CCW X=36.65713 Y=13.72518 dX=0.07 dY=-0.16
+Arc CW X=36.63523 Y=13.71428 dX=-0.1 dY=0.17
+Arc CCW X=36.61333 Y=13.70338 dX=0.08 dY=-0.18
+Arc CW X=36.59144 Y=13.69248 dX=-0.1 dY=0.17
+Arc CCW X=36.56954 Y=13.68159 dX=0.08 dY=-0.18
+Arc CCW X=36.55579 Y=13.67241 dX=0.07 dY=-0.11
+Arc CW X=36.53171 Y=13.65635 dX=-0.13 dY=0.17
+Arc CCW X=36.50764 Y=13.64029 dX=0.11 dY=-0.19
+Arc CW X=36.48356 Y=13.62423 dX=-0.13 dY=0.17
+Arc CCW X=36.45949 Y=13.60817 dX=0.11 dY=-0.19
+Arc CCW X=36.44296 Y=13.59405 dX=0.13 dY=-0.17
+Arc CW X=36.42691 Y=13.57938 dX=-0.44 dY=0.47
+Line X=36.39433 Y=13.55059
+Arc CW X=36.37947 Y=13.53791 dX=-0.38 dY=0.43
+Arc CCW X=36.36506 Y=13.52473 dX=0.12 dY=-0.15
+Arc CCW X=36.35256 Y=13.51068 dX=0.13 dY=-0.13
+Arc CW X=36.34055 Y=13.49621 dX=-0.43 dY=0.34
+Arc CW X=36.32586 Y=13.47968 dX=-0.5 dY=0.43
+Arc CCW X=36.31173 Y=13.46266 dX=0.16 dY=-0.15
+Arc CW X=36.29731 Y=13.44589 dX=-0.13 dY=0.1
+Arc CCW X=36.2829 Y=13.42911 dX=0.12 dY=-0.12
+Arc CCW X=36.27389 Y=13.41523 dX=0.1 dY=-0.07
+Arc CW X=36.25812 Y=13.39093 dX=-0.2 dY=0.11
+Arc CCW X=36.24236 Y=13.36664 dX=0.19 dY=-0.14
+Arc CW X=36.22659 Y=13.34234 dX=-0.2 dY=0.11
+Arc CCW X=36.21082 Y=13.31804 dX=0.19 dY=-0.14
+Arc CCW X=36.20372 Y=13.30394 dX=0.15 dY=-0.08
+Arc CW X=36.19707 Y=13.28962 dX=-0.46 dY=0.21
+Line X=36.1558 Y=13.20435
+Line X=36.15182 Y=13.19643
+Line X=36.14808 Y=13.1884
+Arc CCW X=36.1445 Y=13.17905 dX=0.15 dY=-0.06
+Arc CCW X=36.14143 Y=13.16952 dX=0.21 dY=-0.07
+Arc CW X=36.1298 Y=13.13649 dX=-0.34 dY=0.1
+Arc CCW X=36.11817 Y=13.10345 dX=0.33 dY=-0.13
+Arc CW X=36.10654 Y=13.07042 dX=-0.34 dY=0.1
+Arc CCW X=36.09491 Y=13.03738 dX=0.33 dY=-0.13
+Arc CCW X=36.08998 Y=13.01829 dX=0.26 dY=-0.08
+Arc CW X=36.08552 Y=12.99909 dX=-0.78 dY=0.17
+Line X=36.05737 Y=12.88421
+Arc CW X=36.05471 Y=12.87384 dX=-0.5 dY=0.12
+Arc CCW X=36.05227 Y=12.86342 dX=0.16 dY=-0.04
+Line X=36.02105 Y=12.66586
+Arc CCW X=36.01828 Y=12.63668 dX=0.55 dY=-0.07
+Arc CW X=36.01604 Y=12.60746 dX=-1.64 dY=0.11
+Line X=36.01102 Y=12.54906
+Arc CW X=36.00859 Y=12.52295 dX=-1.76 dY=0.15
+Arc CCW X=36.00654 Y=12.49682 dX=0.59 dY=-0.06
+Arc CW X=36.0043 Y=12.4707 dX=-0.44 dY=0.02
+Arc CCW X=36.00206 Y=12.44458 dX=0.44 dY=-0.05
+Line X=35.9955 Y=12.19481
+Line X=35.99505 Y=8.09825
+Line X=35.99825 Y=8.09505
+Line X=36.10111 Y=8.09506
+Line X=36.10429 Y=8.09825
+Line X=36.09724 Y=12.21038
+Line X=36.11395 Y=12.54022
+Arc CW X=36.11941 Y=12.58001 dX=0.39 dY=-0.03
+Line X=36.16781 Y=12.83551
+Arc CW X=36.18985 Y=12.91043 dX=0.39 dY=-0.07
+Line X=36.27405 Y=13.11823
+Arc CW X=36.32473 Y=13.20771 dX=0.37 dY=-0.15
+Line X=36.44764 Y=13.37081
+Arc CW X=36.52843 Y=13.45086 dX=0.32 dY=-0.24
+Line X=36.64964 Y=13.54044
+Arc CW X=36.69389 Y=13.54298 dX=0.02 dY=-0.03
+Arc CCW X=36.73819 Y=13.54426 dX=0.02 dY=0.04
+Arc CW X=36.80001 Y=13.57633 dX=0.19 dY=-0.29
+Line X=37.00901 Y=13.65934
+Arc CW X=37.07378 Y=13.678 dX=0.13 dY=-0.32
+Line X=37.33018 Y=13.7255
+Arc CW X=37.37615 Y=13.73088 dX=0.06 dY=-0.34
+Line X=37.7 Y=13.7465
+Line X=41.31593 Y=13.74613
+Line X=41.64851 Y=13.73048
+Arc CW X=41.67775 Y=13.72657 dX=-0.03 dY=-0.35
+Line X=41.93864 Y=13.68027
+Arc CW X=42.00404 Y=13.6619 dX=-0.06 dY=-0.34
+Line X=42.21294 Y=13.5804
+Arc CW X=42.2941 Y=13.5354 dX=-0.13 dY=-0.32
+Line X=42.4552 Y=13.4153
+Arc CW X=42.52852 Y=13.34103 dX=-0.21 dY=-0.28
+Line X=42.64632 Y=13.17873
+Arc CW X=42.68993 Y=13.09796 dX=-0.28 dY=-0.2
+Line X=42.76873 Y=12.88996
+Arc CW X=42.78622 Y=12.82576 dX=-0.32 dY=-0.12
+Line X=42.83031 Y=12.56856
+Arc CW X=42.83496 Y=12.5253 dX=-0.34 dY=-0.06
+Line X=42.849 Y=12.2
+Line Y=10.91542
+Line X=42.84695 Y=9.78641
+Line X=42.85305 Y=9.54161
+Line X=42.87223 Y=9.30893
+Line X=42.904 Y=9.10213
+Arc CCW X=42.90646 Y=9.09074 dX=0.3 dY=0.06
+Arc CCW X=42.90944 Y=9.07946 dX=0.21 dY=0.05
+Arc CW X=42.9142 Y=9.05963 dX=-0.2 dY=-0.06
+Arc CCW X=42.91896 Y=9.0398 dX=0.2 dY=0.04
+Arc CW X=42.9261 Y=9.01005 dX=-0.3 dY=-0.09
+Arc CCW X=42.93324 Y=8.9803 dX=0.3 dY=0.06
+Arc CW X=42.94038 Y=8.95055 dX=-0.3 dY=-0.09
+Arc CCW X=42.94752 Y=8.92081 dX=0.3 dY=0.06
+Arc CCW X=42.95066 Y=8.91093 dX=0.22 dY=0.06
+Arc CCW X=42.95433 Y=8.90123 dX=0.16 dY=0.05
+Arc CW X=42.96028 Y=8.8841 dX=-0.15 dY=-0.06
+Arc CCW X=42.96624 Y=8.86697 dX=0.15 dY=0.04
+Arc CW X=42.97517 Y=8.84128 dX=-0.22 dY=-0.09
+Arc CCW X=42.9841 Y=8.81559 dX=0.23 dY=0.06
+Arc CW X=42.99303 Y=8.7899 dX=-0.22 dY=-0.09
+Arc CCW X=43.00196 Y=8.7642 dX=0.23 dY=0.06
+Line X=43.00573 Y=8.75573
+Line X=43.01001 Y=8.7475
+Arc CW X=43.01706 Y=8.73288 dX=-0.11 dY=-0.06
+Arc CCW X=43.02411 Y=8.71826 dX=0.12 dY=0.05
+Arc CW X=43.03468 Y=8.69634 dX=-0.16 dY=-0.09
+Arc CCW X=43.04525 Y=8.67441 dX=0.17 dY=0.07
+Arc CW X=43.05582 Y=8.65248 dX=-0.16 dY=-0.09
+Arc CCW X=43.06639 Y=8.63056 dX=0.17 dY=0.07
+Arc CCW X=43.07565 Y=8.61637 dX=0.11 dY=0.06
+Arc CW X=43.08376 Y=8.60395 dX=-0.09 dY=-0.06
+Arc CCW X=43.09187 Y=8.59153 dX=0.09 dY=0.05
+Arc CW X=43.10403 Y=8.57291 dX=-0.13 dY=-0.1
+Arc CCW X=43.1162 Y=8.55428 dX=0.14 dY=0.08
+Arc CW X=43.12836 Y=8.53565 dX=-0.13 dY=-0.1
+Arc CCW X=43.14052 Y=8.51703 dX=0.14 dY=0.08
+Arc CCW X=43.15424 Y=8.50074 dX=0.16 dY=0.12
+Arc CW X=43.16852 Y=8.48495 dX=-0.45 dY=-0.42
+Arc CW X=43.19619 Y=8.45291 dX=-3 dY=-2.62
+Arc CCW X=43.22386 Y=8.42087 dX=3.03 dY=2.59
+Line X=43.22627 Y=8.41847
+Arc CCW X=43.24285 Y=8.4045 dX=0.68 dY=0.79
+Arc CW X=43.25943 Y=8.39052 dX=-0.67 dY=-0.81
+Arc CW X=43.27506 Y=8.37658 dX=-0.39 dY=-0.46
+Arc CCW X=43.29117 Y=8.36319 dX=0.14 dY=0.15
+Arc CW X=43.30704 Y=8.34952 dX=-0.09 dY=-0.12
+Arc CCW X=43.32292 Y=8.33586 dX=0.11 dY=0.11
+Line X=43.32989 Y=8.33103
+Line X=43.33717 Y=8.32668
+Arc CW X=43.36211 Y=8.31063 dX=-0.11 dY=-0.2
+Arc CCW X=43.38704 Y=8.29458 dX=0.14 dY=0.19
+Arc CW X=43.41198 Y=8.27853 dX=-0.11 dY=-0.2
+Arc CCW X=43.43692 Y=8.26247 dX=0.14 dY=0.19
+Line X=43.44517 Y=8.25824
+Line X=43.45367 Y=8.25452
+Arc CW X=43.48297 Y=8.24059 dX=-0.11 dY=-0.26
+Arc CCW X=43.51228 Y=8.22667 dX=0.14 dY=0.25
+Arc CW X=43.54159 Y=8.21274 dX=-0.11 dY=-0.26
+Arc CCW X=43.57089 Y=8.19882 dX=0.14 dY=0.25
+Arc CCW X=43.58059 Y=8.19521 dX=0.06 dY=0.16
+Arc CCW X=43.59046 Y=8.19212 dX=0.07 dY=0.22
+Arc CW X=43.62469 Y=8.1804 dX=-0.1 dY=-0.36
+Arc CCW X=43.65893 Y=8.16868 dX=0.14 dY=0.34
+Arc CW X=43.69317 Y=8.15695 dX=-0.1 dY=-0.36
+Arc CCW X=43.72741 Y=8.14523 dX=0.14 dY=0.34
+Arc CCW X=43.73863 Y=8.14231 dX=0.06 dY=0.21
+Arc CCW X=43.74997 Y=8.13989 dX=0.07 dY=0.3
+Arc CW X=43.78947 Y=8.13056 dX=-0.09 dY=-0.48
+Arc CCW X=43.82897 Y=8.12122 dX=0.13 dY=0.47
+Arc CW X=43.86847 Y=8.11189 dX=-0.09 dY=-0.48
+Arc CCW X=43.90797 Y=8.10255 dX=0.13 dY=0.47
+Line X=44.11356 Y=8.07158
+Arc CCW X=44.14768 Y=8.06852 dX=0.08 dY=0.66
+Arc CW X=44.18185 Y=8.06604 dX=-0.13 dY=-2
+Line X=44.25014 Y=8.0605
+Arc CW X=44.29722 Y=8.05635 dX=-0.27 dY=-3.33
+Arc CCW X=44.34436 Y=8.05286 dX=0.11 dY=1.11
+Line X=44.60423 Y=8.04651
+Line X=52.40001 Y=8.04655
+Arc CW X=52.43486 Y=8.04624 dX=0 dY=-1.97
+Arc CCW X=52.46971 Y=8.04655 dX=0.01 dY=0.66
+Arc CCW X=52.49352 Y=8.04803 dX=-0.02 dY=0.45
+Arc CW X=52.5173 Y=8.04993 dX=0.12 dY=-1.34
+Line X=52.88608 Y=8.07612
+Line X=53.25251 Y=8.15334
+Line X=53.57695 Y=8.26591
+Line X=53.88115 Y=8.41435
+Line X=54.18591 Y=8.61303
+Arc CCW X=54.20229 Y=8.62673 dX=-0.13 dY=0.17
+Arc CW X=54.21819 Y=8.64098 dX=0.43 dY=-0.46
+Line X=54.50517 Y=8.88947
+Line X=59.56674 Y=13.95141
+Line X=59.56569 Y=13.95395
+Line X=59.36721
+Line X=59.36009 Y=13.951
+Line X=54.42821 Y=9.01853
+Arc CW X=54.41076 Y=9.00224 dX=-0.25 dY=0.25
+Line X=54.21922 Y=8.83543
+Arc CW X=54.18459 Y=8.80906 dX=-0.23 dY=0.26
+Line X=53.97194 Y=8.66734
+Arc CW X=53.94085 Y=8.6493 dX=-0.19 dY=0.29
+Line X=53.71105 Y=8.5315
+Arc CW X=53.68515 Y=8.52014 dX=-0.15 dY=0.31
+Line X=53.43989 Y=8.42463
+Line X=53.18516 Y=8.35062
+Arc CW X=53.157 Y=8.34376 dX=-0.1 dY=0.33
+Line X=52.9204 Y=8.29648
+Arc CW X=52.89326 Y=8.29217 dX=-0.07 dY=0.34
+Line X=52.64565 Y=8.26322
+Line X=52.4 Y=8.2535
+Line X=44.58337 Y=8.2539
+Line X=44.26708 Y=8.26929
+Arc CW X=44.23333 Y=8.2737 dX=0.03 dY=0.35
+Line X=43.97783 Y=8.31999
+Arc CW X=43.91374 Y=8.33811 dX=0.06 dY=0.34
+Line X=43.70484 Y=8.41955
+Arc CW X=43.62669 Y=8.46231 dX=0.13 dY=0.32
+Line X=43.46178 Y=8.58243
+Arc CW X=43.39014 Y=8.65257 dX=0.2 dY=0.28
+Line X=43.26654 Y=8.81487
+Arc CW X=43.22139 Y=8.89386 dX=0.28 dY=0.21
+Line X=43.13649 Y=9.10187
+Arc CW X=43.11692 Y=9.16797 dX=0.32 dY=0.13
+Line X=43.06792 Y=9.4252
+Arc CW X=43.06225 Y=9.4724 dX=0.34 dY=0.06
+Line X=43.046 Y=9.8
+Line Y=10.29998
+Arc CW X=43.04688 Y=10.31953 dX=0.23 dY=0
+Arc CCW X=43.0483 Y=10.33906 dX=-0.65 dY=0.06
+Line Y=12.19526
+Line X=43.04142 Y=12.44622
+Arc CCW X=43.03912 Y=12.47438 dX=-0.6 dY=-0.04
+Arc CW X=43.03637 Y=12.5025 dX=1.8 dY=0.19
+Line X=43.0313 Y=12.55878
+Arc CW X=43.02906 Y=12.58654 dX=1.52 dY=0.14
+Arc CCW X=43.02632 Y=12.61426 dX=-0.51 dY=-0.04
+Arc CW X=43.02382 Y=12.642 dX=0.38 dY=0.05
+Arc CCW X=43.02133 Y=12.66975 dX=-0.38 dY=-0.02
+Line X=42.98839 Y=12.87027
+Arc CCW X=42.9844 Y=12.88672 dX=-0.26 dY=-0.05
+Arc CW X=42.98006 Y=12.90309 dX=0.76 dY=0.21
+Arc CW X=42.97569 Y=12.92126 dX=0.73 dY=0.19
+Arc CCW X=42.97086 Y=12.93932 dX=-0.25 dY=-0.06
+Arc CW X=42.96397 Y=12.9665 dX=0.27 dY=0.08
+Arc CCW X=42.95707 Y=12.99367 dX=-0.28 dY=-0.06
+Arc CW X=42.95017 Y=13.02084 dX=0.27 dY=0.08
+Arc CCW X=42.94327 Y=13.04802 dX=-0.28 dY=-0.06
+Arc CCW X=42.94 Y=13.05785 dX=-0.21 dY=-0.07
+Arc CCW X=42.93622 Y=13.0675 dX=-0.16 dY=-0.06
+Arc CW X=42.93004 Y=13.08454 dX=0.15 dY=0.06
+Arc CCW X=42.92387 Y=13.10158 dX=-0.16 dY=-0.05
+Arc CW X=42.91461 Y=13.12714 dX=0.22 dY=0.1
+Arc CCW X=42.90535 Y=13.15271 dX=-0.23 dY=-0.07
+Arc CW X=42.89609 Y=13.17827 dX=0.22 dY=0.1
+Arc CCW X=42.88683 Y=13.20384 dX=-0.23 dY=-0.07
+Arc CCW X=42.88121 Y=13.21561 dX=-0.14 dY=-0.06
+Arc CW X=42.87526 Y=13.22721 dX=0.41 dY=0.22
+Arc CW X=42.86855 Y=13.24132 dX=0.45 dY=0.22
+Arc CCW X=42.86141 Y=13.25521 dX=-0.15 dY=-0.07
+Arc CW X=42.85102 Y=13.2762 dX=0.16 dY=0.09
+Arc CCW X=42.84064 Y=13.29719 dX=-0.17 dY=-0.07
+Arc CW X=42.83025 Y=13.31819 dX=0.16 dY=0.09
+Arc CCW X=42.81987 Y=13.33918 dX=-0.17 dY=-0.07
+Arc CCW X=42.81021 Y=13.3538 dX=-0.12 dY=-0.07
+Arc CW X=42.80177 Y=13.3666 dX=0.09 dY=0.07
+Arc CCW X=42.79332 Y=13.37939 dX=-0.1 dY=-0.06
+Arc CW X=42.78066 Y=13.39859 dX=0.14 dY=0.11
+Arc CCW X=42.76799 Y=13.41778 dX=-0.15 dY=-0.09
+Arc CW X=42.75533 Y=13.43697 dX=0.14 dY=0.11
+Arc CCW X=42.74266 Y=13.45617 dX=-0.15 dY=-0.09
+Arc CCW X=42.72913 Y=13.47225 dX=-0.17 dY=-0.13
+Arc CW X=42.71508 Y=13.48788 dX=0.47 dY=0.43
+Line X=42.6875 Y=13.5196
+Arc CW X=42.67939 Y=13.52925 dX=0.28 dY=0.25
+Arc CCW X=42.67095 Y=13.53863 dX=-0.1 dY=-0.08
+Arc CW X=42.66268 Y=13.54814 dX=0.07 dY=0.07
+Arc CCW X=42.6544 Y=13.55765 dX=-0.07 dY=-0.06
+Arc CCW X=42.64389 Y=13.5672 dX=-0.1 dY=-0.1
+Arc CW X=42.63305 Y=13.57638 dX=0.27 dY=0.33
+Arc CW X=42.62325 Y=13.58527 dX=0.26 dY=0.3
+Arc CCW X=42.61315 Y=13.59384 dX=-0.09 dY=-0.1
+Arc CW X=42.59823 Y=13.60693 dX=0.09 dY=0.12
+Arc CCW X=42.5833 Y=13.62002 dX=-0.11 dY=-0.11
+Arc CW X=42.56838 Y=13.63311 dX=0.09 dY=0.12
+Arc CCW X=42.55346 Y=13.6462 dX=-0.11 dY=-0.11
+Arc CCW X=42.53889 Y=13.65589 dX=-0.08 dY=-0.1
+Arc CW X=42.51341 Y=13.67284 dX=0.12 dY=0.21
+Arc CCW X=42.48792 Y=13.6898 dX=-0.15 dY=-0.2
+Arc CW X=42.46244 Y=13.70676 dX=0.12 dY=0.21
+Arc CCW X=42.43695 Y=13.72371 dX=-0.15 dY=-0.2
+Arc CCW X=42.42532 Y=13.72975 dX=-0.07 dY=-0.12
+Arc CW X=42.41351 Y=13.73542 dX=0.18 dY=0.38
+Line X=42.34317 Y=13.77055
+Arc CW X=42.3228 Y=13.78109 dX=0.36 dY=0.73
+Arc CCW X=42.30214 Y=13.79104 dX=-0.13 dY=-0.24
+Arc CCW X=42.29253 Y=13.79484 dX=-0.07 dY=-0.16
+Arc CCW X=42.28274 Y=13.79813 dX=-0.08 dY=-0.21
+Arc CW X=42.24879 Y=13.81052 dX=0.11 dY=0.35
+Arc CCW X=42.21485 Y=13.82291 dX=-0.14 dY=-0.33
+Arc CW X=42.1809 Y=13.83531 dX=0.11 dY=0.35
+Arc CCW X=42.14696 Y=13.8477 dX=-0.14 dY=-0.33
+Arc CCW X=42.13074 Y=13.85207 dX=-0.07 dY=-0.22
+Arc CW X=42.11443 Y=13.85603 dX=0.15 dY=0.66
+Line X=42.01683 Y=13.88101
+Arc CW X=41.99327 Y=13.88732 dX=0.28 dY=1.09
+Arc CCW X=41.96958 Y=13.89311 dX=-0.1 dY=-0.36
+Line X=41.76946 Y=13.92627
+Arc CCW X=41.7439 Y=13.92883 dX=-0.06 dY=-0.46
+Arc CW X=41.71829 Y=13.93091 dX=0.1 dY=1.39
+Line X=41.66711 Y=13.93556
+Arc CW X=41.63689 Y=13.93854 dX=0.18 dY=1.93
+Arc CCW X=41.60662 Y=13.94105 dX=-0.07 dY=-0.64
+Arc CW X=41.57637 Y=13.94379 dX=0.03 dY=0.48
+Arc CCW X=41.54612 Y=13.94654 dX=-0.06 dY=-0.48
+Line X=41.29519 Y=13.9535
+Line X=37.7047
+Line X=37.4472 Y=13.94652
+Arc CCW X=37.42147 Y=13.94443 dX=0.03 dY=-0.56
+Arc CW X=37.39577 Y=13.94196 dX=-0.17 dY=1.68
+Line X=37.34434 Y=13.9374
+Arc CW X=37.31292 Y=13.93491 dX=-0.15 dY=1.71
+Arc CCW X=37.28155 Y=13.93184 dX=0.04 dY=-0.57
+Arc CW X=37.25016 Y=13.92906 dX=-0.05 dY=0.43
+Arc CCW X=37.21877 Y=13.92628 dX=0.02 dY=-0.43
+Line X=37.01512 Y=13.89303
+Line X=37.00629 Y=13.89089
+Line X=36.99751 Y=13.88857
+Arc CW X=36.97721 Y=13.88371 dX=-0.2 dY=0.81
+Arc CCW X=36.95703 Y=13.87834 dX=0.06 dY=-0.27
+Arc CW X=36.92667 Y=13.87066 dX=-0.09 dY=0.3
+Arc CCW X=36.89631 Y=13.86299 dX=0.06 dY=-0.31
+Arc CW X=36.86595 Y=13.85531 dX=-0.09 dY=0.3
+Arc CCW X=36.83559 Y=13.84763 dX=0.06 dY=-0.31
+Arc CCW X=36.82573 Y=13.84435 dX=0.07 dY=-0.21
+Arc CCW X=36.81606 Y=13.84055 dX=0.06 dY=-0.16
+Arc CW X=36.79898 Y=13.83436 dX=-0.06 dY=0.15
+Arc CCW X=36.7819 Y=13.82816 dX=0.05 dY=-0.15
+Arc CW X=36.75627 Y=13.81887 dX=-0.09 dY=0.22
+Arc CCW X=36.73065 Y=13.80958 dX=0.07 dY=-0.23
+Arc CW X=36.70502 Y=13.80028 dX=-0.09 dY=0.22
+Arc CCW X=36.6794 Y=13.79099 dX=0.07 dY=-0.23
+Line X=36.67189 Y=13.78739
+Line X=36.66449 Y=13.78358
+Arc CW X=36.64943 Y=13.77637 dX=-0.24 dY=0.47
+Arc CCW X=36.63461 Y=13.7687 dX=0.07 dY=-0.16
+Arc CW X=36.61219 Y=13.75754 dX=-0.1 dY=0.17
+Arc CCW X=36.58977 Y=13.74639 dX=0.08 dY=-0.18
+Arc CW X=36.56735 Y=13.73523 dX=-0.1 dY=0.17
+Arc CCW X=36.54493 Y=13.72407 dX=0.08 dY=-0.18
+Arc CCW X=36.53051 Y=13.71445 dX=0.07 dY=-0.12
+Arc CW X=36.51788 Y=13.70603 dX=-0.07 dY=0.09
+Arc CCW X=36.50526 Y=13.69761 dX=0.06 dY=-0.1
+Arc CW X=36.48633 Y=13.68498 dX=-0.1 dY=0.13
+Arc CCW X=36.4674 Y=13.67235 dX=0.08 dY=-0.15
+Arc CW X=36.44846 Y=13.65972 dX=-0.1 dY=0.13
+Arc CCW X=36.42953 Y=13.64709 dX=0.08 dY=-0.15
+Arc CCW X=36.42095 Y=13.63976 dX=0.07 dY=-0.09
+Arc CW X=36.41262 Y=13.63214 dX=-0.23 dY=0.24
+Line X=36.36189 Y=13.58731
+Arc CW X=36.34575 Y=13.57354 dX=-0.41 dY=0.46
+Arc CCW X=36.33009 Y=13.55922 dX=0.13 dY=-0.16
+Arc CCW X=36.31647 Y=13.54391 dX=0.14 dY=-0.14
+Arc CW X=36.30339 Y=13.52814 dX=-0.47 dY=0.37
+Arc CW X=36.29577 Y=13.51957 dX=-0.26 dY=0.22
+Arc CCW X=36.28844 Y=13.51075 dX=0.08 dY=-0.08
+Arc CW X=36.27723 Y=13.4977 dX=-0.1 dY=0.08
+Arc CCW X=36.26601 Y=13.48465 dX=0.09 dY=-0.09
+Arc CW X=36.2548 Y=13.4716 dX=-0.1 dY=0.08
+Arc CCW X=36.24359 Y=13.45855 dX=0.09 dY=-0.09
+Arc CCW X=36.23415 Y=13.444 dX=0.1 dY=-0.08
+Arc CW X=36.21762 Y=13.41853 dX=-0.21 dY=0.12
+Arc CCW X=36.2011 Y=13.39307 dX=0.2 dY=-0.14
+Arc CW X=36.18458 Y=13.36761 dX=-0.21 dY=0.12
+Arc CCW X=36.16805 Y=13.34215 dX=0.2 dY=-0.14
+Arc CCW X=36.16078 Y=13.3277 dX=0.15 dY=-0.08
+Arc CW X=36.15396 Y=13.31304 dX=-0.47 dY=0.21
+Line X=36.11169 Y=13.22569
+Arc CW X=36.1071 Y=13.21654 dX=-0.33 dY=0.16
+Arc CCW X=36.10277 Y=13.20727 dX=0.11 dY=-0.06
+Arc CCW X=36.09908 Y=13.19761 dX=0.16 dY=-0.07
+Arc CCW X=36.09591 Y=13.18778 dX=0.21 dY=-0.07
+Arc CW X=36.0839 Y=13.15368 dX=-0.35 dY=0.11
+Arc CCW X=36.0719 Y=13.11958 dX=0.34 dY=-0.14
+Arc CW X=36.05989 Y=13.08548 dX=-0.35 dY=0.11
+Arc CCW X=36.04789 Y=13.05138 dX=0.34 dY=-0.14
+Arc CCW X=36.04288 Y=13.032 dX=0.26 dY=-0.08
+Arc CW X=36.03836 Y=13.01251 dX=-0.8 dY=0.17
+Line X=36.00977 Y=12.89587
+Arc CW X=36.00686 Y=12.88451 dX=-0.54 dY=0.13
+Arc CCW X=36.00419 Y=12.8731 dX=0.18 dY=-0.05
+Line X=35.97238 Y=12.67179
+Arc CCW X=35.96957 Y=12.64217 dX=0.55 dY=-0.07
+Arc CW X=35.96729 Y=12.61252 dX=-1.67 dY=0.11
+Line X=35.9622 Y=12.55325
+Arc CW X=35.95973 Y=12.52678 dX=-1.78 dY=0.15
+Arc CCW X=35.95766 Y=12.50028 dX=0.59 dY=-0.06
+Arc CW X=35.95538 Y=12.4738 dX=-0.45 dY=0.03
+Arc CCW X=35.95311 Y=12.44732 dX=0.44 dY=-0.05
+Line X=35.9465 Y=12.19545
+Line X=35.94605 Y=8.04925
+Line X=35.94924 Y=8.04605
+Line X=36.15019 Y=8.04606
+Line X=36.15337 Y=8.04925
+Line X=36.14654 Y=12.21739
+Line X=36.16277 Y=12.53603
+Arc CW X=36.16755 Y=12.57089 dX=0.35 dY=-0.03
+Line X=36.21986 Y=12.84438
+Arc CW X=36.23526 Y=12.89202 dX=0.34 dY=-0.08
+Line X=36.31946 Y=13.09982
+Arc CW X=36.36387 Y=13.17822 dX=0.32 dY=-0.13
+Line X=36.48677 Y=13.34132
+Arc CW X=36.55756 Y=13.41146 dX=0.28 dY=-0.21
+Line X=36.72196 Y=13.53296
+Arc CW X=36.73819 Y=13.54426 dX=0.21 dY=-0.28
+Arc CW X=36.78468 Y=13.54237 dX=0.02 dY=-0.03
+Arc CCW X=36.83074 Y=13.53582 dX=0.03 dY=0.04
+Line X=37.0271 Y=13.61379
+Arc CW X=37.08271 Y=13.62982 dX=0.11 dY=-0.28
+Line X=37.33911 Y=13.67732
+Arc CW X=37.37857 Y=13.68194 dX=0.05 dY=-0.29
+Line X=37.7 Y=13.6975
+Line X=41.31368 Y=13.69719
+Line X=41.64408 Y=13.68168
+Arc CW X=41.66918 Y=13.67832 dX=-0.03 dY=-0.3
+Line X=41.93008 Y=13.63202
+Arc CW X=41.98623 Y=13.61625 dX=-0.05 dY=-0.29
+Line X=42.19513 Y=13.53475
+Arc CW X=42.26481 Y=13.49611 dX=-0.11 dY=-0.28
+Line X=42.42591 Y=13.37601
+Arc CW X=42.48886 Y=13.31225 dX=-0.18 dY=-0.24
+Line X=42.60667 Y=13.14995
+Arc CW X=42.6441 Y=13.0806 dX=-0.24 dY=-0.17
+Line X=42.7229 Y=12.8726
+Arc CW X=42.73792 Y=12.81748 dX=-0.28 dY=-0.11
+Line X=42.78202 Y=12.56028
+Arc CW X=42.78601 Y=12.52314 dX=-0.29 dY=-0.05
+Line X=42.8 Y=12.2
+Line Y=10.91553
+Line X=42.79796 Y=9.78519
+Line X=42.8041 Y=9.53898
+Line X=42.82354 Y=9.30319
+Line X=42.85587 Y=9.09268
+Arc CCW X=42.85839 Y=9.08101 dX=0.31 dY=0.06
+Arc CCW X=42.86144 Y=9.06947 dX=0.22 dY=0.05
+Arc CW X=42.86632 Y=9.04916 dX=-0.2 dY=-0.06
+Arc CCW X=42.87119 Y=9.02885 dX=0.21 dY=0.04
+Arc CW X=42.87851 Y=8.99839 dX=-0.3 dY=-0.09
+Arc CCW X=42.88582 Y=8.96793 dX=0.31 dY=0.06
+Arc CW X=42.89313 Y=8.93747 dX=-0.3 dY=-0.09
+Arc CCW X=42.90044 Y=8.90701 dX=0.31 dY=0.06
+Arc CCW X=42.90368 Y=8.89682 dX=0.23 dY=0.07
+Arc CCW X=42.90746 Y=8.88682 dX=0.17 dY=0.06
+Arc CW X=42.9136 Y=8.86915 dX=-0.15 dY=-0.06
+Arc CCW X=42.91975 Y=8.85148 dX=0.16 dY=0.04
+Arc CW X=42.92896 Y=8.82497 dX=-0.23 dY=-0.09
+Arc CCW X=42.93818 Y=8.79847 dX=0.24 dY=0.07
+Arc CW X=42.94739 Y=8.77196 dX=-0.23 dY=-0.09
+Arc CCW X=42.9566 Y=8.74546 dX=0.24 dY=0.07
+Line X=42.96053 Y=8.73664
+Line X=42.96498 Y=8.72808
+Arc CW X=42.97231 Y=8.71287 dX=-0.11 dY=-0.06
+Arc CCW X=42.97964 Y=8.69767 dX=0.12 dY=0.05
+Arc CW X=42.99063 Y=8.67486 dX=-0.17 dY=-0.1
+Arc CCW X=43.00163 Y=8.65204 dX=0.18 dY=0.07
+Arc CW X=43.01263 Y=8.62923 dX=-0.17 dY=-0.1
+Arc CCW X=43.02362 Y=8.60642 dX=0.18 dY=0.07
+Arc CCW X=43.03334 Y=8.59154 dX=0.12 dY=0.07
+Arc CW X=43.04184 Y=8.57852 dX=-0.09 dY=-0.07
+Arc CCW X=43.05035 Y=8.5655 dX=0.1 dY=0.05
+
+Arc CW X=43.0631 Y=8.54597 dX=-0.13 dY=-0.1
+Arc CCW X=43.07585 Y=8.52644 dX=0.15 dY=0.08
+Arc CW X=43.08861 Y=8.50691 dX=-0.13 dY=-0.1
+Arc CCW X=43.10136 Y=8.48738 dX=0.15 dY=0.08
+Arc CCW X=43.1085 Y=8.47891 dX=0.08 dY=0.06
+Arc CW X=43.11592 Y=8.47069 dX=-0.23 dY=-0.22
+
+Line X=43.18924 Y=8.38602
+Line X=43.19165 Y=8.38362
+Arc CCW X=43.20956 Y=8.3685 dX=0.8 dY=0.92
+Arc CW X=43.22746 Y=8.35339 dX=-0.78 dY=-0.94
+Arc CW X=43.23559 Y=8.34613 dX=-0.2 dY=-0.24
+Arc CCW X=43.24398 Y=8.33917 dX=0.07 dY=0.08
+Arc CW X=43.25636 Y=8.3285 dX=-0.07 dY=-0.09
+Arc CCW X=43.26875 Y=8.31783 dX=0.08 dY=0.08
+Arc CW X=43.28114 Y=8.30717 dX=-0.07 dY=-0.09
+Arc CCW X=43.29353 Y=8.2965 dX=0.08 dY=0.08
+Line X=43.30084 Y=8.29144
+Line X=43.30847 Y=8.28688
+Arc CW X=43.33461 Y=8.27005 dX=-0.12 dY=-0.21
+Arc CCW X=43.36076 Y=8.25323 dX=0.14 dY=0.19
+Arc CW X=43.3869 Y=8.23639 dX=-0.12 dY=-0.21
+Arc CCW X=43.41304 Y=8.21957 dX=0.14 dY=0.19
+Line X=43.42163 Y=8.21516
+Line X=43.43046 Y=8.21129
+Arc CW X=43.46094 Y=8.19681 dX=-0.11 dY=-0.28
+Arc CCW X=43.49142 Y=8.18233 dX=0.14 dY=0.26
+Arc CW X=43.5219 Y=8.16785 dX=-0.11 dY=-0.28
+Arc CCW X=43.55238 Y=8.15337 dX=0.14 dY=0.26
+Arc CCW X=43.56238 Y=8.14964 dX=0.07 dY=0.16
+Arc CCW X=43.57256 Y=8.14646 dX=0.08 dY=0.22
+Arc CW X=43.60787 Y=8.13437 dX=-0.11 dY=-0.37
+Arc CCW X=43.64318 Y=8.12228 dX=0.14 dY=0.35
+Arc CW X=43.67849 Y=8.11018 dX=-0.11 dY=-0.37
+Arc CCW X=43.7138 Y=8.09809 dX=0.14 dY=0.35
+Arc CCW X=43.72529 Y=8.0951 dX=0.06 dY=0.22
+Arc CCW X=43.73691 Y=8.09263 dX=0.07 dY=0.31
+Arc CW X=43.77735 Y=8.08307 dX=-0.1 dY=-0.49
+Arc CCW X=43.81779 Y=8.07352 dX=0.14 dY=0.48
+Arc CW X=43.85823 Y=8.06396 dX=-0.1 dY=-0.49
+Arc CCW X=43.89867 Y=8.0544 dX=0.14 dY=0.48
+Line X=44.10793 Y=8.02288
+Arc CCW X=44.14246 Y=8.01978 dX=0.08 dY=0.67
+Arc CW X=44.17705 Y=8.01727 dX=-0.13 dY=-2.02
+Line X=44.24617 Y=8.01166
+Arc CW X=44.29395 Y=8.00745 dX=-0.27 dY=-3.38
+Arc CCW X=44.34177 Y=8.00391 dX=0.11 dY=1.13
+Line X=44.60363 Y=7.99751
+Line X=52.40001 Y=7.99755
+Arc CW X=52.43573 Y=7.99723 dX=0 dY=-2.02
+Arc CCW X=52.47145 Y=7.99755 dX=0.01 dY=0.67
+Arc CCW X=52.49548 Y=7.99904 dX=-0.02 dY=0.45
+Arc CW X=52.51947 Y=8.00096 dX=0.12 dY=-1.35
+Line X=52.8929 Y=8.02748
+Line X=53.26565 Y=8.10603
+Line X=53.59579 Y=8.22058
+Line X=53.90537 Y=8.37164
+Line X=54.21547 Y=8.57381
+Arc CCW X=54.23216 Y=8.58777 dX=-0.13 dY=0.17
+Arc CW X=54.24837 Y=8.6023 dX=0.44 dY=-0.47
+Line X=54.53857 Y=8.85359
+Line X=59.68502 Y=14.00041
+Line X=59.68396 Y=14.00295
+Line X=59.34692
+Line X=59.33979 Y=14
+Line X=54.39356 Y=9.05317
+Arc CW X=54.37858 Y=9.03919 dX=-0.21 dY=0.21
+Line X=54.18714 Y=8.87248
+Arc CW X=54.15741 Y=8.84983 dX=-0.19 dY=0.22
+Line X=53.94518 Y=8.70838
+Arc CW X=53.91848 Y=8.69289 dX=-0.16 dY=0.25
+Line X=53.68956 Y=8.57553
+Arc CW X=53.66733 Y=8.56578 dX=-0.13 dY=0.27
+Line X=53.42382 Y=8.47092
+Line X=53.17157 Y=8.3977
+Arc CW X=53.1474 Y=8.39181 dX=-0.08 dY=0.29
+Line X=52.9108 Y=8.34453
+Arc CW X=52.8875 Y=8.34083 dX=-0.06 dY=0.29
+Line X=52.64217 Y=8.3121
+Line X=52.4 Y=8.3025
+Line X=44.58572 Y=8.30284
+Line X=44.27104 Y=8.31812
+Arc CW X=44.24207 Y=8.32192 dX=0.02 dY=0.3
+Line X=43.98656 Y=8.36821
+Arc CW X=43.93154 Y=8.38376 dX=0.05 dY=0.29
+Line X=43.72264 Y=8.4652
+Arc CW X=43.65554 Y=8.50191 dX=0.11 dY=0.28
+Line X=43.49063 Y=8.62204
+Arc CW X=43.42912 Y=8.68225 dX=0.18 dY=0.24
+Line X=43.30552 Y=8.84455
+Arc CW X=43.26676 Y=8.91238 dX=0.24 dY=0.18
+Line X=43.18186 Y=9.12039
+Arc CW X=43.16505 Y=9.17714 dX=0.28 dY=0.11
+Line X=43.11605 Y=9.43437
+Arc CW X=43.11119 Y=9.47489 dX=0.29 dY=0.06
+Line X=43.095 Y=9.8
+Line Y=10.29987
+Arc CW X=43.09588 Y=10.31801 dX=0.2 dY=0
+Arc CCW X=43.0973 Y=10.33612 dX=-0.56 dY=0.05
+Line Y=12.19593
+Line X=43.09037 Y=12.44909
+Arc CCW X=43.08802 Y=12.47763 dX=-0.61 dY=-0.04
+Arc CW X=43.08524 Y=12.50613 dX=1.83 dY=0.19
+Line X=43.08011 Y=12.56317
+Arc CW X=43.07783 Y=12.59138 dX=1.54 dY=0.14
+Arc CCW X=43.07504 Y=12.61954 dX=-0.51 dY=-0.04
+Arc CW X=43.07251 Y=12.64773 dX=0.38 dY=0.05
+Arc CCW X=43.06997 Y=12.67592 dX=-0.39 dY=-0.02
+Line X=43.0364 Y=12.88028
+Arc CCW X=43.03217 Y=12.89776 dX=-0.27 dY=-0.06
+Arc CW X=43.02755 Y=12.91515 dX=0.81 dY=0.22
+Arc CW X=43.02311 Y=12.93361 dX=0.74 dY=0.19
+Arc CCW X=43.01821 Y=12.95197 dX=-0.25 dY=-0.06
+Arc CW X=43.0112 Y=12.97958 dX=0.28 dY=0.08
+Arc CCW X=43.00419 Y=13.0072 dX=-0.28 dY=-0.06
+Arc CW X=42.99718 Y=13.03481 dX=0.28 dY=0.08
+Arc CCW X=42.99017 Y=13.06243 dX=-0.28 dY=-0.06
+Arc CCW X=42.9868 Y=13.07256 dX=-0.22 dY=-0.07
+Arc CCW X=42.98289 Y=13.08251 dX=-0.17 dY=-0.06
+Arc CW X=42.97653 Y=13.10009 dX=0.15 dY=0.07
+Arc CCW X=42.97016 Y=13.11766 dX=-0.16 dY=-0.05
+Arc CW X=42.96061 Y=13.14402 dX=0.23 dY=0.1
+Arc CCW X=42.95106 Y=13.17038 dX=-0.24 dY=-0.07
+Arc CW X=42.94151 Y=13.19674 dX=0.23 dY=0.1
+Arc CCW X=42.93196 Y=13.22311 dX=-0.24 dY=-0.07
+Arc CCW X=42.92575 Y=13.23612 dX=-0.16 dY=-0.07
+Arc CW X=42.91918 Y=13.24894 dX=0.46 dY=0.24
+Arc CW X=42.91231 Y=13.26339 dX=0.46 dY=0.23
+Arc CCW X=42.90499 Y=13.27762 dX=-0.16 dY=-0.07
+Arc CW X=42.89435 Y=13.29912 dX=0.17 dY=0.1
+Arc CCW X=42.88371 Y=13.32062 dX=-0.18 dY=-0.08
+Arc CW X=42.87307 Y=13.34213 dX=0.17 dY=0.1
+Arc CCW X=42.86243 Y=13.36363 dX=-0.18 dY=-0.08
+Arc CCW X=42.85235 Y=13.37891 dX=-0.13 dY=-0.07
+Arc CW X=42.84353 Y=13.39228 dX=0.1 dY=0.07
+Arc CCW X=42.83471 Y=13.40565 dX=-0.11 dY=-0.06
+Arc CW X=42.82147 Y=13.4257 dX=0.14 dY=0.11
+Arc CCW X=42.80824 Y=13.44576 dX=-0.16 dY=-0.09
+Arc CW X=42.795 Y=13.46581 dX=0.14 dY=0.11
+Arc CCW X=42.78176 Y=13.48587 dX=-0.16 dY=-0.09
+Arc CCW X=42.76772 Y=13.50258 dX=-0.18 dY=-0.13
+Arc CW X=42.75312 Y=13.51881 dX=0.48 dY=0.45
+Line X=42.72447 Y=13.55175
+Arc CW X=42.71583 Y=13.56204 dX=0.3 dY=0.26
+Arc CCW X=42.70684 Y=13.57203 dX=-0.1 dY=-0.08
+Arc CW X=42.69802 Y=13.58217 dX=0.07 dY=0.07
+Arc CCW X=42.68921 Y=13.59231 dX=-0.08 dY=-0.06
+Arc CCW X=42.67746 Y=13.60296 dX=-0.11 dY=-0.11
+Arc CW X=42.66536 Y=13.61322 dX=0.3 dY=0.36
+Arc CW X=42.65525 Y=13.62239 dX=0.27 dY=0.31
+Arc CCW X=42.64485 Y=13.63121 dX=-0.09 dY=-0.1
+Arc CW X=42.62947 Y=13.6447 dX=0.09 dY=0.12
+Arc CCW X=42.61408 Y=13.6582 dX=-0.11 dY=-0.11
+Arc CW X=42.5987 Y=13.67169 dX=0.09 dY=0.12
+Arc CCW X=42.58331 Y=13.68519 dX=-0.11 dY=-0.11
+Arc CCW X=42.5681 Y=13.69531 dX=-0.08 dY=-0.11
+Arc CW X=42.54146 Y=13.71303 dX=0.13 dY=0.22
+Arc CCW X=42.51483 Y=13.73075 dX=-0.16 dY=-0.21
+Arc CW X=42.4882 Y=13.74847 dX=0.13 dY=0.22
+Arc CCW X=42.46157 Y=13.76619 dX=-0.16 dY=-0.21
+Arc CCW X=42.4496 Y=13.7724 dX=-0.07 dY=-0.13
+Arc CW X=42.43744 Y=13.77824 dX=0.18 dY=0.4
+Line X=42.36507 Y=13.81439
+Arc CW X=42.34346 Y=13.82556 dX=0.38 dY=0.77
+Arc CCW X=42.32154 Y=13.83612 dX=-0.14 dY=-0.25
+Arc CCW X=42.31164 Y=13.84004 dX=-0.07 dY=-0.16
+Arc CCW X=42.30154 Y=13.84343 dX=-0.08 dY=-0.22
+Arc CW X=42.26652 Y=13.85621 dX=0.11 dY=0.36
+Arc CCW X=42.23151 Y=13.869 dX=-0.15 dY=-0.35
+Arc CW X=42.19649 Y=13.88178 dX=0.11 dY=0.36
+Arc CCW X=42.16148 Y=13.89457 dX=-0.15 dY=-0.35
+Arc CCW X=42.14497 Y=13.89901 dX=-0.07 dY=-0.22
+Arc CW X=42.12835 Y=13.90305 dX=0.15 dY=0.67
+Line X=42.02898 Y=13.92848
+Arc CW X=42.00439 Y=13.93506 dX=0.29 dY=1.14
+Arc CCW X=41.97968 Y=13.9411 dX=-0.11 dY=-0.38
+Line X=41.77569 Y=13.97491
+Arc CCW X=41.74968 Y=13.97751 dX=-0.06 dY=-0.47
+Arc CW X=41.72361 Y=13.97963 dX=0.1 dY=1.41
+Line X=41.67154 Y=13.98436
+Arc CW X=41.64093 Y=13.98738 dX=0.18 dY=1.95
+Arc CCW X=41.61028 Y=13.98992 dX=-0.07 dY=-0.65
+Arc CW X=41.57965 Y=13.99269 dX=0.03 dY=0.49
+Arc CCW X=41.54902 Y=13.99547 dX=-0.06 dY=-0.49
+Line X=41.29587 Y=14.0025
+Line X=37.70403
+Line X=37.44438 Y=13.99546
+Arc CCW X=37.41827 Y=13.99334 dX=0.03 dY=-0.57
+Arc CW X=37.3922 Y=13.99083 dX=-0.18 dY=1.7
+Line X=37.34002 Y=13.98621
+Arc CW X=37.30815 Y=13.98368 dX=-0.15 dY=1.73
+Arc CCW X=37.27633 Y=13.98057 dX=0.04 dY=-0.58
+Arc CW X=37.24449 Y=13.97775 dX=-0.05 dY=0.43
+Arc CCW X=37.21265 Y=13.97493 dX=0.02 dY=-0.43
+Line X=37.00515 Y=13.94105
+Arc CCW X=36.9953 Y=13.93867 dX=0.03 dY=-0.15
+Arc CW X=36.9855 Y=13.93608 dX=-0.13 dY=0.46
+Arc CW X=36.9649 Y=13.93114 dX=-0.21 dY=0.82
+Arc CCW X=36.94442 Y=13.92569 dX=0.06 dY=-0.27
+Arc CW X=36.91362 Y=13.9179 dX=-0.09 dY=0.3
+Arc CCW X=36.88281 Y=13.91011 dX=0.06 dY=-0.31
+Arc CW X=36.852 Y=13.90232 dX=-0.09 dY=0.3
+Arc CCW X=36.82119 Y=13.89454 dX=0.06 dY=-0.31
+Arc CCW X=36.81102 Y=13.89115 dX=0.07 dY=-0.22
+Arc CCW X=36.80105 Y=13.88723 dX=0.06 dY=-0.17
+Arc CW X=36.78343 Y=13.88084 dX=-0.06 dY=0.15
+Arc CCW X=36.7658 Y=13.87445 dX=0.05 dY=-0.16
+Arc CW X=36.73937 Y=13.86486 dX=-0.1 dY=0.23
+Arc CCW X=36.71294 Y=13.85528 dX=0.07 dY=-0.24
+Arc CW X=36.6865 Y=13.84569 dX=-0.1 dY=0.23
+Arc CCW X=36.66006 Y=13.8361 dX=0.07 dY=-0.24
+Line X=36.6513 Y=13.8319
+Line X=36.64266 Y=13.82744
+Arc CW X=36.62725 Y=13.82007 dX=-0.24 dY=0.48
+Arc CCW X=36.61208 Y=13.81222 dX=0.08 dY=-0.16
+Arc CW X=36.58914 Y=13.80081 dX=-0.1 dY=0.18
+Arc CCW X=36.5662 Y=13.78939 dX=0.08 dY=-0.19
+Arc CW X=36.54326 Y=13.77797 dX=-0.1 dY=0.18
+Arc CCW X=36.52032 Y=13.76656 dX=0.08 dY=-0.19
+Arc CCW X=36.50523 Y=13.75649 dX=0.07 dY=-0.12
+Arc CW X=36.49202 Y=13.74768 dX=-0.07 dY=0.09
+Arc CCW X=36.47881 Y=13.73887 dX=0.06 dY=-0.1
+Arc CW X=36.45901 Y=13.72565 dX=-0.11 dY=0.14
+Arc CCW X=36.4392 Y=13.71244 dX=0.09 dY=-0.15
+Arc CW X=36.41939 Y=13.69922 dX=-0.11 dY=0.14
+Arc CCW X=36.39958 Y=13.68601 dX=0.09 dY=-0.15
+Arc CCW X=36.39068 Y=13.67841 dX=0.07 dY=-0.09
+Arc CW X=36.38204 Y=13.67051 dX=-0.24 dY=0.25
+Line X=36.32944 Y=13.62403
+Arc CW X=36.32073 Y=13.6166 dX=-0.22 dY=0.25
+Arc CCW X=36.31228 Y=13.60887 dX=0.07 dY=-0.09
+Arc CW X=36.3037 Y=13.60129 dX=-0.06 dY=0.06
+Arc CCW X=36.29512 Y=13.59371 dX=0.05 dY=-0.07
+Arc CCW X=36.28775 Y=13.58542 dX=0.08 dY=-0.08
+Arc CW X=36.28067 Y=13.57689 dX=-0.25 dY=0.2
+Line X=36.26622 Y=13.56008
+Arc CW X=36.25833 Y=13.5512 dX=-0.27 dY=0.23
+Arc CCW X=36.25074 Y=13.54205 dX=0.09 dY=-0.08
+Arc CW X=36.23912 Y=13.52854 dX=-0.11 dY=0.08
+Arc CCW X=36.2275 Y=13.51502 dX=0.09 dY=-0.09
+Arc CW X=36.21589 Y=13.5015 dX=-0.11 dY=0.08
+Arc CCW X=36.20428 Y=13.48798 dX=0.09 dY=-0.09
+Arc CCW X=36.1944 Y=13.47277 dX=0.11 dY=-0.08
+Arc CW X=36.17712 Y=13.44614 dX=-0.22 dY=0.12
+Arc CCW X=36.15984 Y=13.41951 dX=0.2 dY=-0.15
+Arc CW X=36.14256 Y=13.39288 dX=-0.22 dY=0.12
+Arc CCW X=36.12528 Y=13.36625 dX=0.2 dY=-0.15
+Arc CCW X=36.11784 Y=13.35146 dX=0.15 dY=-0.09
+Arc CW X=36.11086 Y=13.33645 dX=-0.48 dY=0.22
+Line X=36.06758 Y=13.24704
+Arc CW X=36.06238 Y=13.23666 dX=-0.37 dY=0.18
+Arc CCW X=36.05746 Y=13.22614 dX=0.12 dY=-0.06
+Arc CCW X=36.05367 Y=13.21618 dX=0.16 dY=-0.07
+Arc CCW X=36.05039 Y=13.20604 dX=0.22 dY=-0.08
+Arc CW X=36.03801 Y=13.17088 dX=-0.36 dY=0.11
+Arc CCW X=36.02563 Y=13.13571 dX=0.35 dY=-0.14
+Arc CW X=36.01325 Y=13.10055 dX=-0.36 dY=0.11
+Arc CCW X=36.00087 Y=13.06539 dX=0.35 dY=-0.14
+Arc CCW X=35.99579 Y=13.04572 dX=0.26 dY=-0.08
+Arc CW X=35.9912 Y=13.02592 dX=-0.81 dY=0.18
+Line X=35.96218 Y=12.90754
+Arc CW X=35.95901 Y=12.89519 dX=-0.59 dY=0.15
+Arc CCW X=35.95611 Y=12.88277 dX=0.2 dY=-0.05
+Line X=35.92371 Y=12.67771
+Arc CCW X=35.92086 Y=12.64767 dX=0.56 dY=-0.07
+Arc CW X=35.91854 Y=12.61758 dX=-1.69 dY=0.12
+Line X=35.91338 Y=12.55744
+Arc CW X=35.91088 Y=12.53061 dX=-1.81 dY=0.16
+Arc CCW X=35.90878 Y=12.50375 dX=0.6 dY=-0.06
+Arc CW X=35.90647 Y=12.47691 dX=-0.45 dY=0.03
+Arc CCW X=35.90417 Y=12.45006 dX=0.45 dY=-0.05
+Line X=35.8975 Y=12.1961
+Line X=35.89705 Y=8.00025
+Line X=35.90024 Y=7.99705
+Line X=36.19927 Y=7.99706
+Line X=36.20246 Y=8.00025
+Line X=36.19548 Y=12.21493
+Line X=36.21159 Y=12.53184
+Arc CW X=36.2157 Y=12.56177 dX=0.3 dY=-0.03
+Line X=36.26745 Y=12.83272
+Arc CW X=36.28067 Y=12.87362 dX=0.29 dY=-0.07
+Line X=36.36488 Y=13.08142
+Arc CW X=36.403 Y=13.14874 dX=0.28 dY=-0.11
+Line X=36.5259 Y=13.31184
+Arc CW X=36.58668 Y=13.37205 dX=0.24 dY=-0.18
+Line X=36.75108 Y=13.49355
+Arc CW X=36.8181 Y=13.5308 dX=0.18 dY=-0.24
+Line X=36.83074 Y=13.53582
+Arc CW X=36.87394 Y=13.52661 dX=0.01 dY=-0.04
+Arc CCW X=36.91713 Y=13.5174 dX=0.03 dY=0.03
+Line X=37.04518 Y=13.56825
+Arc CW X=37.09163 Y=13.58164 dX=0.09 dY=-0.23
+Line X=37.34803 Y=13.62914
+Arc CW X=37.381 Y=13.633 dX=0.05 dY=-0.24
+Line X=37.7 Y=13.6485
+Line X=41.31142 Y=13.64824
+Line X=41.63965 Y=13.63288
+Arc CW X=41.66062 Y=13.63008 dX=-0.02 dY=-0.25
+Line X=41.92152 Y=13.58378
+Arc CW X=41.96842 Y=13.57061 dX=-0.04 dY=-0.24
+Line X=42.17732 Y=13.48911
+Arc CW X=42.23553 Y=13.45683 dX=-0.09 dY=-0.23
+Line X=42.39663 Y=13.33673
+Arc CW X=42.44921 Y=13.28347 dX=-0.15 dY=-0.2
+Line X=42.56701 Y=13.12117
+Arc CW X=42.59828 Y=13.06324 dX=-0.2 dY=-0.15
+Line X=42.67708 Y=12.85524
+Arc CW X=42.68962 Y=12.8092 dX=-0.23 dY=-0.09
+Line X=42.73373 Y=12.552
+Arc CW X=42.73706 Y=12.52097 dX=-0.24 dY=-0.04
+Line X=42.751 Y=12.2
+Line Y=10.91564
+Line X=42.74851 Y=9.80282
+Line X=42.75515 Y=9.53636
+Line X=42.77484 Y=9.29745
+Line X=42.80775 Y=9.08322
+Arc CCW X=42.81033 Y=9.07128 dX=0.32 dY=0.06
+Arc CCW X=42.81345 Y=9.05947 dX=0.22 dY=0.05
+Arc CW X=42.81844 Y=9.03869 dX=-0.21 dY=-0.06
+Arc CCW X=42.82343 Y=9.0179 dX=0.21 dY=0.04
+Arc CW X=42.83091 Y=8.98673 dX=-0.31 dY=-0.09
+Arc CCW X=42.83839 Y=8.95556 dX=0.32 dY=0.06
+Arc CW X=42.84588 Y=8.92439 dX=-0.31 dY=-0.09
+Arc CCW X=42.85336 Y=8.89321 dX=0.32 dY=0.06
+Arc CCW X=42.8567 Y=8.88271 dX=0.23 dY=0.07
+Arc CCW X=42.8606 Y=8.8724 dX=0.17 dY=0.06
+Arc CW X=42.86693 Y=8.85419 dX=-0.16 dY=-0.06
+Arc CCW X=42.87326 Y=8.83598 dX=0.16 dY=0.05
+Arc CW X=42.88276 Y=8.80866 dX=-0.23 dY=-0.1
+Arc CCW X=42.89225 Y=8.78135 dX=0.24 dY=0.07
+Arc CW X=42.90174 Y=8.75403 dX=-0.23 dY=-0.1
+Arc CCW X=42.91124 Y=8.72671 dX=0.24 dY=0.07
+Arc CCW X=42.91532 Y=8.71755 dX=0.17 dY=0.07
+Arc CCW X=42.91994 Y=8.70866 dX=0.13 dY=0.06
+Arc CW X=42.92756 Y=8.69286 dX=-0.12 dY=-0.07
+Arc CCW X=42.93517 Y=8.67707 dX=0.13 dY=0.05
+Arc CW X=42.94659 Y=8.65337 dX=-0.18 dY=-0.1
+Arc CCW X=42.95802 Y=8.62968 dX=0.19 dY=0.08
+Arc CW X=42.96944 Y=8.60598 dX=-0.18 dY=-0.1
+Arc CCW X=42.98086 Y=8.58229 dX=0.19 dY=0.08
+Arc CCW X=42.99103 Y=8.56672 dX=0.13 dY=0.07
+Arc CW X=42.99993 Y=8.55309 dX=-0.09 dY=-0.07
+Arc CCW X=43.00882 Y=8.53947 dX=0.1 dY=0.06
+Arc CW X=43.02217 Y=8.51904 dX=-0.14 dY=-0.11
+Arc CCW X=43.03551 Y=8.4986 dX=0.15 dY=0.09
+Arc CW X=43.04885 Y=8.47816 dX=-0.14 dY=-0.11
+Arc CCW X=43.0622 Y=8.45773 dX=0.15 dY=0.09
+Arc CCW X=43.06961 Y=8.44893 dX=0.09 dY=0.07
+Arc CW X=43.07732 Y=8.4404 dX=-0.24 dY=-0.23
+Line X=43.15462 Y=8.35117
+Line X=43.15704 Y=8.34877
+Arc CCW X=43.17626 Y=8.33251 dX=0.92 dY=1.07
+Arc CW X=43.19548 Y=8.31626 dX=-0.9 dY=-1.08
+Arc CW X=43.20394 Y=8.30872 dX=-0.21 dY=-0.25
+Arc CCW X=43.21265 Y=8.30148 dX=0.07 dY=0.08
+Arc CW X=43.22552 Y=8.29039 dX=-0.07 dY=-0.1
+Arc CCW X=43.2384 Y=8.27931 dX=0.09 dY=0.09
+Arc CW X=43.25127 Y=8.26823 dX=-0.07 dY=-0.1
+Arc CCW X=43.26414 Y=8.25714 dX=0.09 dY=0.09
+Line X=43.27179 Y=8.25185
+Line X=43.27977 Y=8.24708
+Arc CW X=43.29345 Y=8.23828 dX=-0.06 dY=-0.11
+Arc CCW X=43.30712 Y=8.22948 dX=0.08 dY=0.1
+Arc CW X=43.32763 Y=8.21627 dX=-0.09 dY=-0.17
+Arc CCW X=43.34814 Y=8.20307 dX=0.11 dY=0.15
+Arc CW X=43.36866 Y=8.18986 dX=-0.09 dY=-0.17
+Arc CCW X=43.38917 Y=8.17666 dX=0.11 dY=0.15
+Arc CCW X=43.39809 Y=8.17209 dX=0.07 dY=0.13
+Arc CCW X=43.40726 Y=8.16807 dX=0.08 dY=0.17
+Arc CW X=43.43891 Y=8.15303 dX=-0.12 dY=-0.29
+Arc CCW X=43.47057 Y=8.13799 dX=0.15 dY=0.27
+Arc CW X=43.50222 Y=8.12295 dX=-0.12 dY=-0.29
+Arc CCW X=43.53387 Y=8.10791 dX=0.15 dY=0.27
+Arc CCW X=43.54417 Y=8.10408 dX=0.07 dY=0.17
+Arc CCW X=43.55466 Y=8.10079 dX=0.08 dY=0.23
+Arc CW X=43.59105 Y=8.08833 dX=-0.11 dY=-0.38
+Arc CCW X=43.62743 Y=8.07588 dX=0.15 dY=0.37
+Arc CW X=43.66381 Y=8.06342 dX=-0.11 dY=-0.38
+Arc CCW X=43.7002 Y=8.05096 dX=0.15 dY=0.37
+Arc CCW X=43.71196 Y=8.0479 dX=0.06 dY=0.22
+Arc CCW X=43.72384 Y=8.04537 dX=0.07 dY=0.32
+Arc CW X=43.76522 Y=8.03559 dX=-0.1 dY=-0.51
+Arc CCW X=43.8066 Y=8.02581 dX=0.14 dY=0.5
+Arc CW X=43.84798 Y=8.01603 dX=-0.1 dY=-0.51
+Arc CCW X=43.88937 Y=8.00625 dX=0.14 dY=0.5
+Line X=44.10229 Y=7.97418
+Arc CCW X=44.13725 Y=7.97104 dX=0.08 dY=0.68
+Arc CW X=44.17225 Y=7.9685 dX=-0.13 dY=-2.04
+Line X=44.24221 Y=7.96282
+Arc CW X=44.29067 Y=7.95855 dX=-0.28 dY=-3.43
+Arc CCW X=44.33919 Y=7.95495 dX=0.11 dY=1.14
+Line X=44.60303 Y=7.94851
+Line X=52.40001 Y=7.94855
+Arc CW X=52.4366 Y=7.94823 dX=0 dY=-2.06
+Arc CCW X=52.47319 Y=7.94855 dX=0.01 dY=0.69
+Arc CCW X=52.49743 Y=7.95006 dX=-0.02 dY=0.46
+Arc CW X=52.52164 Y=7.95199 dX=0.12 dY=-1.37
+Line X=52.89972 Y=7.97884
+Line X=53.27879 Y=8.05872
+Line X=53.61464 Y=8.17526
+Line X=53.92958 Y=8.32894
+Line X=54.24502 Y=8.53458
+Arc CCW X=54.25352 Y=8.5417 dX=-0.07 dY=0.09
+Arc CW X=54.26178 Y=8.5491 dX=0.22 dY=-0.24
+Line X=54.57198 Y=8.81769
+Line X=59.8033 Y=14.04941
+Line X=59.80224 Y=14.05195
+Line X=59.32662
+Line X=59.31949 Y=14.049
+Line X=54.35892 Y=9.08782
+Arc CW X=54.3464 Y=9.07614 dX=-0.18 dY=0.18
+Line X=54.15507 Y=8.90952
+Arc CW X=54.13023 Y=8.89061 dX=-0.16 dY=0.19
+Line X=53.91842 Y=8.74943
+Arc CW X=53.89612 Y=8.73649 dX=-0.14 dY=0.21
+Line X=53.66808 Y=8.61957
+Arc CW X=53.6495 Y=8.61143 dX=-0.11 dY=0.22
+Line X=53.40776 Y=8.51721
+Line X=53.15799 Y=8.44478
+Arc CW X=53.13779 Y=8.43986 dX=-0.07 dY=0.24
+Line X=52.9012 Y=8.39258
+Arc CW X=52.88173 Y=8.38949 dX=-0.05 dY=0.24
+Line X=52.6387 Y=8.36097
+Line X=52.4 Y=8.3515
+Line X=44.58807 Y=8.35179
+Line X=44.275 Y=8.36696
+Arc CW X=44.2508 Y=8.37013 dX=0.02 dY=0.25
+Line X=43.9953 Y=8.41642
+Arc CW X=43.94934 Y=8.42941 dX=0.04 dY=0.24
+Line X=43.74044 Y=8.51085
+Arc CW X=43.68439 Y=8.54152 dX=0.09 dY=0.23
+Line X=43.51949 Y=8.66164
+Arc CW X=43.4681 Y=8.71194 dX=0.15 dY=0.2
+Line X=43.3445 Y=8.87424
+Arc CW X=43.31213 Y=8.93089 dX=0.2 dY=0.15
+Line X=43.22723 Y=9.1389
+Arc CW X=43.21319 Y=9.18631 dX=0.23 dY=0.09
+Line X=43.16419 Y=9.44354
+Arc CW X=43.16012 Y=9.47739 dX=0.24 dY=0.05
+Line X=43.144 Y=9.8
+Line Y=10.29976
+Arc CW X=43.14488 Y=10.31636 dX=0.16 dY=0
+Arc CCW X=43.1463 Y=10.33293 dX=-0.47 dY=0.05
+Line Y=12.1966
+Line X=43.13931 Y=12.45196
+Arc CCW X=43.13693 Y=12.48088 dX=-0.62 dY=-0.04
+Arc CW X=43.13411 Y=12.50976 dX=1.85 dY=0.2
+Line X=43.12891 Y=12.56756
+Arc CW X=43.1266 Y=12.59621 dX=1.57 dY=0.14
+Arc CCW X=43.12376 Y=12.62482 dX=-0.52 dY=-0.04
+Arc CW X=43.12119 Y=12.65346 dX=0.39 dY=0.05
+Arc CCW X=43.11861 Y=12.68209 dX=-0.39 dY=-0.02
+Line X=43.08442 Y=12.8903
+Arc CCW X=43.07993 Y=12.9088 dX=-0.29 dY=-0.06
+Arc CW X=43.07505 Y=12.9272 dX=0.86 dY=0.24
+Arc CW X=43.07053 Y=12.94596 dX=0.76 dY=0.19
+Arc CCW X=43.06555 Y=12.96461 dX=-0.25 dY=-0.06
+Arc CW X=43.05843 Y=12.99267 dX=0.28 dY=0.09
+Arc CCW X=43.05131 Y=13.02072 dX=-0.29 dY=-0.06
+Arc CW X=43.04419 Y=13.04878 dX=0.28 dY=0.09
+Arc CCW X=43.03707 Y=13.07683 dX=-0.29 dY=-0.06
+Arc CCW X=43.03359 Y=13.08728 dX=-0.23 dY=-0.07
+Arc CCW X=43.02957 Y=13.09753 dX=-0.18 dY=-0.06
+Arc CW X=43.02301 Y=13.11563 dX=0.16 dY=0.07
+Arc CCW X=43.01645 Y=13.13374 dX=-0.16 dY=-0.05
+Arc CW X=43.00661 Y=13.1609 dX=0.24 dY=0.1
+Arc CCW X=42.99678 Y=13.18806 dX=-0.25 dY=-0.07
+Arc CW X=42.98694 Y=13.21522 dX=0.24 dY=0.1
+Arc CCW X=42.9771 Y=13.24238 dX=-0.25 dY=-0.07
+Arc CCW X=42.97029 Y=13.25662 dX=-0.17 dY=-0.07
+Arc CW X=42.9631 Y=13.27067 dX=0.5 dY=0.26
+Arc CW X=42.95606 Y=13.28546 dX=0.47 dY=0.23
+Arc CCW X=42.94857 Y=13.30003 dX=-0.16 dY=-0.07
+Arc CW X=42.93768 Y=13.32204 dX=0.17 dY=0.1
+Arc CCW X=42.92679 Y=13.34406 dX=-0.18 dY=-0.08
+Arc CW X=42.9159 Y=13.36607 dX=0.17 dY=0.1
+Arc CCW X=42.90501 Y=13.38809 dX=-0.18 dY=-0.08
+Arc CCW X=42.89449 Y=13.40402 dX=-0.13 dY=-0.08
+Arc CW X=42.88529 Y=13.41796 dX=0.1 dY=0.08
+Arc CCW X=42.87608 Y=13.43191 dX=-0.11 dY=-0.06
+Arc CW X=42.86228 Y=13.45282 dX=0.15 dY=0.11
+Arc CCW X=42.84848 Y=13.47374 dX=-0.16 dY=-0.09
+Arc CW X=42.83467 Y=13.49465 dX=0.15 dY=0.11
+Arc CCW X=42.82087 Y=13.51557 dX=-0.16 dY=-0.09
+Arc CCW X=42.8063 Y=13.5329 dX=-0.18 dY=-0.14
+Arc CW X=42.79116 Y=13.54974 dX=0.5 dY=0.47
+Line X=42.76145 Y=13.58391
+Arc CW X=42.75227 Y=13.59483 dX=0.32 dY=0.28
+Arc CCW X=42.74273 Y=13.60543 dX=-0.11 dY=-0.09
+Arc CW X=42.73337 Y=13.6162 dX=0.07 dY=0.07
+Arc CCW X=42.72401 Y=13.62696 dX=-0.08 dY=-0.06
+Arc CCW X=42.71104 Y=13.63873 dX=-0.12 dY=-0.12
+Arc CW X=42.69767 Y=13.65006 dX=0.33 dY=0.4
+Arc CW X=42.68726 Y=13.6595 dX=0.28 dY=0.32
+Arc CCW X=42.67655 Y=13.66859 dX=-0.1 dY=-0.1
+Arc CW X=42.66071 Y=13.68248 dX=0.1 dY=0.13
+Arc CCW X=42.64486 Y=13.69638 dX=-0.11 dY=-0.11
+Arc CW X=42.62902 Y=13.71028 dX=0.1 dY=0.13
+Arc CCW X=42.61317 Y=13.72417 dX=-0.11 dY=-0.11
+Arc CCW X=42.5973 Y=13.73474 dX=-0.09 dY=-0.11
+
+Arc CW X=42.58341 Y=13.74398 dX=0.07 dY=0.12
+Arc CCW X=42.56952 Y=13.75322 dX=-0.08 dY=-0.11
+Arc CW X=42.54868 Y=13.76708 dX=0.1 dY=0.17
+Arc CCW X=42.52785 Y=13.78095 dX=-0.12 dY=-0.16
+Arc CW X=42.50702 Y=13.79481 dX=0.1 dY=0.17
+Arc CCW X=42.48618 Y=13.80867 dX=-0.12 dY=-0.16
+Arc CCW X=42.47387 Y=13.81506 dX=-0.07 dY=-0.13
+
+Arc CW X=42.46138 Y=13.82106 dX=0.19 dY=0.41
+Line X=42.38696 Y=13.85822
+Arc CW X=42.36412 Y=13.87004 dX=0.41 dY=0.81
+Arc CCW X=42.34096 Y=13.8812 dX=-0.14 dY=-0.27
+Arc CCW X=42.33075 Y=13.88524 dX=-0.07 dY=-0.17
+Arc CCW X=42.32034 Y=13.88873 dX=-0.08 dY=-0.22
+Arc CW X=42.28425 Y=13.9019 dX=0.11 dY=0.37
+Arc CCW X=42.24816 Y=13.91508 dX=-0.15 dY=-0.36
+Arc CW X=42.21208 Y=13.92825 dX=0.11 dY=0.37
+Arc CCW X=42.17599 Y=13.94143 dX=-0.15 dY=-0.36
+Arc CCW X=42.15919 Y=13.94596 dX=-0.07 dY=-0.22
+Arc CW X=42.14228 Y=13.95006 dX=0.16 dY=0.68
+Line X=42.04113 Y=13.97595
+Arc CW X=42.01553 Y=13.9828 dX=0.3 dY=1.19
+Arc CCW X=41.98978 Y=13.9891 dX=-0.11 dY=-0.39
+Line X=41.78192 Y=14.02354
+Arc CCW X=41.75545 Y=14.02619 dX=-0.06 dY=-0.48
+Arc CW X=41.72894 Y=14.02835 dX=0.1 dY=1.44
+Line X=41.67597 Y=14.03316
+Arc CW X=41.64498 Y=14.03621 dX=0.18 dY=1.98
+Arc CCW X=41.61394 Y=14.03878 dX=-0.07 dY=-0.66
+Arc CW X=41.58292 Y=14.0416 dX=0.03 dY=0.5
+Arc CCW X=41.55191 Y=14.04441 dX=-0.06 dY=-0.49
+Line X=41.29655 Y=14.0515
+Line X=37.70337
+Line X=37.44155 Y=14.0444
+Arc CCW X=37.41507 Y=14.04226 dX=0.03 dY=-0.58
+Arc CW X=37.38862 Y=14.03971 dX=-0.18 dY=1.73
+Line X=37.33569 Y=14.03502
+Arc CW X=37.30338 Y=14.03245 dX=-0.16 dY=1.76
+Arc CCW X=37.27111 Y=14.0293 dX=0.04 dY=-0.59
+Arc CW X=37.23882 Y=14.02644 dX=-0.06 dY=0.44
+Arc CCW X=37.20653 Y=14.02358 dX=0.02 dY=-0.44
+Line X=36.99517 Y=13.98907
+Arc CCW X=36.9843 Y=13.98644 dX=0.04 dY=-0.17
+Arc CW X=36.97349 Y=13.98358 dX=-0.14 dY=0.5
+Arc CW X=36.95259 Y=13.97858 dX=-0.21 dY=0.83
+Arc CCW X=36.93182 Y=13.97305 dX=0.06 dY=-0.28
+Arc CW X=36.90056 Y=13.96515 dX=-0.09 dY=0.31
+Arc CCW X=36.86931 Y=13.95724 dX=0.06 dY=-0.32
+Arc CW X=36.83805 Y=13.94934 dX=-0.09 dY=0.31
+Arc CCW X=36.8068 Y=13.94144 dX=0.06 dY=-0.32
+Arc CCW X=36.79632 Y=13.93795 dX=0.07 dY=-0.23
+Arc CCW X=36.78604 Y=13.93391 dX=0.06 dY=-0.17
+Arc CW X=36.76788 Y=13.92732 dX=-0.07 dY=0.16
+Arc CCW X=36.74971 Y=13.92074 dX=0.05 dY=-0.16
+Arc CW X=36.72247 Y=13.91086 dX=-0.1 dY=0.23
+Arc CCW X=36.69522 Y=13.90098 dX=0.07 dY=-0.24
+Arc CW X=36.66798 Y=13.8911 dX=-0.1 dY=0.23
+Arc CCW X=36.64074 Y=13.88122 dX=0.07 dY=-0.24
+Arc CCW X=36.63071 Y=13.8764 dX=0.05 dY=-0.12
+Arc CW X=36.62083 Y=13.87131 dX=-0.18 dY=0.34
+Arc CW X=36.60507 Y=13.86377 dX=-0.25 dY=0.49
+Arc CCW X=36.58955 Y=13.85574 dX=0.08 dY=-0.17
+Arc CW X=36.56609 Y=13.84407 dX=-0.1 dY=0.18
+Arc CCW X=36.54263 Y=13.83239 dX=0.08 dY=-0.19
+Arc CW X=36.51917 Y=13.82072 dX=-0.1 dY=0.18
+Arc CCW X=36.49571 Y=13.80904 dX=0.08 dY=-0.19
+Arc CCW X=36.47995 Y=13.79853 dX=0.08 dY=-0.13
+Arc CW X=36.46616 Y=13.78933 dX=-0.07 dY=0.1
+Arc CCW X=36.45237 Y=13.78013 dX=0.06 dY=-0.11
+Arc CW X=36.43168 Y=13.76633 dX=-0.11 dY=0.15
+Arc CCW X=36.411 Y=13.75253 dX=0.09 dY=-0.16
+Arc CW X=36.39031 Y=13.73873 dX=-0.11 dY=0.15
+Arc CCW X=36.36962 Y=13.72493 dX=0.09 dY=-0.16
+Arc CCW X=36.3604 Y=13.71706 dX=0.07 dY=-0.09
+Arc CW X=36.35146 Y=13.70888 dX=-0.25 dY=0.26
+Line X=36.29699 Y=13.66075
+Arc CW X=36.28764 Y=13.65277 dX=-0.24 dY=0.27
+Arc CCW X=36.27857 Y=13.64447 dX=0.08 dY=-0.09
+Arc CW X=36.26936 Y=13.63633 dX=-0.06 dY=0.06
+Arc CCW X=36.26015 Y=13.62819 dX=0.05 dY=-0.07
+Arc CCW X=36.25222 Y=13.61928 dX=0.08 dY=-0.08
+Arc CW X=36.2446 Y=13.6101 dX=-0.27 dY=0.22
+Line X=36.22906 Y=13.59201
+Arc CW X=36.22089 Y=13.58282 dX=-0.28 dY=0.24
+Arc CCW X=36.21304 Y=13.57336 dX=0.09 dY=-0.08
+Arc CW X=36.20102 Y=13.55938 dX=-0.11 dY=0.08
+Arc CCW X=36.189 Y=13.54539 dX=0.1 dY=-0.1
+Arc CW X=36.17698 Y=13.5314 dX=-0.11 dY=0.08
+Arc CCW X=36.16496 Y=13.51742 dX=0.1 dY=-0.1
+Arc CCW X=36.15466 Y=13.50154 dX=0.11 dY=-0.08
+Arc CW X=36.14564 Y=13.48764 dX=-0.12 dY=0.07
+Arc CCW X=36.13662 Y=13.47374 dX=0.11 dY=-0.08
+Arc CW X=36.12309 Y=13.4529 dX=-0.17 dY=0.1
+Arc CCW X=36.10957 Y=13.43205 dX=0.16 dY=-0.12
+Arc CW X=36.09604 Y=13.4112 dX=-0.17 dY=0.1
+Arc CCW X=36.08251 Y=13.39036 dX=0.16 dY=-0.12
+Arc CCW X=36.07489 Y=13.37523 dX=0.16 dY=-0.09
+Arc CW X=36.06775 Y=13.35987 dX=-0.5 dY=0.22
+Line X=36.02348 Y=13.26839
+Arc CW X=36.01765 Y=13.25678 dX=-0.42 dY=0.2
+Arc CCW X=36.01216 Y=13.24501 dX=0.14 dY=-0.07
+Arc CCW X=36.00824 Y=13.23475 dX=0.17 dY=-0.07
+Arc CCW X=36.00487 Y=13.2243 dX=0.23 dY=-0.08
+Arc CW X=35.99212 Y=13.18808 dX=-0.38 dY=0.11
+Arc CCW X=35.97936 Y=13.15185 dX=0.36 dY=-0.15
+Arc CW X=35.96661 Y=13.11562 dX=-0.38 dY=0.11
+Arc CCW X=35.95385 Y=13.07939 dX=0.36 dY=-0.15
+Arc CCW X=35.9487 Y=13.05943 dX=0.27 dY=-0.08
+Arc CW X=35.94403 Y=13.03934 dX=-0.82 dY=0.18
+Line X=35.91459 Y=12.9192
+Arc CW X=35.91117 Y=12.90586 dX=-0.64 dY=0.16
+Arc CCW X=35.90803 Y=12.89244 dX=0.21 dY=-0.06
+Line X=35.87503 Y=12.68364
+Arc CCW X=35.87214 Y=12.65316 dX=0.57 dY=-0.07
+Arc CW X=35.8698 Y=12.62263 dX=-1.72 dY=0.12
+Line X=35.86456 Y=12.56163
+Arc CW X=35.86202 Y=12.53444 dX=-1.83 dY=0.16
+Arc CCW X=35.85989 Y=12.50721 dX=0.61 dY=-0.06
+Arc CW X=35.85756 Y=12.48001 dX=-0.46 dY=0.03
+Arc CCW X=35.85522 Y=12.4528 dX=0.46 dY=-0.05
+Line X=35.8485 Y=12.19674
+Line X=35.84805 Y=7.95125
+Line X=35.85124 Y=7.94805
+Line X=36.24835 Y=7.94806
+Line X=36.25154 Y=7.95125
+Line X=36.24441 Y=12.21247
+Line X=36.26041 Y=12.52765
+Arc CW X=36.26384 Y=12.55265 dX=0.25 dY=-0.02
+Line X=36.31504 Y=12.82105
+Arc CW X=36.32609 Y=12.85522 dX=0.24 dY=-0.06
+Line X=36.41029 Y=13.06302
+Arc CW X=36.44213 Y=13.11925 dX=0.23 dY=-0.09
+Line X=36.57502 Y=13.29475
+Arc CW X=36.6158 Y=13.33265 dX=0.19 dY=-0.16
+Line X=36.7802 Y=13.45415
+Arc CW X=36.83618 Y=13.48525 dX=0.15 dY=-0.2
+Line X=36.91713 Y=13.5174
+Arc CW X=36.96033 Y=13.5082 dX=0.01 dY=-0.04
+Arc CCW X=37.00353 Y=13.49899 dX=0.03 dY=0.03
+Line X=37.06327 Y=13.52271
+Arc CW X=37.10056 Y=13.53346 dX=0.07 dY=-0.19
+Line X=37.35696 Y=13.58096
+Arc CW X=37.38343 Y=13.58406 dX=0.04 dY=-0.2
+Line X=37.7 Y=13.5995
+Line X=41.30917 Y=13.59929
+Line X=41.63523 Y=13.58408
+Arc CW X=41.65206 Y=13.58183 dX=-0.02 dY=-0.2
+Line X=41.91296 Y=13.53553
+Arc CW X=41.95061 Y=13.52496 dX=-0.03 dY=-0.2
+Line X=42.15951 Y=13.44346
+Arc CW X=42.20624 Y=13.41754 dX=-0.07 dY=-0.19
+Line X=42.36734 Y=13.29745
+Arc CW X=42.40955 Y=13.25469 dX=-0.12 dY=-0.16
+Line X=42.52736 Y=13.09239
+Arc CW X=42.55246 Y=13.04588 dX=-0.16 dY=-0.12
+Line X=42.63126 Y=12.83788
+Arc CW X=42.64133 Y=12.80091 dX=-0.19 dY=-0.07
+Line X=42.68543 Y=12.54371
+Arc CW X=42.68811 Y=12.51881 dX=-0.2 dY=-0.03
+Line X=42.702 Y=12.2
+Line Y=10.91575
+Line X=42.6995 Y=9.80226
+Line X=42.7062 Y=9.53373
+Line X=42.72615 Y=9.29171
+Line X=42.75963 Y=9.07376
+Arc CCW X=42.76227 Y=9.06155 dX=0.33 dY=0.06
+Arc CCW X=42.76546 Y=9.04947 dX=0.23 dY=0.05
+Arc CW X=42.77056 Y=9.02821 dX=-0.21 dY=-0.06
+Arc CCW X=42.77567 Y=9.00696 dX=0.22 dY=0.04
+Arc CW X=42.78332 Y=8.97507 dX=-0.32 dY=-0.09
+Arc CCW X=42.79097 Y=8.94319 dX=0.33 dY=0.06
+Arc CW X=42.79863 Y=8.9113 dX=-0.32 dY=-0.09
+Arc CCW X=42.80628 Y=8.87941 dX=0.33 dY=0.06
+Arc CCW X=42.80972 Y=8.8686 dX=0.24 dY=0.07
+Arc CCW X=42.81373 Y=8.85798 dX=0.18 dY=0.06
+Arc CW X=42.82025 Y=8.83923 dX=-0.16 dY=-0.07
+Arc CCW X=42.82677 Y=8.82048 dX=0.17 dY=0.05
+Arc CW X=42.83655 Y=8.79235 dX=-0.24 dY=-0.1
+Arc CCW X=42.84632 Y=8.76422 dX=0.25 dY=0.07
+Arc CW X=42.8561 Y=8.7361 dX=-0.24 dY=-0.1
+Arc CCW X=42.86588 Y=8.70797 dX=0.25 dY=0.07
+Arc CCW X=42.87011 Y=8.69847 dX=0.18 dY=0.07
+Arc CCW X=42.87491 Y=8.68924 dX=0.14 dY=0.07
+Arc CW X=42.88281 Y=8.67286 dX=-0.12 dY=-0.07
+Arc CCW X=42.89071 Y=8.65647 dX=0.13 dY=0.05
+Arc CW X=42.90255 Y=8.63189 dX=-0.18 dY=-0.1
+Arc CCW X=42.9144 Y=8.60731 dX=0.2 dY=0.08
+Arc CW X=42.92625 Y=8.58273 dX=-0.18 dY=-0.1
+Arc CCW X=42.9381 Y=8.55815 dX=0.2 dY=0.08
+Arc CCW X=42.94872 Y=8.54189 dX=0.13 dY=0.07
+Arc CW X=42.95801 Y=8.52767 dX=-0.1 dY=-0.07
+Arc CCW X=42.9673 Y=8.51344 dX=0.11 dY=0.06
+Arc CW X=42.98123 Y=8.4921 dX=-0.15 dY=-0.11
+Arc CCW X=42.99517 Y=8.47076 dX=0.16 dY=0.09
+Arc CW X=43.0091 Y=8.44942 dX=-0.15 dY=-0.11
+Arc CCW X=43.02304 Y=8.42808 dX=0.16 dY=0.09
+Arc CCW X=43.03073 Y=8.41896 dX=0.09 dY=0.07
+Arc CW X=43.03873 Y=8.41011 dX=-0.25 dY=-0.23
+Line X=43.12 Y=8.31631
+Line X=43.12242 Y=8.31391
+Arc CCW X=43.14297 Y=8.29652 dX=1.05 dY=1.22
+Arc CW X=43.16351 Y=8.27912 dX=-1.03 dY=-1.24
+Arc CW X=43.17229 Y=8.2713 dX=-0.22 dY=-0.26
+Arc CCW X=43.18132 Y=8.26379 dX=0.08 dY=0.08
+Arc CW X=43.19468 Y=8.25229 dX=-0.08 dY=-0.1
+Arc CCW X=43.20804 Y=8.24079 dX=0.09 dY=0.09
+Arc CW X=43.22139 Y=8.22929 dX=-0.08 dY=-0.1
+Arc CCW X=43.23475 Y=8.21779 dX=0.09 dY=0.09
+Line X=43.24274 Y=8.21226
+Line X=43.25107 Y=8.20728
+Arc CW X=43.26535 Y=8.19809 dX=-0.06 dY=-0.12
+Arc CCW X=43.27963 Y=8.1889 dX=0.08 dY=0.11
+Arc CW X=43.30104 Y=8.17511 dX=-0.1 dY=-0.17
+Arc CCW X=43.32246 Y=8.16133 dX=0.12 dY=0.16
+Arc CW X=43.34388 Y=8.14754 dX=-0.1 dY=-0.17
+Arc CCW X=43.3653 Y=8.13375 dX=0.12 dY=0.16
+Arc CCW X=43.37454 Y=8.12901 dX=0.07 dY=0.13
+Arc CCW X=43.38406 Y=8.12484 dX=0.08 dY=0.18
+Arc CW X=43.40047 Y=8.11704 dX=-0.06 dY=-0.15
+Arc CCW X=43.41688 Y=8.10924 dX=0.08 dY=0.14
+Arc CW X=43.4415 Y=8.09755 dX=-0.09 dY=-0.22
+Arc CCW X=43.46612 Y=8.08585 dX=0.12 dY=0.21
+Arc CW X=43.49074 Y=8.07415 dX=-0.09 dY=-0.22
+Arc CCW X=43.51536 Y=8.06246 dX=0.12 dY=0.21
+Arc CCW X=43.52597 Y=8.05851 dX=0.07 dY=0.17
+Arc CCW X=43.53677 Y=8.05513 dX=0.08 dY=0.24
+Arc CW X=43.57422 Y=8.0423 dX=-0.11 dY=-0.39
+Arc CCW X=43.61168 Y=8.02948 dX=0.15 dY=0.38
+Arc CW X=43.64914 Y=8.01665 dX=-0.11 dY=-0.39
+Arc CCW X=43.68659 Y=8.00383 dX=0.15 dY=0.38
+Arc CCW X=43.69862 Y=8.00069 dX=0.07 dY=0.23
+Arc CCW X=43.71077 Y=7.99811 dX=0.08 dY=0.32
+Arc CW X=43.7531 Y=7.98811 dX=-0.1 dY=-0.52
+Arc CCW X=43.79542 Y=7.9781 dX=0.14 dY=0.51
+Arc CW X=43.83774 Y=7.9681 dX=-0.1 dY=-0.52
+Arc CCW X=43.88007 Y=7.9581 dX=0.14 dY=0.51
+Line X=44.09665 Y=7.92547
+Arc CCW X=44.13203 Y=7.9223 dX=0.08 dY=0.69
+Arc CW X=44.16745 Y=7.91973 dX=-0.13 dY=-2.07
+Line X=44.23825 Y=7.91398
+Arc CW X=44.2874 Y=7.90965 dX=-0.28 dY=-3.48
+Arc CCW X=44.33661 Y=7.906 dX=0.11 dY=1.16
+Line X=44.60244 Y=7.89951
+Line X=52.40001 Y=7.89955
+Arc CW X=52.43747 Y=7.89922 dX=0 dY=-2.11
+Arc CCW X=52.47493 Y=7.89955 dX=0.01 dY=0.7
+Arc CCW X=52.49939 Y=7.90107 dX=-0.02 dY=0.46
+Arc CW X=52.52382 Y=7.90302 dX=0.12 dY=-1.38
+Line X=52.90654 Y=7.9302
+Line X=53.29192 Y=8.01141
+Line X=53.63348 Y=8.12993
+Line X=53.9538 Y=8.28623
+Line X=54.27457 Y=8.49536
+Arc CCW X=54.28324 Y=8.50261 dX=-0.07 dY=0.09
+Arc CW X=54.29166 Y=8.51015 dX=0.23 dY=-0.24
+Line X=54.60539 Y=8.7818
+Line X=59.92158 Y=14.09841
+Line X=59.92052 Y=14.10095
+Line X=59.30632
+Line X=59.2992 Y=14.098
+Line X=54.31422 Y=9.11309
+Line X=54.12299 Y=8.94656
+Arc CW X=54.10305 Y=8.93138 dX=-0.13 dY=0.15
+Line X=53.89165 Y=8.79048
+Arc CW X=53.87376 Y=8.78009 dX=-0.11 dY=0.17
+Line X=53.64659 Y=8.66361
+Arc CW X=53.63168 Y=8.65707 dX=-0.09 dY=0.18
+Line X=53.3917 Y=8.5635
+Line X=53.14441 Y=8.49186
+Arc CW X=53.12819 Y=8.48791 dX=-0.06 dY=0.19
+Line X=52.89159 Y=8.44063
+Arc CW X=52.87597 Y=8.43814 dX=-0.04 dY=0.2
+Line X=52.63523 Y=8.40985
+Line X=52.4 Y=8.4005
+Line X=44.59042 Y=8.40073
+Line X=44.27896 Y=8.4158
+Arc CW X=44.25953 Y=8.41835 dX=0.02 dY=0.2
+Line X=44.00404 Y=8.46464
+Arc CW X=43.96714 Y=8.47507 dX=0.04 dY=0.2
+Line X=43.75824 Y=8.55651
+Arc CW X=43.71324 Y=8.58113 dX=0.07 dY=0.19
+Line X=43.54834 Y=8.70125
+Arc CW X=43.50708 Y=8.74163 dX=0.12 dY=0.16
+Line X=43.38348 Y=8.90393
+Arc CW X=43.35749 Y=8.94941 dX=0.16 dY=0.12
+Line X=43.27259 Y=9.15742
+Arc CW X=43.26133 Y=9.19548 dX=0.18 dY=0.08
+Line X=43.21232 Y=9.45271
+Arc CW X=43.20906 Y=9.47988 dX=0.2 dY=0.04
+Line X=43.193 Y=9.8
+Line Y=10.29965
+Arc CW X=43.19376 Y=10.31372 dX=0.14 dY=0
+Arc CW X=43.1955 Y=10.32771 dX=0.36 dY=-0.04
+Line X=43.19575 Y=10.33115
+Line X=43.1953 Y=12.19727
+Line X=43.18824 Y=12.45482
+Arc CCW X=43.18584 Y=12.48413 dX=-0.63 dY=-0.04
+Arc CW X=43.18298 Y=12.51338 dX=1.88 dY=0.2
+Line X=43.17772 Y=12.57194
+Arc CW X=43.17537 Y=12.60105 dX=1.59 dY=0.14
+Arc CCW X=43.17249 Y=12.63011 dX=-0.53 dY=-0.04
+Arc CW X=43.16987 Y=12.65919 dX=0.4 dY=0.05
+Arc CCW X=43.16726 Y=12.68827 dX=-0.4 dY=-0.02
+Line X=43.13243 Y=12.90032
+Arc CCW X=43.12769 Y=12.91984 dX=-0.31 dY=-0.06
+Arc CW X=43.12254 Y=12.93926 dX=0.9 dY=0.25
+Arc CW X=43.11795 Y=12.95831 dX=0.77 dY=0.19
+Arc CCW X=43.1129 Y=12.97725 dX=-0.26 dY=-0.06
+Arc CW X=43.10566 Y=13.00575 dX=0.28 dY=0.09
+Arc CCW X=43.09843 Y=13.03425 dX=-0.29 dY=-0.06
+Arc CW X=43.0912 Y=13.06274 dX=0.28 dY=0.09
+Arc CCW X=43.08396 Y=13.09124 dX=-0.29 dY=-0.06
+Arc CCW X=43.08039 Y=13.10199 dX=-0.23 dY=-0.07
+Arc CCW X=43.07625 Y=13.11254 dX=-0.18 dY=-0.06
+Arc CW X=43.0695 Y=13.13118 dX=0.16 dY=0.07
+Arc CCW X=43.06274 Y=13.14982 dX=-0.17 dY=-0.05
+Arc CW X=43.05262 Y=13.17777 dX=0.24 dY=0.1
+Arc CCW X=43.04249 Y=13.20573 dX=-0.25 dY=-0.08
+Arc CW X=43.03236 Y=13.23369 dX=0.24 dY=0.1
+Arc CCW X=43.02223 Y=13.26165 dX=-0.25 dY=-0.08
+Arc CCW X=43.01484 Y=13.27713 dX=-0.19 dY=-0.08
+Arc CW X=43.00702 Y=13.2924 dX=0.54 dY=0.29
+Arc CW X=42.99982 Y=13.30754 dX=0.48 dY=0.24
+Arc CCW X=42.99216 Y=13.32244 dX=-0.16 dY=-0.07
+Arc CW X=42.98101 Y=13.34496 dX=0.18 dY=0.1
+Arc CCW X=42.96987 Y=13.36749 dX=-0.19 dY=-0.08
+Arc CW X=42.95872 Y=13.39001 dX=0.18 dY=0.1
+Arc CCW X=42.94757 Y=13.41254 dX=-0.19 dY=-0.08
+Arc CCW X=42.93663 Y=13.42913 dX=-0.14 dY=-0.08
+Arc CW X=42.92704 Y=13.44365 dX=0.1 dY=0.08
+Arc CCW X=42.91747 Y=13.45817 dX=-0.11 dY=-0.06
+Arc CW X=42.90309 Y=13.47994 dX=0.16 dY=0.12
+Arc CCW X=42.88872 Y=13.50172 dX=-0.17 dY=-0.1
+Arc CW X=42.87435 Y=13.52349 dX=0.16 dY=0.12
+Arc CCW X=42.85998 Y=13.54527 dX=-0.17 dY=-0.1
+Arc CCW X=42.85243 Y=13.55425 dX=-0.09 dY=-0.07
+Arc CW X=42.84459 Y=13.56297 dX=0.26 dY=0.24
+Line X=42.79842 Y=13.61606
+Arc CW X=42.78871 Y=13.62761 dX=0.34 dY=0.29
+Arc CCW X=42.77861 Y=13.63883 dX=-0.12 dY=-0.09
+Arc CW X=42.76871 Y=13.65022 dX=0.08 dY=0.08
+Arc CCW X=42.75881 Y=13.66161 dX=-0.09 dY=-0.07
+Arc CCW X=42.74461 Y=13.6745 dX=-0.13 dY=-0.13
+Arc CW X=42.72998 Y=13.6869 dX=0.36 dY=0.44
+Arc CW X=42.71927 Y=13.69661 dX=0.29 dY=0.33
+Arc CCW X=42.70824 Y=13.70596 dX=-0.1 dY=-0.11
+Arc CW X=42.69194 Y=13.72026 dX=0.1 dY=0.13
+Arc CCW X=42.67564 Y=13.73456 dX=-0.12 dY=-0.12
+Arc CW X=42.65934 Y=13.74886 dX=0.1 dY=0.13
+Arc CCW X=42.64303 Y=13.76316 dX=-0.12 dY=-0.12
+Arc CCW X=42.6265 Y=13.77416 dX=-0.09 dY=-0.12
+Arc CW X=42.61204 Y=13.78378 dX=0.07 dY=0.12
+Arc CCW X=42.59757 Y=13.79341 dX=-0.08 dY=-0.11
+Arc CW X=42.57588 Y=13.80784 dX=0.11 dY=0.18
+Arc CCW X=42.55418 Y=13.82228 dX=-0.13 dY=-0.17
+Arc CW X=42.53249 Y=13.83671 dX=0.11 dY=0.18
+Arc CCW X=42.51079 Y=13.85115 dX=-0.13 dY=-0.17
+Arc CCW X=42.49815 Y=13.85771 dX=-0.08 dY=-0.13
+Arc CW X=42.48531 Y=13.86388 dX=0.19 dY=0.42
+Line X=42.40886 Y=13.90206
+Arc CW X=42.39682 Y=13.90828 dX=0.21 dY=0.43
+Arc CCW X=42.38461 Y=13.91417 dX=-0.08 dY=-0.14
+Arc CW X=42.37249 Y=13.92022 dX=0.05 dY=0.11
+Arc CCW X=42.36037 Y=13.92627 dX=-0.06 dY=-0.1
+Arc CCW X=42.34985 Y=13.93043 dX=-0.07 dY=-0.17
+Arc CCW X=42.33913 Y=13.93403 dX=-0.08 dY=-0.23
+Arc CW X=42.30198 Y=13.94759 dX=0.12 dY=0.38
+Arc CCW X=42.26482 Y=13.96116 dX=-0.15 dY=-0.37
+Arc CW X=42.22766 Y=13.97473 dX=0.12 dY=0.38
+Arc CCW X=42.19051 Y=13.98829 dX=-0.15 dY=-0.37
+Arc CCW X=42.1734 Y=13.9929 dX=-0.07 dY=-0.23
+Arc CW X=42.1562 Y=13.99708 dX=0.16 dY=0.69
+Line X=42.05328 Y=14.02342
+Arc CW X=42.02665 Y=14.03055 dX=0.32 dY=1.24
+Arc CCW X=41.99988 Y=14.03709 dX=-0.11 dY=-0.41
+Line X=41.78815 Y=14.07218
+Arc CCW X=41.76123 Y=14.07487 dX=-0.06 dY=-0.49
+Arc CW X=41.73427 Y=14.07707 dX=0.11 dY=1.46
+Line X=41.68039 Y=14.08196
+Arc CW X=41.64902 Y=14.08505 dX=0.18 dY=2
+Arc CCW X=41.6176 Y=14.08765 dX=-0.07 dY=-0.67
+Arc CW X=41.5862 Y=14.0905 dX=0.03 dY=0.5
+Arc CCW X=41.55481 Y=14.09335 dX=-0.06 dY=-0.5
+Line X=41.29723 Y=14.1005
+Line X=37.70271
+Line X=37.43872 Y=14.09334
+Arc CCW X=37.41186 Y=14.09117 dX=0.03 dY=-0.59
+Arc CW X=37.38504 Y=14.08858 dX=-0.18 dY=1.75
+Line X=37.33137 Y=14.08383
+Arc CW X=37.2986 Y=14.08123 dX=-0.16 dY=1.78
+Arc CCW X=37.26589 Y=14.07803 dX=0.04 dY=-0.6
+Arc CW X=37.23315 Y=14.07513 dX=-0.06 dY=0.44
+Arc CCW X=37.20041 Y=14.07223 dX=0.02 dY=-0.45
+Line X=36.9852 Y=14.03709
+Arc CCW X=36.97331 Y=14.03422 dX=0.04 dY=-0.19
+Arc CW X=36.96148 Y=14.03109 dX=-0.15 dY=0.55
+Arc CW X=36.94028 Y=14.02601 dX=-0.21 dY=0.84
+Arc CCW X=36.91921 Y=14.0204 dX=0.06 dY=-0.28
+Arc CW X=36.88751 Y=14.01239 dX=-0.1 dY=0.31
+Arc CCW X=36.85581 Y=14.00437 dX=0.06 dY=-0.32
+Arc CW X=36.82411 Y=13.99636 dX=-0.1 dY=0.31
+Arc CCW X=36.7924 Y=13.98834 dX=0.06 dY=-0.32
+Arc CCW X=36.78161 Y=13.98475 dX=0.07 dY=-0.23
+Arc CCW X=36.77103 Y=13.98059 dX=0.06 dY=-0.18
+Arc CW X=36.75233 Y=13.97381 dX=-0.07 dY=0.16
+Arc CCW X=36.73362 Y=13.96702 dX=0.05 dY=-0.17
+Arc CW X=36.70557 Y=13.95685 dX=-0.1 dY=0.24
+Arc CCW X=36.67751 Y=13.94668 dX=0.08 dY=-0.25
+Arc CW X=36.64946 Y=13.9365 dX=-0.1 dY=0.24
+Arc CCW X=36.6214 Y=13.92633 dX=0.08 dY=-0.25
+Arc CCW X=36.61012 Y=13.92091 dX=0.06 dY=-0.13
+Arc CW X=36.599 Y=13.91518 dX=-0.21 dY=0.39
+Arc CW X=36.58289 Y=13.90747 dX=-0.25 dY=0.51
+Arc CCW X=36.56702 Y=13.89927 dX=0.08 dY=-0.17
+Arc CW X=36.54305 Y=13.88733 dX=-0.11 dY=0.18
+Arc CCW X=36.51906 Y=13.8754 dX=0.08 dY=-0.2
+Arc CW X=36.49508 Y=13.86346 dX=-0.11 dY=0.18
+Arc CCW X=36.4711 Y=13.85153 dX=0.08 dY=-0.2
+Arc CCW X=36.45467 Y=13.84057 dX=0.08 dY=-0.14
+Arc CW X=36.4403 Y=13.83098 dX=-0.08 dY=0.1
+Arc CCW X=36.42592 Y=13.82139 dX=0.06 dY=-0.11
+Arc CW X=36.40435 Y=13.807 dX=-0.12 dY=0.15
+Arc CCW X=36.38279 Y=13.79262 dX=0.1 dY=-0.17
+Arc CW X=36.36123 Y=13.77823 dX=-0.12 dY=0.15
+Arc CCW X=36.33966 Y=13.76385 dX=0.1 dY=-0.17
+Arc CCW X=36.33014 Y=13.75571 dX=0.08 dY=-0.1
+Arc CW X=36.32088 Y=13.74725 dX=-0.25 dY=0.27
+Line X=36.26455 Y=13.69747
+Arc CW X=36.25455 Y=13.68894 dX=-0.25 dY=0.29
+Arc CCW X=36.24486 Y=13.68008 dX=0.08 dY=-0.1
+Arc CW X=36.23502 Y=13.67138 dX=-0.07 dY=0.07
+Arc CCW X=36.22518 Y=13.66268 dX=0.06 dY=-0.08
+Arc CCW X=36.21669 Y=13.65314 dX=0.09 dY=-0.09
+Arc CW X=36.20853 Y=13.64331 dX=-0.29 dY=0.23
+Line X=36.19189 Y=13.62395
+Arc CW X=36.18345 Y=13.61445 dX=-0.29 dY=0.25
+Arc CCW X=36.17533 Y=13.60467 dX=0.09 dY=-0.09
+Arc CW X=36.16291 Y=13.59022 dX=-0.11 dY=0.09
+Arc CCW X=36.15049 Y=13.57576 dX=0.1 dY=-0.1
+Arc CW X=36.13807 Y=13.56131 dX=-0.11 dY=0.09
+Arc CCW X=36.12565 Y=13.54685 dX=0.1 dY=-0.1
+Arc CCW X=36.11491 Y=13.5303 dX=0.12 dY=-0.09
+Arc CW X=36.10552 Y=13.51582 dX=-0.12 dY=0.07
+Arc CCW X=36.09612 Y=13.50134 dX=0.11 dY=-0.08
+Arc CW X=36.08202 Y=13.47962 dX=-0.18 dY=0.1
+Arc CCW X=36.06793 Y=13.4579 dX=0.17 dY=-0.12
+Arc CW X=36.05383 Y=13.43618 dX=-0.18 dY=0.1
+Arc CCW X=36.03974 Y=13.41446 dX=0.17 dY=-0.12
+Arc CCW X=36.03195 Y=13.39899 dX=0.16 dY=-0.09
+Arc CW X=36.02465 Y=13.38328 dX=-0.51 dY=0.23
+Line X=35.97937 Y=13.28974
+Arc CW X=35.97293 Y=13.27689 dX=-0.46 dY=0.22
+Arc CCW X=35.96685 Y=13.26388 dX=0.15 dY=-0.08
+Arc CCW X=35.96282 Y=13.25332 dX=0.17 dY=-0.07
+Arc CCW X=35.95935 Y=13.24256 dX=0.23 dY=-0.08
+Arc CW X=35.94622 Y=13.20527 dX=-0.39 dY=0.11
+Arc CCW X=35.93309 Y=13.16798 dX=0.37 dY=-0.15
+Arc CW X=35.91996 Y=13.13068 dX=-0.39 dY=0.11
+Arc CCW X=35.90683 Y=13.09339 dX=0.37 dY=-0.15
+Arc CCW X=35.9016 Y=13.07314 dX=0.27 dY=-0.08
+Arc CW X=35.89687 Y=13.05276 dX=-0.83 dY=0.18
+Line X=35.867 Y=12.93087
+Arc CW X=35.86332 Y=12.91653 dX=-0.69 dY=0.17
+Arc CCW X=35.85995 Y=12.90211 dX=0.23 dY=-0.06
+Line X=35.82636 Y=12.68957
+Arc CCW X=35.82343 Y=12.65865 dX=0.58 dY=-0.07
+Arc CW X=35.82105 Y=12.62769 dX=-1.74 dY=0.12
+Line X=35.81574 Y=12.56582
+Arc CW X=35.81317 Y=12.53827 dX=-1.86 dY=0.16
+Arc CCW X=35.81101 Y=12.51068 dX=0.62 dY=-0.06
+Arc CW X=35.80864 Y=12.48311 dX=-0.47 dY=0.03
+Arc CCW X=35.80627 Y=12.45554 dX=0.46 dY=-0.05
+Line X=35.7995 Y=12.19738
+Line X=35.79905 Y=7.90225
+Line X=35.80224 Y=7.89905
+Line X=36.29743 Y=7.89906
+Line X=36.30062 Y=7.90225
+Line X=36.29335 Y=12.21001
+Line X=36.30923 Y=12.52346
+Arc CW X=36.31199 Y=12.54353 dX=0.2 dY=-0.02
+Line X=36.36264 Y=12.80939
+Arc CW X=36.3715 Y=12.83682 dX=0.19 dY=-0.05
+Line X=36.46103 Y=13.05661
+Arc CW X=36.48127 Y=13.08976 dX=0.18 dY=-0.09
+Line X=36.61219 Y=13.26282
+Arc CW X=36.64493 Y=13.29324 dX=0.15 dY=-0.13
+Line X=36.80933 Y=13.41474
+Arc CW X=36.85427 Y=13.43971 dX=0.12 dY=-0.16
+Line X=37.00353 Y=13.49899
+Arc CW X=37.04739 Y=13.49026 dX=0.02 dY=-0.04
+Arc CCW X=37.09092 Y=13.48008 dX=0.03 dY=0.03
+Arc CW X=37.10958 Y=13.48479 dX=0.05 dY=-0.14
+Line X=37.36597 Y=13.53229
+Arc CW X=37.38588 Y=13.53462 dX=0.03 dY=-0.15
+Line X=37.69257 Y=13.54982
+Line X=37.7 Y=13.55
+Line X=41.3
+Line X=41.3069 Y=13.54984
+Line X=41.6241 Y=13.53524
+Arc CW X=41.64341 Y=13.53309 dX=-0.01 dY=-0.15
+
+Line X=41.90431 Y=13.48679
+Arc CW X=41.93262 Y=13.47884 dX=-0.03 dY=-0.15
+Line X=42.14152 Y=13.39734
+Arc CW X=42.17665 Y=13.37786 dX=-0.05 dY=-0.14
+Line X=42.33775 Y=13.25776
+Arc CW X=42.3695 Y=13.22561 dX=-0.09 dY=-0.12
+Line X=42.48729 Y=13.06331
+Arc CW X=42.50617 Y=13.02834 dX=-0.12 dY=-0.09
+
+Line X=42.58497 Y=12.82034
+Arc CW X=42.59254 Y=12.79255 dX=-0.14 dY=-0.05
+Line X=42.63664 Y=12.53535
+Arc CW X=42.63865 Y=12.51662 dX=-0.15 dY=-0.03
+Line X=42.65236 Y=12.20662
+Line X=42.6525 Y=12.2
+Line Y=10.9162
+Line X=42.65001 Y=9.8017
+Line X=42.65675 Y=9.53108
+Line X=42.67696 Y=9.28591
+Line X=42.71101 Y=9.06421
+Line X=42.75872 Y=8.86548
+Line X=42.82006 Y=8.68903
+Line X=42.89491 Y=8.53377
+Line X=42.98348 Y=8.39813
+Line X=43.08647 Y=8.28014
+Line X=43.20506 Y=8.17803
+Line X=43.34118 Y=8.09041
+Line X=43.49666 Y=8.01654
+Line X=43.67285 Y=7.95621
+Line X=43.87067 Y=7.90945
+Line X=44.09096 Y=7.87627
+Line X=44.334 Y=7.85655
+Line X=44.60183 Y=7.85001
+Line X=46.0658
+Line X=47.4365 Y=7.85002
+Line X=48.6627
+Line X=49.8438 Y=7.85003
+Line X=51.0996 Y=7.85004
+Line X=52.47668 Y=7.85005
+Line X=52.91343 Y=7.88107
+Line X=53.30519 Y=7.96362
+Line X=53.65252 Y=8.08414
+Line X=53.97827 Y=8.24309
+Line X=54.30443 Y=8.45573
+Line X=54.63913 Y=8.74555
+Line X=60.04252 Y=14.15
+Line X=59.28183
+Line X=54.28926 Y=9.15747
+Arc CW X=54.28171 Y=9.15042 dX=-0.11 dY=0.11
+Line X=54.09091 Y=8.98426
+Arc CW X=54.0756 Y=8.97257 dX=-0.1 dY=0.11
+Line X=53.8659 Y=8.83279
+Arc CW X=53.85116 Y=8.82414 dX=-0.08 dY=0.12
+Line X=53.62756 Y=8.70944
+Arc CW X=53.61367 Y=8.70318 dX=-0.07 dY=0.13
+Line X=53.38087 Y=8.61226
+Arc CW X=53.36788 Y=8.60786 dX=-0.05 dY=0.14
+Line X=53.13068 Y=8.53942
+Arc CW X=53.11849 Y=8.53645 dX=-0.04 dY=0.14
+Line X=52.88189 Y=8.48917
+Arc CW X=52.87014 Y=8.4873 dX=-0.03 dY=0.15
+Line X=52.63874 Y=8.45989
+Arc CW X=52.6271 Y=8.45897 dX=-0.02 dY=0.15
+Line X=52.406 Y=8.45012
+Line X=52.4 Y=8.45
+Line X=44.6
+Line X=44.5928 Y=8.45017
+Line X=44.2879 Y=8.46482
+Arc CW X=44.26836 Y=8.46705 dX=0.01 dY=0.15
+Line X=44.01286 Y=8.51334
+Arc CW X=43.98512 Y=8.52118 dX=0.03 dY=0.15
+Line X=43.77621 Y=8.60262
+Arc CW X=43.74238 Y=8.62114 dX=0.05 dY=0.14
+Line X=43.57748 Y=8.74126
+Arc CW X=43.54647 Y=8.77162 dX=0.09 dY=0.12
+Line X=43.42287 Y=8.93392
+Arc CW X=43.40332 Y=8.96812 dX=0.12 dY=0.09
+Line X=43.31842 Y=9.17613
+Arc CW X=43.30995 Y=9.20474 dX=0.14 dY=0.06
+Line X=43.26095 Y=9.46197
+Arc CW X=43.2585 Y=9.4824 dX=0.15 dY=0.03
+Line X=43.24269 Y=9.79236
+Line X=43.2425 Y=9.8
+Line Y=10.2992
+Arc CW X=43.2448 Y=10.32537 dX=0.15 dY=0
+Line Y=12.19795
+Line X=43.23768 Y=12.45772
+Line X=43.21639 Y=12.6945
+Line X=43.18093 Y=12.91044
+Line X=43.13134 Y=13.1058
+Line X=43.06783 Y=13.28111
+Line X=42.99058 Y=13.43724
+Line X=42.89949 Y=13.57528
+Line X=42.79396 Y=13.69662
+Line X=42.67319 Y=13.80255
+Line X=42.53566 Y=13.89406
+Line X=42.37998 Y=13.97181
+Line X=42.20517 Y=14.03564
+Line X=42.01008 Y=14.08558
+Line X=41.79444 Y=14.12131
+Line X=41.55774 Y=14.14279
+Line X=41.29792 Y=14.15
+Line X=37.70203
+Line X=37.43586 Y=14.14278
+Line X=37.19423 Y=14.12137
+Line X=36.97513 Y=14.0856
+Line X=36.77786 Y=14.03572
+Line X=36.60188 Y=13.9719
+Line X=36.44624 Y=13.89444
+Line X=36.3094 Y=13.80316
+Line X=36.18985 Y=13.69752
+Line X=36.08594 Y=13.57659
+Line X=35.99653 Y=13.43881
+Line X=35.92109 Y=13.28294
+Line X=35.85933 Y=13.10754
+Line X=35.81138 Y=12.91189
+Line X=35.77719 Y=12.69556
+Line X=35.75683 Y=12.45831
+Line X=35.75 Y=12.19803
+Line Y=7.85
+Line X=36.34975 Y=7.85001
+Line X=36.3426 Y=12.19975
+Line X=36.34279 Y=12.20753
+Line X=36.35819 Y=12.51393
+Arc CW X=36.36062 Y=12.53432 dX=0.15 dY=-0.01
+Line X=36.40902 Y=12.78982
+Arc CW X=36.41738 Y=12.81823 dX=0.15 dY=-0.03
+Line X=36.50158 Y=13.02603
+Arc CW X=36.5208 Y=13.05997 dX=0.14 dY=-0.06
+Line X=36.6437 Y=13.22307
+Arc CW X=36.67435 Y=13.25343 dX=0.12 dY=-0.09
+Line X=36.83875 Y=13.37493
+Arc CW X=36.87254 Y=13.39371 dX=0.09 dY=-0.12
+Line X=37.08154 Y=13.47671
+Line X=37.09092 Y=13.48008
+Feed Approach
+Line X=37.04495 Y=13.62286 Z=-0.085
+Rapid Z=15
+Rapid X=45.34405 Y=13.8503
+Rapid Z=5
+Feed Plunge
+Line Z=2.5
+Line Z=-0.1
+Feed Roughing
+Line Y=13.84794
+Line X=45.34724 Y=13.84475
+Line X=51.05266
+Line X=51.05585 Y=13.84794
+Line Y=13.85266
+Line X=51.05266 Y=13.85585
+Line X=45.3472
+Line X=45.34405 Y=13.8527
+Line Y=13.8503
+Arc CW X=45.33066 Y=13.82389 dX=-0.03 dY=0
+Arc CCW X=45.33359 Y=13.79707 dX=0.01 dY=-0.01
+Arc CCW X=45.33987 Y=13.79575 dX=0.01 dY=0.01
+Line X=51.10166
+Line X=51.10485 Y=13.79894
+Line Y=13.90166
+Line X=51.10166 Y=13.90485
+Line X=45.2982
+Line X=45.29505 Y=13.9017
+Line Y=13.79894
+Line X=45.29824 Y=13.79575
+Line X=45.33987
+Arc CW X=45.37662 Y=13.77125 dX=0 dY=-0.04
+Arc CCW X=45.41337 Y=13.74675 dX=0.04 dY=0.02
+Line X=51.15066
+Line X=51.15385 Y=13.74994
+Line Y=13.95066
+Line X=51.15066 Y=13.95385
+Line X=45.2492
+Line X=45.24605 Y=13.9507
+Line Y=13.74994
+Line X=45.24924 Y=13.74675
+Line X=45.41337
+Arc CW X=45.45012 Y=13.72225 dX=0 dY=-0.04
+Arc CCW X=45.48687 Y=13.69775 dX=0.04 dY=0.02
+Line X=51.19966
+Line X=51.20285 Y=13.70094
+Line Y=13.99966
+Line X=51.19966 Y=14.00285
+Line X=45.2002
+Line X=45.19705 Y=13.9997
+Line Y=13.70094
+Line X=45.20024 Y=13.69775
+Line X=45.48687
+Arc CW X=45.52362 Y=13.67325 dX=0 dY=-0.04
+Arc CCW X=45.56037 Y=13.64875 dX=0.04 dY=0.02
+Line X=51.24866
+Line X=51.25185 Y=13.65194
+Line Y=14.04866
+Line X=51.24866 Y=14.05185
+Line X=45.1512
+Line X=45.14805 Y=14.0487
+Line Y=13.65194
+Line X=45.15125 Y=13.64875
+Line X=45.56037
+Arc CW X=45.59712 Y=13.62425 dX=0 dY=-0.04
+Arc CCW X=45.63387 Y=13.59975 dX=0.04 dY=0.02
+Line X=51.29766
+Line X=51.30085 Y=13.60294
+Line Y=14.09766
+Line X=51.29766 Y=14.10085
+Line X=45.1022
+Line X=45.09905 Y=14.0977
+Line Y=13.60294
+Line X=45.10225 Y=13.59975
+Line X=45.63387
+Arc CW X=45.67066 Y=13.57522 dX=0 dY=-0.04
+Arc CCW X=45.70745 Y=13.5507 dX=0.04 dY=0.02
+Line X=51.3499
+Line Y=14.1499
+Line X=45.05
+Line Y=13.5507
+Line X=45.70745
+Feed Approach
+Line Y=13.7007 Z=-0.085
+Rapid Z=15
+Rapid X=45.34405 Y=11.15
+Rapid Z=5
+Feed Plunge
+Line Z=2.5
+Line Z=-0.1
+Feed Roughing
+Line Y=11.14724
+Line X=45.34724 Y=11.14405
+Line X=51.05266
+Line X=51.05585 Y=11.14724
+Line Y=11.15276
+Line X=51.05266 Y=11.15595
+Line X=45.3472
+Line X=45.34405 Y=11.1528
+Line Y=11.15
+Arc CW X=45.33038 Y=11.12347 dX=-0.03 dY=0
+Arc CCW X=45.33297 Y=11.09646 dX=0.01 dY=-0.01
+Arc CCW X=45.33947 Y=11.09505 dX=0.01 dY=0.01
+Line X=51.10166
+Line X=51.10485 Y=11.09824
+Line Y=11.20176
+Line X=51.10166 Y=11.20495
+Line X=45.2982
+Line X=45.29505 Y=11.2018
+Line Y=11.09824
+Line X=45.29824 Y=11.09505
+Line X=45.33947
+Arc CW X=45.37622 Y=11.07055 dX=0 dY=-0.04
+Arc CCW X=45.41297 Y=11.04605 dX=0.04 dY=0.02
+Line X=51.15066
+Line X=51.15385 Y=11.04924
+Line Y=11.25076
+Line X=51.15066 Y=11.25395
+Line X=45.2492
+Line X=45.24605 Y=11.2508
+Line Y=11.04924
+Line X=45.24924 Y=11.04605
+Line X=45.41297
+Arc CW X=45.44972 Y=11.02155 dX=0 dY=-0.04
+Arc CCW X=45.48647 Y=10.99705 dX=0.04 dY=0.02
+Line X=51.19966
+Line X=51.20285 Y=11.00024
+Line Y=11.29976
+Line X=51.19966 Y=11.30295
+Line X=45.2002
+Line X=45.19705 Y=11.2998
+Line Y=11.00024
+Line X=45.20024 Y=10.99705
+Line X=45.48647
+Arc CW X=45.52322 Y=10.97255 dX=0 dY=-0.04
+Arc CCW X=45.55997 Y=10.94805 dX=0.04 dY=0.02
+Line X=51.24866
+Line X=51.25185 Y=10.95124
+Line Y=11.34876
+Line X=51.24866 Y=11.35195
+Line X=45.1512
+Line X=45.14805 Y=11.3488
+Line Y=10.95124
+Line X=45.15125 Y=10.94805
+Line X=45.55997
+Arc CW X=45.59672 Y=10.92355 dX=0 dY=-0.04
+Arc CCW X=45.63347 Y=10.89905 dX=0.04 dY=0.02
+Line X=51.29766
+Line X=51.30085 Y=10.90224
+Line Y=11.39776
+Line X=51.29766 Y=11.40095
+Line X=45.1022
+Line X=45.09905 Y=11.3978
+Line Y=10.90224
+Line X=45.10225 Y=10.89905
+Line X=45.63347
+Arc CW X=45.67026 Y=10.87453 dX=0 dY=-0.04
+Arc CCW X=45.70705 Y=10.85 dX=0.04 dY=0.02
+Line X=51.3499
+Line Y=11.45
+Line X=45.05
+Line Y=10.85
+Line X=45.70705
+Feed Approach
+Line Y=11 Z=-0.085
+Rapid Z=15
+Rapid X=55.36886 Y=12.20774
+Rapid Z=5
+Feed Plunge
+Line Z=2.5
+Line Z=-0.1
+Feed Roughing
+Line X=55.38726 Y=12.22614
+Line Y=12.23066
+Line X=53.71661 Y=13.90131
+Line X=53.70782 Y=13.90495
+Line X=53.63393
+Line X=53.63288 Y=13.90241
+Line X=55.34594 Y=12.18934
+Line X=55.35046
+Line X=55.36886 Y=12.20774
+Arc CW X=55.41217 Y=12.2164 dX=0.03 dY=-0.03
+Arc CCW X=55.45548 Y=12.22507 dX=0.02 dY=0.04
+Line X=55.45655 Y=12.22614
+Line Y=12.23066
+Line X=53.7369 Y=13.95031
+Line X=53.72811 Y=13.95395
+Line X=53.51563
+Line X=53.51458 Y=13.95141
+Line X=55.34594 Y=12.12005
+Line X=55.35046
+Line X=55.45548 Y=12.22507
+Arc CW X=55.48303 Y=12.23452 dX=0.02 dY=-0.02
+Arc CCW X=55.49912 Y=12.25578 dX=0 dY=0.02
+Arc CCW X=55.49582 Y=12.26068 dX=-0.01 dY=-0.01
+Line X=53.7572 Y=13.99931
+Line X=53.74841 Y=14.00295
+Line X=53.39734
+Line X=53.39628 Y=14.00041
+Line X=55.34594 Y=12.05075
+Line X=55.35046
+Line X=55.52585 Y=12.22614
+Line Y=12.23066
+Line X=55.49582 Y=12.26068
+Arc CW X=55.48716 Y=12.30399 dX=0.03 dY=0.03
+Arc CCW X=55.4785 Y=12.3473 dX=-0.04 dY=0.02
+Line X=53.7775 Y=14.04831
+Line X=53.76871 Y=14.05195
+Line X=53.27904
+Line X=53.27799 Y=14.04941
+Line X=55.34594 Y=11.98145
+Line X=55.35046
+Line X=55.59515 Y=12.22614
+Line Y=12.23066
+Line X=55.4785 Y=12.3473
+Arc CW X=55.46984 Y=12.39061 dX=0.03 dY=0.03
+Arc CCW X=55.46117 Y=12.43393 dX=-0.04 dY=0.02
+Line X=53.79779 Y=14.09731
+Line X=53.789 Y=14.10095
+Line X=53.16074
+Line X=53.15969 Y=14.09841
+Line X=55.34594 Y=11.91216
+Line X=55.35046
+Line X=55.66444 Y=12.22614
+Line Y=12.23066
+Line X=55.46117 Y=12.43393
+Arc CW X=55.4525 Y=12.47728 dX=0.03 dY=0.03
+Arc CCW X=55.44383 Y=12.52063 dX=-0.04 dY=0.02
+Line X=53.81447 Y=14.15
+Line X=53.03873
+Line X=55.3482 Y=11.84053
+Line X=55.73607 Y=12.2284
+Line X=55.44383 Y=12.52063
+Feed Approach
+Line X=55.33777 Y=12.41457 Z=-0.085
+Rapid Z=15
+Rapid X=64.06152 Y=13.51129
+Rapid Z=5
+Feed Plunge
+Line Z=2.5
+Line Z=-0.1
+Feed Roughing
+Line X=64.10072 Y=13.48168
+Arc CW X=64.19012 Y=13.3914 dX=-0.27 dY=-0.35
+Line X=64.31161 Y=13.2272
+Arc CW X=64.367 Y=13.12788 dX=-0.36 dY=-0.26
+Line X=64.45 Y=12.92038
+Arc CW X=64.47419 Y=12.8372 dX=-0.41 dY=-0.17
+Line X=64.52169 Y=12.5838
+Arc CW X=64.52874 Y=12.52425 dX=-0.44 dY=-0.08
+Line X=64.54434 Y=12.21179
+Line X=64.54405 Y=8.14705
+Line X=64.5468 Y=8.1443
+Line X=64.54955 Y=8.14705
+Line X=64.55502 Y=12.21207
+Line X=64.54891 Y=12.44248
+Arc CCW X=64.54694 Y=12.46728 dX=-0.55 dY=-0.03
+Arc CW X=64.54459 Y=12.49204 dX=1.64 dY=0.17
+Line X=64.54028 Y=12.5416
+Arc CW X=64.53794 Y=12.57146 dX=1.66 dY=0.14
+Arc CCW X=64.53507 Y=12.60128 dX=-0.55 dY=-0.04
+Arc CW X=64.53247 Y=12.63111 dX=0.41 dY=0.05
+Arc CCW X=64.52987 Y=12.66095 dX=-0.42 dY=-0.02
+Arc CCW X=64.52646 Y=12.68527 dX=-0.74 dY=-0.09
+Arc CCW X=64.52209 Y=12.70945 dX=-0.54 dY=-0.08
+Arc CW X=64.51627 Y=12.74582 dX=0.43 dY=0.09
+Arc CCW X=64.51043 Y=12.7822 dX=-0.43 dY=-0.05
+Arc CW X=64.5046 Y=12.81857 dX=0.43 dY=0.09
+Arc CCW X=64.49877 Y=12.85495 dX=-0.43 dY=-0.05
+Line X=64.49711 Y=12.86195
+Line X=64.4953 Y=12.86892
+Arc CW X=64.49071 Y=12.88846 dX=0.79 dY=0.2
+Arc CCW X=64.48564 Y=12.90787 dX=-0.27 dY=-0.06
+Arc CW X=64.47839 Y=12.93708 dX=0.29 dY=0.09
+Arc CCW X=64.47115 Y=12.96629 dX=-0.3 dY=-0.06
+Arc CW X=64.4639 Y=12.99551 dX=0.29 dY=0.09
+Arc CCW X=64.45665 Y=13.02472 dX=-0.3 dY=-0.06
+Line X=64.45364 Y=13.03394
+Line X=64.45016 Y=13.04298
+Arc CW X=64.43879 Y=13.07495 dX=0.28 dY=0.12
+Arc CCW X=64.42742 Y=13.10692 dX=-0.29 dY=-0.08
+Arc CW X=64.41605 Y=13.13889 dX=0.28 dY=0.12
+Arc CCW X=64.40469 Y=13.17086 dX=-0.29 dY=-0.08
+Line X=64.40241 Y=13.1757
+Line X=64.39999 Y=13.18047
+Arc CW X=64.39322 Y=13.19492 dX=0.46 dY=0.22
+Arc CCW X=64.38599 Y=13.20916 dX=-0.15 dY=-0.07
+Arc CW X=64.37547 Y=13.23067 dX=0.17 dY=0.09
+Arc CCW X=64.36497 Y=13.25219 dX=-0.18 dY=-0.07
+Arc CW X=64.35445 Y=13.27371 dX=0.17 dY=0.09
+Arc CCW X=64.34395 Y=13.29523 dX=-0.18 dY=-0.07
+Arc CCW X=64.32664 Y=13.32166 dX=-0.22 dY=-0.12
+Arc CW X=64.31365 Y=13.34148 dX=0.14 dY=0.11
+Arc CCW X=64.30067 Y=13.3613 dX=-0.16 dY=-0.09
+Arc CW X=64.28769 Y=13.38113 dX=0.14 dY=0.11
+Arc CCW X=64.2747 Y=13.40095 dX=-0.16 dY=-0.09
+Arc CCW X=64.26157 Y=13.41665 dX=-0.16 dY=-0.12
+Arc CW X=64.24792 Y=13.43191 dX=0.45 dY=0.42
+Line X=64.22115 Y=13.46288
+Arc CW X=64.20898 Y=13.47744 dX=0.42 dY=0.36
+Arc CCW X=64.19633 Y=13.49157 dX=-0.14 dY=-0.12
+Arc CCW X=64.18418 Y=13.5026 dX=-0.11 dY=-0.11
+Arc CW X=64.17166 Y=13.51321 dX=0.3 dY=0.37
+Arc CW X=64.1556 Y=13.52779 dX=0.43 dY=0.48
+Arc CCW X=64.13906 Y=13.54181 dX=-0.15 dY=-0.16
+Arc CW X=64.12276 Y=13.55612 dX=0.1 dY=0.13
+Arc CCW X=64.10646 Y=13.57042 dX=-0.11 dY=-0.11
+Arc CCW X=64.0933 Y=13.57915 dX=-0.07 dY=-0.09
+Arc CW X=64.07027 Y=13.59442 dX=0.11 dY=0.19
+Arc CCW X=64.04725 Y=13.60969 dX=-0.13 dY=-0.18
+Arc CW X=64.02422 Y=13.62496 dX=0.11 dY=0.19
+Arc CCW X=64.00119 Y=13.64023 dX=-0.13 dY=-0.18
+Arc CCW X=63.98743 Y=13.64732 dX=-0.08 dY=-0.14
+Arc CW X=63.97346 Y=13.65398 dX=0.21 dY=0.45
+Line X=63.89026 Y=13.69521
+Line X=63.88366 Y=13.6986
+Line X=63.87695 Y=13.70181
+Line X=63.86791 Y=13.70535
+Line X=63.85869 Y=13.70841
+Arc CW X=63.82672 Y=13.71995 dX=0.1 dY=0.33
+Arc CCW X=63.79475 Y=13.73149 dX=-0.13 dY=-0.31
+Arc CW X=63.76279 Y=13.74303 dX=0.1 dY=0.33
+Arc CCW X=63.73082 Y=13.75458 dX=-0.13 dY=-0.31
+Arc CCW X=63.71169 Y=13.75965 dX=-0.08 dY=-0.25
+Arc CW X=63.69243 Y=13.76425 dX=0.17 dY=0.77
+Line X=63.57726 Y=13.79324
+Line X=63.56899 Y=13.79542
+Line X=63.56068 Y=13.79742
+Arc CCW X=63.53636 Y=13.80187 dX=-0.11 dY=-0.53
+Arc CCW X=63.51189 Y=13.80536 dX=-0.12 dY=-0.74
+Arc CW X=63.47528 Y=13.81131 dX=0.06 dY=0.51
+Arc CCW X=63.43869 Y=13.81726 dX=-0.1 dY=-0.5
+Arc CW X=63.40209 Y=13.82322 dX=0.06 dY=0.51
+Arc CCW X=63.36549 Y=13.82917 dX=-0.1 dY=-0.5
+Arc CCW X=63.33585 Y=13.83207 dX=-0.07 dY=-0.54
+Arc CW X=63.30616 Y=13.83444 dX=0.12 dY=1.63
+Line X=63.24683 Y=13.8397
+Arc CW X=63.22142 Y=13.84216 dX=0.15 dY=1.65
+Arc CCW X=63.19598 Y=13.84422 dX=-0.06 dY=-0.55
+Arc CW X=63.17056 Y=13.84647 dX=0.02 dY=0.41
+Arc CCW X=63.14514 Y=13.84873 dX=-0.05 dY=-0.41
+Line X=62.89401 Y=13.8555
+Line X=61.58627 Y=13.85595
+Line X=61.58228 Y=13.8543
+Line X=61.57457 Y=13.84659
+Line X=61.57563 Y=13.84405
+Line X=62.91198 Y=13.84434
+Line X=63.2457 Y=13.82696
+Arc CW X=63.29029 Y=13.82071 dX=-0.04 dY=-0.44
+Line X=63.54578 Y=13.77161
+Arc CW X=63.63002 Y=13.74658 dX=-0.08 dY=-0.44
+Line X=63.83782 Y=13.66168
+Arc CW X=63.93761 Y=13.60488 dX=-0.17 dY=-0.41
+Line X=64.06152 Y=13.51129
+Arc CW X=64.07649 Y=13.46952 dX=-0.02 dY=-0.03
+Arc CCW X=64.09017 Y=13.4273 dX=0.04 dY=-0.01
+Arc CW X=64.15073 Y=13.36225 dX=-0.26 dY=-0.3
+Line X=64.27222 Y=13.19805
+Arc CW X=64.32151 Y=13.10968 dX=-0.32 dY=-0.24
+Line X=64.40451 Y=12.90219
+Arc CW X=64.42603 Y=12.82817 dX=-0.37 dY=-0.15
+Line X=64.47353 Y=12.57477
+Arc CW X=64.4798 Y=12.52179 dX=-0.39 dY=-0.07
+Line X=64.4955 Y=12.2
+Line X=64.49505 Y=8.09824
+Line X=64.49825 Y=8.09505
+
+Line X=64.59528
+Line X=64.59848 Y=8.09824
+Line X=64.60449 Y=12.19507
+Line X=64.59785 Y=12.44526
+Arc CCW X=64.59586 Y=12.47043 dX=-0.56 dY=-0.03
+Arc CW X=64.59348 Y=12.49556 dX=1.66 dY=0.17
+Line X=64.58909 Y=12.54586
+Arc CW X=64.58672 Y=12.57616 dX=1.68 dY=0.15
+Arc CCW X=64.58381 Y=12.60641 dX=-0.56 dY=-0.04
+
+Arc CW X=64.58117 Y=12.63669 dX=0.42 dY=0.05
+Arc CCW X=64.57853 Y=12.66696 dX=-0.42 dY=-0.02
+Line X=64.54682 Y=12.86474
+Line X=64.54493 Y=12.87275
+Line X=64.54286 Y=12.88072
+Arc CW X=64.5382 Y=12.90055 dX=0.8 dY=0.2
+Arc CCW X=64.53305 Y=12.92026 dX=-0.27 dY=-0.06
+Arc CW X=64.5257 Y=12.94991 dX=0.3 dY=0.09
+Arc CCW X=64.51834 Y=12.97956 dX=-0.3 dY=-0.06
+Arc CW X=64.51099 Y=13.00921 dX=0.3 dY=0.09
+Arc CCW X=64.50363 Y=13.03886 dX=-0.3 dY=-0.06
+Arc CCW X=64.50052 Y=13.04839 dX=-0.21 dY=-0.06
+Arc CCW X=64.49692 Y=13.05774 dX=-0.16 dY=-0.06
+Arc CW X=64.48517 Y=13.09077 dX=0.29 dY=0.12
+Arc CCW X=64.47342 Y=13.12381 dX=-0.3 dY=-0.09
+Arc CW X=64.46168 Y=13.15685 dX=0.29 dY=0.12
+Arc CCW X=64.44993 Y=13.18988 dX=-0.3 dY=-0.09
+Line X=64.44706 Y=13.19597
+Line X=64.44402 Y=13.20197
+Arc CW X=64.43708 Y=13.21677 dX=0.47 dY=0.23
+Arc CCW X=64.42968 Y=13.23135 dX=-0.16 dY=-0.07
+Arc CW X=64.41891 Y=13.25339 dX=0.17 dY=0.1
+Arc CCW X=64.40815 Y=13.27543 dX=-0.18 dY=-0.07
+Arc CW X=64.39739 Y=13.29746 dX=0.17 dY=0.1
+Arc CCW X=64.38663 Y=13.3195 dX=-0.18 dY=-0.07
+Arc CCW X=64.37753 Y=13.33338 dX=-0.11 dY=-0.07
+Arc CW X=64.36163 Y=13.35767 dX=0.17 dY=0.13
+Arc CCW X=64.34572 Y=13.38196 dX=-0.19 dY=-0.11
+Arc CW X=64.32981 Y=13.40624 dX=0.17 dY=0.13
+Arc CCW X=64.3139 Y=13.43053 dX=-0.19 dY=-0.11
+Arc CCW X=64.30025 Y=13.44686 dX=-0.17 dY=-0.13
+Arc CW X=64.28606 Y=13.46273 dX=0.47 dY=0.43
+Line X=64.2582 Y=13.49493
+Arc CW X=64.24496 Y=13.51079 dX=0.45 dY=0.39
+Arc CCW X=64.23119 Y=13.52617 dX=-0.16 dY=-0.13
+Arc CCW X=64.21779 Y=13.53834 dX=-0.12 dY=-0.12
+Arc CW X=64.20398 Y=13.55004 dX=0.33 dY=0.41
+Arc CW X=64.19564 Y=13.55761 dX=0.22 dY=0.25
+Arc CCW X=64.18706 Y=13.56489 dX=-0.08 dY=-0.08
+Arc CW X=64.17437 Y=13.57603 dX=0.08 dY=0.1
+Arc CCW X=64.16167 Y=13.58716 dX=-0.09 dY=-0.09
+Arc CW X=64.14899 Y=13.59829 dX=0.08 dY=0.1
+Arc CCW X=64.13629 Y=13.60943 dX=-0.09 dY=-0.09
+Arc CCW X=64.12247 Y=13.6186 dX=-0.07 dY=-0.1
+Arc CW X=64.09828 Y=13.63464 dX=0.12 dY=0.2
+Arc CCW X=64.07409 Y=13.65068 dX=-0.14 dY=-0.18
+Arc CW X=64.0499 Y=13.66673 dX=0.12 dY=0.2
+Arc CCW X=64.02571 Y=13.68277 dX=-0.14 dY=-0.18
+Arc CCW X=64.01161 Y=13.69003 dX=-0.08 dY=-0.15
+Arc CW X=63.99729 Y=13.69685 dX=0.21 dY=0.46
+Line X=63.91203 Y=13.73911
+Line X=63.90417 Y=13.74314
+Line X=63.89622 Y=13.74695
+Arc CCW X=63.88687 Y=13.75061 dX=-0.07 dY=-0.15
+Arc CCW X=63.87733 Y=13.75377 dX=-0.07 dY=-0.2
+Arc CW X=63.84429 Y=13.7657 dX=0.1 dY=0.34
+Arc CCW X=63.81125 Y=13.77763 dX=-0.14 dY=-0.32
+Arc CW X=63.77821 Y=13.78957 dX=0.1 dY=0.34
+Arc CCW X=63.74516 Y=13.8015 dX=-0.14 dY=-0.32
+Arc CCW X=63.72573 Y=13.80665 dX=-0.08 dY=-0.26
+Arc CW X=63.70618 Y=13.81131 dX=0.18 dY=0.79
+Line X=63.58922 Y=13.84076
+Line X=63.57994 Y=13.8432
+Line X=63.57062 Y=13.84544
+Line X=63.3716 Y=13.87782
+Arc CCW X=63.34151 Y=13.88077 dX=-0.07 dY=-0.55
+Arc CW X=63.31138 Y=13.88317 dX=0.12 dY=1.66
+Line X=63.25116 Y=13.88851
+Arc CW X=63.22538 Y=13.891 dX=0.15 dY=1.68
+Arc CCW X=63.19957 Y=13.89309 dX=-0.06 dY=-0.56
+Arc CW X=63.17376 Y=13.89538 dX=0.02 dY=0.42
+Arc CCW X=63.14796 Y=13.89767 dX=-0.05 dY=-0.42
+Line X=62.89467 Y=13.9045
+Line X=61.56781 Y=13.90495
+Line X=61.56068 Y=13.902
+Line X=61.45628 Y=13.79759
+Line X=61.45733 Y=13.79505
+Line X=62.91066 Y=13.79536
+Line X=63.24137 Y=13.77815
+Arc CW X=63.28104 Y=13.77259 dX=-0.03 dY=-0.39
+Line X=63.53654 Y=13.72349
+Arc CW X=63.61148 Y=13.70122 dX=-0.07 dY=-0.39
+Line X=63.81929 Y=13.61632
+Arc CW X=63.90808 Y=13.56579 dX=-0.15 dY=-0.37
+Line X=64.07118 Y=13.44259
+Arc CW X=64.09017 Y=13.4273 dX=-0.24 dY=-0.32
+Arc CW X=64.1018 Y=13.3825 dX=-0.03 dY=-0.03
+Arc CCW X=64.10862 Y=13.33673 dX=0.05 dY=-0.02
+Line X=64.11134 Y=13.3331
+Line X=64.23284 Y=13.1689
+Arc CW X=64.27602 Y=13.09149 dX=-0.28 dY=-0.21
+Line X=64.35902 Y=12.88399
+Arc CW X=64.37787 Y=12.81914 dX=-0.32 dY=-0.13
+Line X=64.42537 Y=12.56574
+Arc CW X=64.43086 Y=12.51932 dX=-0.34 dY=-0.06
+Line X=64.4465 Y=12.2
+Line X=64.44605 Y=8.04924
+Line X=64.44924 Y=8.04605
+Line X=64.6442
+Line X=64.6474 Y=8.04924
+Line X=64.6535 Y=12.19568
+Line X=64.6468 Y=12.44804
+Arc CCW X=64.64477 Y=12.47358 dX=-0.56 dY=-0.03
+Arc CW X=64.64235 Y=12.49908 dX=1.69 dY=0.17
+Line X=64.6379 Y=12.55011
+Arc CW X=64.6355 Y=12.58085 dX=1.71 dY=0.15
+Arc CCW X=64.63255 Y=12.61154 dX=-0.57 dY=-0.04
+Arc CW X=64.62987 Y=12.64226 dX=0.42 dY=0.05
+Arc CCW X=64.62719 Y=12.67298 dX=-0.43 dY=-0.02
+Line X=64.59488 Y=12.87454
+Line X=64.59274 Y=12.88355
+Line X=64.59042 Y=12.89252
+Arc CW X=64.58569 Y=12.91264 dX=0.82 dY=0.2
+Arc CCW X=64.58047 Y=12.93264 dX=-0.27 dY=-0.06
+Arc CW X=64.573 Y=12.96273 dX=0.3 dY=0.09
+Arc CCW X=64.56554 Y=12.99282 dX=-0.31 dY=-0.06
+Arc CW X=64.55807 Y=13.02291 dX=0.3 dY=0.09
+Arc CCW X=64.55061 Y=13.053 dX=-0.31 dY=-0.06
+Arc CCW X=64.5474 Y=13.06283 dX=-0.22 dY=-0.07
+Arc CCW X=64.54368 Y=13.07249 dX=-0.16 dY=-0.06
+Arc CW X=64.53761 Y=13.08954 dX=0.15 dY=0.06
+Arc CCW X=64.53155 Y=13.10659 dX=-0.15 dY=-0.05
+Arc CW X=64.52245 Y=13.13217 dX=0.22 dY=0.09
+Arc CCW X=64.51336 Y=13.15775 dX=-0.23 dY=-0.07
+Arc CW X=64.50426 Y=13.18332 dX=0.22 dY=0.09
+Arc CCW X=64.49517 Y=13.2089 dX=-0.23 dY=-0.07
+Line X=64.49171 Y=13.21624
+Line X=64.48805 Y=13.22347
+Arc CW X=64.48095 Y=13.23862 dX=0.48 dY=0.23
+Arc CCW X=64.47337 Y=13.25355 dX=-0.16 dY=-0.07
+Arc CW X=64.46235 Y=13.2761 dX=0.17 dY=0.1
+Arc CCW X=64.45134 Y=13.29866 dX=-0.18 dY=-0.08
+Arc CW X=64.44032 Y=13.32121 dX=0.17 dY=0.1
+Arc CCW X=64.42931 Y=13.34377 dX=-0.18 dY=-0.08
+Arc CCW X=64.41978 Y=13.35831 dX=-0.12 dY=-0.07
+Arc CW X=64.41145 Y=13.37104 dX=0.09 dY=0.07
+Arc CCW X=64.40311 Y=13.38376 dX=-0.1 dY=-0.06
+Arc CW X=64.39061 Y=13.40285 dX=0.14 dY=0.1
+Arc CCW X=64.37811 Y=13.42194 dX=-0.15 dY=-0.08
+Arc CW X=64.36561 Y=13.44103 dX=0.14 dY=0.1
+Arc CCW X=64.3531 Y=13.46011 dX=-0.15 dY=-0.08
+Arc CCW X=64.33892 Y=13.47707 dX=-0.18 dY=-0.13
+Arc CW X=64.32418 Y=13.49355 dX=0.49 dY=0.45
+Line X=64.29527 Y=13.52699
+Arc CW X=64.2881 Y=13.53556 dX=0.25 dY=0.21
+Arc CCW X=64.28065 Y=13.54388 dX=-0.08 dY=-0.07
+Arc CW X=64.27335 Y=13.55233 dX=0.06 dY=0.06
+Arc CCW X=64.26604 Y=13.56078 dX=-0.06 dY=-0.05
+Arc CCW X=64.25139 Y=13.57408 dX=-0.14 dY=-0.14
+Arc CW X=64.2363 Y=13.58688 dX=0.36 dY=0.45
+Arc CW X=64.22765 Y=13.59472 dX=0.23 dY=0.26
+Arc CCW X=64.21875 Y=13.60227 dX=-0.08 dY=-0.08
+Arc CW X=64.2056 Y=13.61381 dX=0.08 dY=0.1
+Arc CCW X=64.19244 Y=13.62535 dX=-0.09 dY=-0.09
+Arc CW X=64.17928 Y=13.6369 dX=0.08 dY=0.1
+Arc CCW X=64.16613 Y=13.64844 dX=-0.09 dY=-0.09
+Arc CCW X=64.15164 Y=13.65805 dX=-0.08 dY=-0.1
+Arc CW X=64.12629 Y=13.67486 dX=0.12 dY=0.21
+Arc CCW X=64.10094 Y=13.69168 dX=-0.15 dY=-0.19
+Arc CW X=64.07558 Y=13.70849 dX=0.12 dY=0.21
+Arc CCW X=64.05022 Y=13.7253 dX=-0.15 dY=-0.19
+Arc CCW X=64.03578 Y=13.73275 dX=-0.09 dY=-0.15
+Arc CW X=64.02112 Y=13.73973 dX=0.22 dY=0.47
+Line X=63.93378 Y=13.78302
+Arc CW X=63.9247 Y=13.78768 dX=0.16 dY=0.32
+Arc CCW X=63.91548 Y=13.79209 dX=-0.06 dY=-0.11
+Arc CCW X=63.90583 Y=13.79587 dX=-0.07 dY=-0.16
+Arc CCW X=63.89598 Y=13.79913 dX=-0.08 dY=-0.21
+Arc CW X=63.86186 Y=13.81145 dX=0.11 dY=0.35
+Arc CCW X=63.82774 Y=13.82377 dX=-0.14 dY=-0.34
+Arc CW X=63.79362 Y=13.83609 dX=0.11 dY=0.35
+Arc CCW X=63.7595 Y=13.84842 dX=-0.14 dY=-0.34
+Arc CCW X=63.73977 Y=13.85365 dX=-0.08 dY=-0.26
+Arc CW X=63.71992 Y=13.85838 dX=0.18 dY=0.8
+Line X=63.60118 Y=13.88828
+Arc CW X=63.5909 Y=13.89099 dX=0.12 dY=0.48
+Arc CCW X=63.58055 Y=13.89347 dX=-0.04 dY=-0.16
+Line X=63.3777 Y=13.92647
+Arc CCW X=63.34718 Y=13.92946 dX=-0.07 dY=-0.56
+Arc CW X=63.3166 Y=13.9319 dX=0.12 dY=1.68
+Line X=63.2555 Y=13.93732
+Arc CW X=63.22934 Y=13.93984 dX=0.15 dY=1.7
+Arc CCW X=63.20314 Y=13.94197 dX=-0.06 dY=-0.57
+Arc CW X=63.17697 Y=13.94429 dX=0.02 dY=0.43
+Arc CCW X=63.15079 Y=13.94661 dX=-0.05 dY=-0.42
+Line X=62.89533 Y=13.9535
+Line X=61.54751 Y=13.95395
+Line X=61.54039 Y=13.951
+Line X=61.33798 Y=13.74859
+Line X=61.33904 Y=13.74605
+Line X=62.91784 Y=13.74604
+Line X=63.23704 Y=13.72934
+Arc CW X=63.27179 Y=13.72447 dX=-0.03 dY=-0.35
+Line X=63.52729 Y=13.67537
+Arc CW X=63.59295 Y=13.65586 dX=-0.07 dY=-0.34
+Line X=63.80075 Y=13.57096
+Arc CW X=63.87855 Y=13.52669 dX=-0.13 dY=-0.32
+Line X=64.04165 Y=13.40349
+Arc CW X=64.10862 Y=13.33673 dX=-0.21 dY=-0.28
+Arc CW X=64.11113 Y=13.29237 dX=-0.03 dY=-0.02
+Arc CCW X=64.11336 Y=13.248 dX=0.03 dY=-0.02
+Line X=64.19345 Y=13.13976
+Arc CW X=64.23052 Y=13.07329 dX=-0.24 dY=-0.18
+Line X=64.31352 Y=12.86579
+Arc CW X=64.3297 Y=12.81011 dX=-0.28 dY=-0.11
+Line X=64.3772 Y=12.55671
+Arc CW X=64.38192 Y=12.51686 dX=-0.29 dY=-0.05
+Line X=64.3975 Y=12.2
+Line X=64.39705 Y=8.00024
+Line X=64.40025 Y=7.99705
+Line X=64.69312
+Line X=64.69632 Y=8.00025
+Line X=64.70249 Y=12.19629
+Line X=64.69574 Y=12.45082
+Arc CCW X=64.69368 Y=12.47673 dX=-0.57 dY=-0.03
+Arc CW X=64.69123 Y=12.5026 dX=1.71 dY=0.18
+Line X=64.68671 Y=12.55437
+Arc CW X=64.68428 Y=12.58555 dX=1.73 dY=0.15
+Arc CCW X=64.68129 Y=12.61668 dX=-0.58 dY=-0.04
+Arc CW X=64.67857 Y=12.64783 dX=0.43 dY=0.05
+Arc CCW X=64.67586 Y=12.67899 dX=-0.43 dY=-0.02
+Line X=64.64294 Y=12.88433
+Arc CCW X=64.64056 Y=12.89435 dX=-0.16 dY=-0.03
+Arc CW X=64.63798 Y=12.90432 dX=0.47 dY=0.13
+Arc CW X=64.63318 Y=12.92474 dX=0.83 dY=0.21
+Arc CCW X=64.62788 Y=12.94503 dX=-0.28 dY=-0.06
+Arc CW X=64.6203 Y=12.97555 dX=0.31 dY=0.09
+Arc CCW X=64.61273 Y=13.00608 dX=-0.31 dY=-0.06
+Arc CW X=64.60516 Y=13.03661 dX=0.31 dY=0.09
+Arc CCW X=64.59758 Y=13.06714 dX=-0.31 dY=-0.06
+Arc CCW X=64.59428 Y=13.07728 dX=-0.22 dY=-0.07
+Arc CCW X=64.59044 Y=13.08724 dX=-0.17 dY=-0.06
+Arc CW X=64.58418 Y=13.10482 dX=0.15 dY=0.06
+Arc CCW X=64.57793 Y=13.12241 dX=-0.16 dY=-0.05
+Arc CW X=64.56855 Y=13.14879 dX=0.23 dY=0.1
+Arc CCW X=64.55917 Y=13.17517 dX=-0.24 dY=-0.07
+Arc CW X=64.54979 Y=13.20154 dX=0.23 dY=0.1
+Arc CCW X=64.54041 Y=13.22792 dX=-0.24 dY=-0.07
+Line X=64.53637 Y=13.23651
+Line X=64.53209 Y=13.24497
+Arc CW X=64.52481 Y=13.26048 dX=0.49 dY=0.24
+Arc CCW X=64.51706 Y=13.27574 dX=-0.17 dY=-0.07
+Arc CW X=64.50579 Y=13.29882 dX=0.18 dY=0.1
+Arc CCW X=64.49452 Y=13.32189 dX=-0.19 dY=-0.08
+Arc CW X=64.48325 Y=13.34497 dX=0.18 dY=0.1
+Arc CCW X=64.47198 Y=13.36804 dX=-0.19 dY=-0.08
+Arc CCW X=64.46202 Y=13.38325 dX=-0.13 dY=-0.07
+Arc CW X=64.45331 Y=13.39655 dX=0.1 dY=0.07
+Arc CCW X=64.4446 Y=13.40986 dX=-0.1 dY=-0.06
+Arc CW X=64.43152 Y=13.42982 dX=0.14 dY=0.11
+Arc CCW X=64.41845 Y=13.44978 dX=-0.16 dY=-0.09
+Arc CW X=64.40537 Y=13.46974 dX=0.14 dY=0.11
+Arc CCW X=64.3923 Y=13.4897 dX=-0.16 dY=-0.09
+Arc CCW X=64.38495 Y=13.49849 dX=-0.09 dY=-0.07
+Arc CW X=64.37731 Y=13.50703 dX=0.25 dY=0.23
+Line X=64.33233 Y=13.55904
+Arc CW X=64.32462 Y=13.56826 dX=0.26 dY=0.23
+Arc CCW X=64.3166 Y=13.57722 dX=-0.09 dY=-0.07
+Arc CW X=64.30875 Y=13.5863 dX=0.06 dY=0.06
+Arc CCW X=64.30089 Y=13.59539 dX=-0.07 dY=-0.05
+Arc CCW X=64.285 Y=13.60983 dX=-0.15 dY=-0.15
+Arc CW X=64.26862 Y=13.62371 dX=0.4 dY=0.48
+Arc CW X=64.25967 Y=13.63183 dX=0.24 dY=0.27
+Arc CCW X=64.25045 Y=13.63964 dX=-0.08 dY=-0.09
+Arc CW X=64.23683 Y=13.6516 dX=0.08 dY=0.11
+Arc CCW X=64.22321 Y=13.66355 dX=-0.1 dY=-0.1
+Arc CW X=64.20959 Y=13.6755 dX=0.08 dY=0.11
+Arc CCW X=64.19596 Y=13.68745 dX=-0.1 dY=-0.1
+Arc CCW X=64.18081 Y=13.6975 dX=-0.08 dY=-0.11
+Arc CW X=64.1543 Y=13.71509 dX=0.13 dY=0.22
+Arc CCW X=64.12778 Y=13.73267 dX=-0.15 dY=-0.2
+Arc CW X=64.10126 Y=13.75026 dX=0.13 dY=0.22
+Arc CCW X=64.07475 Y=13.76784 dX=-0.15 dY=-0.2
+Arc CCW X=64.05996 Y=13.77546 dX=-0.09 dY=-0.15
+Arc CW X=64.04494 Y=13.78261 dX=0.22 dY=0.48
+Line X=63.95554 Y=13.82692
+Arc CW X=63.94522 Y=13.83222 dX=0.18 dY=0.37
+Arc CCW X=63.93474 Y=13.83723 dX=-0.06 dY=-0.12
+Arc CCW X=63.92479 Y=13.84113 dX=-0.07 dY=-0.16
+Arc CCW X=63.91463 Y=13.84449 dX=-0.08 dY=-0.22
+Arc CW X=63.87943 Y=13.8572 dX=0.11 dY=0.36
+Arc CCW X=63.84423 Y=13.86992 dX=-0.14 dY=-0.35
+Arc CW X=63.80904 Y=13.88262 dX=0.11 dY=0.36
+Arc CCW X=63.77384 Y=13.89534 dX=-0.14 dY=-0.35
+Arc CCW X=63.75382 Y=13.90064 dX=-0.08 dY=-0.26
+Arc CW X=63.73367 Y=13.90545 dX=0.18 dY=0.81
+Line X=63.61315 Y=13.9358
+Arc CW X=63.60184 Y=13.93877 dX=0.13 dY=0.53
+Arc CCW X=63.59048 Y=13.9415 dX=-0.05 dY=-0.18
+Line X=63.38382 Y=13.97512
+Arc CCW X=63.35284 Y=13.97816 dX=-0.07 dY=-0.57
+Arc CW X=63.32182 Y=13.98063 dX=0.12 dY=1.71
+Line X=63.25983 Y=13.98613
+Arc CW X=63.2333 Y=13.98869 dX=0.15 dY=1.72
+Arc CCW X=63.20673 Y=13.99084 dX=-0.06 dY=-0.57
+Arc CW X=63.18018 Y=13.9932 dX=0.02 dY=0.43
+Arc CCW X=63.15362 Y=13.99555 dX=-0.05 dY=-0.43
+Line X=62.89599 Y=14.0025
+Line X=61.52721 Y=14.00295
+Line X=61.52009 Y=14
+Line X=61.21968 Y=13.69959
+Line X=61.22074 Y=13.69705
+Line X=62.91532 Y=13.69711
+Line X=63.2327 Y=13.68054
+Arc CW X=63.26254 Y=13.67635 dX=-0.03 dY=-0.3
+Line X=63.53454 Y=13.6236
+Arc CW X=63.57442 Y=13.6105 dX=-0.07 dY=-0.29
+Line X=63.78222 Y=13.5256
+Arc CW X=63.84901 Y=13.48759 dX=-0.11 dY=-0.28
+Line X=64.01212 Y=13.36439
+Arc CW X=64.07195 Y=13.30396 dX=-0.18 dY=-0.24
+Line X=64.11336 Y=13.248
+Arc CW X=64.11552 Y=13.20389 dX=-0.03 dY=-0.02
+Arc CCW X=64.11768 Y=13.15977 dX=0.03 dY=-0.02
+Line X=64.15406 Y=13.11061
+Arc CW X=64.18503 Y=13.05509 dX=-0.2 dY=-0.15
+Line X=64.26803 Y=12.84759
+Arc CW X=64.28155 Y=12.80108 dX=-0.23 dY=-0.09
+Line X=64.32905 Y=12.54768
+Arc CW X=64.33298 Y=12.5144 dX=-0.24 dY=-0.05
+Line X=64.3485 Y=12.2
+Line X=64.34805 Y=7.95124
+Line X=64.35124 Y=7.94805
+Line X=64.74205
+Line X=64.74525 Y=7.95124
+Line X=64.7515 Y=12.1969
+Line X=64.74469 Y=12.4536
+Arc CCW X=64.7426 Y=12.47988 dX=-0.58 dY=-0.03
+Arc CW X=64.74011 Y=12.50611 dX=1.74 dY=0.18
+Line X=64.73553 Y=12.55862
+Arc CW X=64.73306 Y=12.59024 dX=1.75 dY=0.15
+Arc CCW X=64.73003 Y=12.62181 dX=-0.59 dY=-0.04
+Arc CW X=64.72727 Y=12.65341 dX=0.44 dY=0.05
+Arc CCW X=64.72452 Y=12.685 dX=-0.44 dY=-0.02
+Line X=64.69099 Y=12.89413
+Arc CCW X=64.68838 Y=12.90515 dX=-0.18 dY=-0.04
+Arc CW X=64.68553 Y=12.91612 dX=0.52 dY=0.14
+Arc CW X=64.68066 Y=12.93683 dX=0.84 dY=0.21
+Arc CCW X=64.67529 Y=12.95741 dX=-0.28 dY=-0.06
+Arc CW X=64.66761 Y=12.98838 dX=0.31 dY=0.09
+Arc CCW X=64.65993 Y=13.01935 dX=-0.32 dY=-0.06
+Arc CW X=64.65224 Y=13.05031 dX=0.31 dY=0.09
+Arc CCW X=64.64456 Y=13.08128 dX=-0.32 dY=-0.06
+Arc CCW X=64.64115 Y=13.09173 dX=-0.23 dY=-0.07
+Arc CCW X=64.6372 Y=13.10199 dX=-0.17 dY=-0.06
+Arc CW X=64.63075 Y=13.12011 dX=0.16 dY=0.07
+Arc CCW X=64.62431 Y=13.13823 dX=-0.16 dY=-0.05
+Arc CW X=64.61465 Y=13.16541 dX=0.24 dY=0.1
+Arc CCW X=64.60498 Y=13.19258 dX=-0.25 dY=-0.07
+Arc CW X=64.59532 Y=13.21976 dX=0.24 dY=0.1
+Arc CCW X=64.58566 Y=13.24694 dX=-0.25 dY=-0.07
+Arc CCW X=64.58102 Y=13.25678 dX=-0.12 dY=-0.05
+Arc CW X=64.57612 Y=13.26648 dX=0.34 dY=0.18
+Arc CW X=64.56868 Y=13.28233 dX=0.5 dY=0.24
+Arc CCW X=64.56075 Y=13.29794 dX=-0.17 dY=-0.08
+Arc CW X=64.54923 Y=13.32153 dX=0.18 dY=0.1
+Arc CCW X=64.5377 Y=13.34512 dX=-0.19 dY=-0.08
+Arc CW X=64.52618 Y=13.36872 dX=0.18 dY=0.1
+Arc CCW X=64.51466 Y=13.39231 dX=-0.19 dY=-0.08
+Arc CCW X=64.50426 Y=13.40818 dX=-0.13 dY=-0.07
+Arc CW X=64.49517 Y=13.42207 dX=0.1 dY=0.08
+Arc CCW X=64.48608 Y=13.43596 dX=-0.11 dY=-0.06
+Arc CW X=64.47243 Y=13.45679 dX=0.15 dY=0.11
+Arc CCW X=64.45879 Y=13.47762 dX=-0.16 dY=-0.09
+Arc CW X=64.44514 Y=13.49845 dX=0.15 dY=0.11
+Arc CCW X=64.4315 Y=13.51928 dX=-0.16 dY=-0.09
+Arc CCW X=64.42389 Y=13.52838 dX=-0.09 dY=-0.07
+Arc CW X=64.41598 Y=13.53723 dX=0.26 dY=0.24
+Line X=64.36938 Y=13.5911
+Arc CW X=64.36115 Y=13.60097 dX=0.28 dY=0.24
+Arc CCW X=64.35256 Y=13.61055 dX=-0.1 dY=-0.08
+Arc CW X=64.34415 Y=13.62027 dX=0.07 dY=0.07
+Arc CCW X=64.33575 Y=13.62999 dX=-0.07 dY=-0.06
+Arc CCW X=64.32717 Y=13.63778 dX=-0.08 dY=-0.08
+Arc CW X=64.31834 Y=13.64527 dX=0.21 dY=0.26
+Line X=64.30093 Y=13.66054
+Arc CW X=64.29168 Y=13.66894 dX=0.24 dY=0.28
+Arc CCW X=64.28214 Y=13.67702 dX=-0.08 dY=-0.09
+Arc CW X=64.26806 Y=13.68938 dX=0.08 dY=0.11
+Arc CCW X=64.25397 Y=13.70174 dX=-0.1 dY=-0.1
+Arc CW X=64.23988 Y=13.7141 dX=0.08 dY=0.11
+Arc CCW X=64.2258 Y=13.72646 dX=-0.1 dY=-0.1
+Arc CCW X=64.20998 Y=13.73695 dX=-0.09 dY=-0.11
+Arc CW X=64.19614 Y=13.74613 dX=0.07 dY=0.11
+Arc CCW X=64.1823 Y=13.75531 dX=-0.08 dY=-0.11
+Arc CW X=64.16154 Y=13.76908 dX=0.1 dY=0.17
+Arc CCW X=64.14078 Y=13.78284 dX=-0.12 dY=-0.16
+Arc CW X=64.12002 Y=13.79661 dX=0.1 dY=0.17
+Arc CCW X=64.09926 Y=13.81038 dX=-0.12 dY=-0.16
+Arc CCW X=64.08414 Y=13.81817 dX=-0.09 dY=-0.16
+Arc CW X=64.06877 Y=13.82549 dX=0.23 dY=0.49
+Line X=63.97731 Y=13.87082
+Arc CW X=63.96574 Y=13.87676 dX=0.2 dY=0.41
+Arc CCW X=63.95401 Y=13.88237 dX=-0.07 dY=-0.13
+Arc CCW X=63.94374 Y=13.88639 dX=-0.07 dY=-0.17
+Arc CCW X=63.93328 Y=13.88986 dX=-0.08 dY=-0.22
+Arc CW X=63.897 Y=13.90296 dX=0.11 dY=0.37
+Arc CCW X=63.86073 Y=13.91606 dX=-0.15 dY=-0.36
+Arc CW X=63.82446 Y=13.92915 dX=0.11 dY=0.37
+Arc CCW X=63.78818 Y=13.94225 dX=-0.15 dY=-0.36
+Arc CCW X=63.76786 Y=13.94764 dX=-0.08 dY=-0.27
+Arc CW X=63.74741 Y=13.95252 dX=0.19 dY=0.82
+Line X=63.62511 Y=13.98331
+Arc CW X=63.6128 Y=13.98655 dX=0.15 dY=0.58
+Arc CCW X=63.60042 Y=13.98953 dX=-0.05 dY=-0.19
+Line X=63.38992 Y=14.02377
+Arc CCW X=63.35851 Y=14.02685 dX=-0.07 dY=-0.57
+Arc CW X=63.32704 Y=14.02935 dX=0.12 dY=1.73
+Line X=63.26416 Y=14.03494
+Arc CW X=63.23725 Y=14.03753 dX=0.16 dY=1.75
+Arc CCW X=63.21031 Y=14.03972 dX=-0.06 dY=-0.58
+Arc CW X=63.18338 Y=14.04211 dX=0.03 dY=0.44
+Arc CCW X=63.15645 Y=14.0445 dX=-0.05 dY=-0.44
+Line X=62.89665 Y=14.0515
+Line X=61.50692 Y=14.05195
+Line X=61.49979 Y=14.049
+Line X=61.10139 Y=13.65059
+Line X=61.10244 Y=13.64805
+Line X=62.9128 Y=13.64817
+Line X=63.22837 Y=13.63173
+Arc CW X=63.2533 Y=13.62823 dX=-0.02 dY=-0.25
+Line X=63.52258 Y=13.57608
+Arc CW X=63.55589 Y=13.56514 dX=-0.06 dY=-0.24
+Line X=63.76369 Y=13.48024
+Arc CW X=63.81948 Y=13.44849 dX=-0.09 dY=-0.23
+Line X=63.98258 Y=13.32529
+Arc CW X=64.03256 Y=13.27481 dX=-0.15 dY=-0.2
+Line X=64.11768 Y=13.15977
+Arc CW X=64.12038 Y=13.11558 dX=-0.03 dY=-0.02
+Arc CCW X=64.1217 Y=13.07132 dX=0.04 dY=-0.02
+Arc CW X=64.13953 Y=13.03689 dX=-0.17 dY=-0.11
+Line X=64.22253 Y=12.82939
+Arc CW X=64.23338 Y=12.79206 dX=-0.19 dY=-0.07
+Line X=64.28088 Y=12.53866
+Arc CW X=64.28405 Y=12.51193 dX=-0.2 dY=-0.04
+Line X=64.2995 Y=12.2
+Line X=64.29905 Y=7.90224
+Line X=64.30225 Y=7.89905
+Line X=64.79097
+Line X=64.79417 Y=7.90224
+Line X=64.8005 Y=12.19751
+Line X=64.79363 Y=12.45638
+Arc CCW X=64.79151 Y=12.48302 dX=-0.59 dY=-0.03
+Arc CW X=64.78899 Y=12.50963 dX=1.76 dY=0.18
+Line X=64.78435 Y=12.56288
+Arc CW X=64.78185 Y=12.59494 dX=1.78 dY=0.16
+Arc CCW X=64.77876 Y=12.62695 dX=-0.59 dY=-0.04
+Arc CW X=64.77597 Y=12.65898 dX=0.44 dY=0.05
+Arc CCW X=64.77318 Y=12.69102 dX=-0.45 dY=-0.02
+Line X=64.73904 Y=12.90392
+Arc CCW X=64.7362 Y=12.91595 dX=-0.19 dY=-0.04
+Arc CW X=64.73309 Y=12.92792 dX=0.57 dY=0.15
+Arc CW X=64.72816 Y=12.94892 dX=0.85 dY=0.21
+Arc CCW X=64.7227 Y=12.96979 dX=-0.29 dY=-0.06
+Arc CW X=64.71491 Y=13.0012 dX=0.31 dY=0.09
+Arc CCW X=64.70712 Y=13.03261 dX=-0.32 dY=-0.06
+Arc CW X=64.69933 Y=13.06402 dX=0.31 dY=0.09
+Arc CCW X=64.69154 Y=13.09542 dX=-0.32 dY=-0.06
+Arc CCW X=64.68803 Y=13.10618 dX=-0.24 dY=-0.07
+Arc CCW X=64.68396 Y=13.11674 dX=-0.18 dY=-0.06
+Arc CW X=64.67732 Y=13.13539 dX=0.16 dY=0.07
+Arc CCW X=64.67069 Y=13.15405 dX=-0.17 dY=-0.05
+Arc CW X=64.66074 Y=13.18203 dX=0.24 dY=0.1
+Arc CCW X=64.65079 Y=13.21 dX=-0.25 dY=-0.07
+Arc CW X=64.64085 Y=13.23798 dX=0.24 dY=0.1
+Arc CCW X=64.6309 Y=13.26596 dX=-0.25 dY=-0.07
+Arc CCW X=64.62568 Y=13.27705 dX=-0.13 dY=-0.06
+Arc CW X=64.62015 Y=13.28798 dX=0.39 dY=0.2
+Arc CW X=64.61255 Y=13.30418 dX=0.51 dY=0.25
+Arc CCW X=64.60445 Y=13.32013 dX=-0.17 dY=-0.08
+Arc CW X=64.59267 Y=13.34424 dX=0.19 dY=0.11
+Arc CCW X=64.58089 Y=13.36836 dX=-0.2 dY=-0.08
+Arc CW X=64.56911 Y=13.39247 dX=0.19 dY=0.11
+Arc CCW X=64.55734 Y=13.41658 dX=-0.2 dY=-0.08
+Arc CCW X=64.54651 Y=13.43312 dX=-0.14 dY=-0.08
+Arc CW X=64.53703 Y=13.44759 dX=0.1 dY=0.08
+Arc CCW X=64.52756 Y=13.46205 dX=-0.11 dY=-0.06
+Arc CW X=64.51334 Y=13.48376 dX=0.16 dY=0.12
+Arc CCW X=64.49913 Y=13.50546 dX=-0.17 dY=-0.1
+Arc CW X=64.48492 Y=13.52716 dX=0.16 dY=0.12
+Arc CCW X=64.4707 Y=13.54886 dX=-0.17 dY=-0.1
+Arc CCW X=64.46282 Y=13.55828 dX=-0.1 dY=-0.07
+Arc CW X=64.45464 Y=13.56743 dX=0.27 dY=0.25
+Line X=64.40645 Y=13.62315
+Arc CW X=64.39766 Y=13.63367 dX=0.3 dY=0.26
+Arc CCW X=64.38852 Y=13.64388 dX=-0.1 dY=-0.08
+Arc CW X=64.37956 Y=13.65424 dX=0.07 dY=0.07
+Arc CCW X=64.3706 Y=13.6646 dX=-0.08 dY=-0.06
+Arc CCW X=64.3614 Y=13.67295 dX=-0.09 dY=-0.08
+Arc CW X=64.35192 Y=13.68099 dX=0.23 dY=0.28
+
+Line X=64.33324 Y=13.69737
+Arc CW X=64.32368 Y=13.70605 dX=0.25 dY=0.29
+Arc CCW X=64.31384 Y=13.7144 dX=-0.09 dY=-0.09
+Arc CW X=64.29929 Y=13.72717 dX=0.09 dY=0.11
+Arc CCW X=64.28474 Y=13.73993 dX=-0.1 dY=-0.1
+Arc CW X=64.27019 Y=13.7527 dX=0.09 dY=0.11
+Arc CCW X=64.25563 Y=13.76547 dX=-0.1 dY=-0.1
+Arc CCW X=64.23915 Y=13.7764 dX=-0.09 dY=-0.12
+Arc CW X=64.22473 Y=13.78597 dX=0.07 dY=0.12
+Arc CCW X=64.2103 Y=13.79553 dX=-0.08 dY=-0.11
+
+Arc CW X=64.18867 Y=13.80988 dX=0.1 dY=0.18
+Arc CCW X=64.16705 Y=13.82422 dX=-0.13 dY=-0.17
+Arc CW X=64.14541 Y=13.83857 dX=0.1 dY=0.18
+Arc CCW X=64.12378 Y=13.85291 dX=-0.13 dY=-0.17
+Arc CCW X=64.10831 Y=13.86089 dX=-0.09 dY=-0.16
+Arc CW X=64.0926 Y=13.86837 dX=0.23 dY=0.5
+Line X=63.99907 Y=13.91473
+Arc CW X=63.98626 Y=13.9213 dX=0.23 dY=0.45
+Arc CCW X=63.97327 Y=13.92751 dX=-0.08 dY=-0.15
+Arc CCW X=63.9627 Y=13.93165 dX=-0.07 dY=-0.17
+Arc CCW X=63.95193 Y=13.93522 dX=-0.08 dY=-0.23
+Arc CW X=63.91457 Y=13.94871 dX=0.12 dY=0.38
+Arc CCW X=63.87722 Y=13.9622 dX=-0.15 dY=-0.37
+Arc CW X=63.83987 Y=13.97568 dX=0.12 dY=0.38
+Arc CCW X=63.80252 Y=13.98917 dX=-0.15 dY=-0.37
+Arc CCW X=63.7819 Y=13.99464 dX=-0.08 dY=-0.27
+Arc CW X=63.76116 Y=13.99959 dX=0.19 dY=0.83
+Line X=63.63707 Y=14.03083
+Arc CW X=63.62375 Y=14.03434 dX=0.16 dY=0.63
+Arc CCW X=63.61036 Y=14.03756 dX=-0.06 dY=-0.21
+Line X=63.39603 Y=14.07242
+Arc CCW X=63.36417 Y=14.07554 dX=-0.07 dY=-0.58
+Arc CW X=63.33226 Y=14.07808 dX=0.12 dY=1.76
+Line X=63.26849 Y=14.08374
+Arc CW X=63.24121 Y=14.08638 dX=0.16 dY=1.77
+Arc CCW X=63.21389 Y=14.08859 dX=-0.06 dY=-0.59
+Arc CW X=63.18658 Y=14.09101 dX=0.03 dY=0.44
+Arc CCW X=63.15928 Y=14.09344 dX=-0.05 dY=-0.44
+Line X=62.89731 Y=14.1005
+Line X=61.48662 Y=14.10095
+Line X=61.4795 Y=14.098
+Line X=60.98309 Y=13.60159
+Line X=60.98414 Y=13.59905
+Line X=62.91027 Y=13.59924
+Line X=63.22404 Y=13.58292
+Arc CW X=63.24405 Y=13.58012 dX=-0.02 dY=-0.2
+Line X=63.51061 Y=13.52856
+Arc CW X=63.53735 Y=13.51978 dX=-0.05 dY=-0.19
+Line X=63.75829 Y=13.42895
+Arc CW X=63.78995 Y=13.40939 dX=-0.09 dY=-0.18
+Line X=63.95304 Y=13.28619
+Arc CW X=63.99317 Y=13.24567 dX=-0.12 dY=-0.16
+Line X=64.11467 Y=13.08147
+Arc CW X=64.1217 Y=13.07132 dX=-0.16 dY=-0.12
+Arc CW X=64.11831 Y=13.02372 dX=-0.03 dY=-0.02
+Arc CCW X=64.11031 Y=12.97668 dX=0.03 dY=-0.03
+Line X=64.17657 Y=12.81101
+Arc CW X=64.18473 Y=12.78294 dX=-0.14 dY=-0.06
+Line X=64.23223 Y=12.52954
+Arc CW X=64.23461 Y=12.50944 dX=-0.15 dY=-0.03
+Line X=64.24981 Y=12.20754
+Line X=64.25 Y=12.2
+Line Y=7.85
+Line X=64.84314
+Line X=64.85 Y=12.19813
+Line X=64.84307 Y=12.45919
+Line X=64.82233 Y=12.69709
+Line X=64.78759 Y=12.91382
+Line X=64.73899 Y=13.10971
+Line X=64.67661 Y=13.28518
+Line X=64.60046 Y=13.4411
+Line X=64.5103 Y=13.57874
+Line X=64.44389 Y=13.65553
+Line X=64.40581 Y=13.69956
+Line X=64.28577 Y=13.80488
+Line X=64.14854 Y=13.89589
+Line X=63.99273 Y=13.97311
+Line X=63.81701 Y=14.03657
+Line X=63.62039 Y=14.08607
+Line X=63.4022 Y=14.12157
+Line X=63.16214 Y=14.14288
+Line X=62.89798 Y=14.15
+Line X=61.46213
+Line X=60.86213 Y=13.55
+Line X=62.9
+Line X=62.90773 Y=13.5498
+Line X=63.21413 Y=13.534
+Arc CW X=63.23471 Y=13.5315 dX=-0.01 dY=-0.15
+Line X=63.49021 Y=13.4824
+Arc CW X=63.51863 Y=13.47396 dX=-0.03 dY=-0.15
+Line X=63.72643 Y=13.38906
+Arc CW X=63.76011 Y=13.36989 dX=-0.06 dY=-0.14
+Line X=63.92321 Y=13.24669
+Arc CW X=63.95338 Y=13.21622 dX=-0.09 dY=-0.12
+Line X=64.07488 Y=13.05202
+Arc CW X=64.09357 Y=13.01851 dX=-0.12 dY=-0.09
+Line X=64.11031 Y=12.97668
+Feed Approach
+Line X=64.24957 Y=13.03239 Z=-0.085
+Rapid Z=15
+Rapid X=67.55 Y=13.84405
+Rapid Z=5
+Feed Plunge
+Line Z=2.5
+Line Z=-0.1
+Feed Roughing
+Line X=67.55276
+Line X=67.55595 Y=13.84724
+Line Y=13.85276
+Line X=67.55276 Y=13.85595
+Line X=65.93006
+Line X=65.92824 Y=13.8531
+Line X=65.93079 Y=13.84749
+Line X=65.9361 Y=13.84405
+Line X=67.55
+Arc CW X=67.57652 Y=13.83038 dX=0 dY=-0.03
+Arc CCW X=67.60354 Y=13.83297 dX=0.01 dY=0.01
+Arc CCW X=67.60495 Y=13.83947 dX=-0.01 dY=0.01
+Line Y=13.90176
+Line X=67.60175 Y=13.90495
+Line X=65.84921
+Line X=65.84766 Y=13.90238
+Line X=65.87511 Y=13.85008
+Arc CW X=65.89766 Y=13.79845 dX=-0.35 dY=-0.18
+Line X=65.90247 Y=13.79505
+Line X=67.60175
+Line X=67.60495 Y=13.79824
+Line Y=13.83947
+Arc CW X=67.62945 Y=13.87622 dX=0.04 dY=0
+Arc CCW X=67.65395 Y=13.91297 dX=-0.02 dY=0.04
+Line Y=13.95076
+Line X=67.65076 Y=13.95395
+Line X=65.76816
+Line X=65.7666 Y=13.95138
+Line X=65.83212 Y=13.82752
+Arc CW X=65.85717 Y=13.76612 dX=-0.31 dY=-0.16
+Line X=65.85944 Y=13.75778
+Line X=65.86171 Y=13.74944
+Line X=65.86626 Y=13.74605
+Line X=67.65076
+Line X=67.65395 Y=13.74924
+Line Y=13.91297
+Arc CW X=67.67845 Y=13.94972 dX=0.04 dY=0
+Arc CCW X=67.70295 Y=13.98647 dX=-0.02 dY=0.04
+Line Y=13.99976
+Line X=67.69975 Y=14.00295
+Line X=65.6871
+Line X=65.68555 Y=14.00038
+Line X=65.78873 Y=13.80475
+Arc CW X=65.80949 Y=13.75347 dX=-0.25 dY=-0.13
+Arc CCW X=65.82526 Y=13.70044 dX=9.89 dY=2.91
+Line X=65.82981 Y=13.69705
+Line X=67.69975
+Line X=67.70295 Y=13.70024
+Line Y=13.98647
+Arc CW X=67.72407 Y=14.01608 dX=0.03 dY=0
+Arc CCW X=67.73015 Y=14.04743 dX=-0.01 dY=0.02
+Arc CCW X=67.71806 Y=14.05195 dX=-0.01 dY=-0.01
+Line X=65.60397
+Line X=65.60255 Y=14.04925
+Arc CW X=65.61082 Y=14.03685 dX=-0.41 dY=-0.28
+Arc CW X=65.61834 Y=14.02398 dX=-0.14 dY=-0.09
+Line X=65.74534 Y=13.78198
+Arc CW X=65.76331 Y=13.73795 dX=-0.22 dY=-0.12
+Line X=65.7888 Y=13.65144
+Line X=65.79337 Y=13.64805
+Line X=67.74876
+Line X=67.75195 Y=13.65124
+Line Y=14.04876
+Line X=67.74876 Y=14.05195
+Line X=67.71806
+Arc CW X=67.6813 Y=14.07645 dX=0 dY=0.04
+Arc CCW X=67.64456 Y=14.10095 dX=-0.04 dY=-0.02
+Line X=65.50253
+Line X=65.50151 Y=14.09884
+Arc CCW X=65.52812 Y=14.06557 dX=3.16 dY=2.5
+Arc CW X=65.55474 Y=14.0323 dX=-3.14 dY=-2.54
+Arc CW X=65.57495 Y=14.00121 dX=-0.16 dY=-0.12
+Line X=65.70195 Y=13.75921
+Arc CW X=65.71638 Y=13.72386 dX=-0.18 dY=-0.09
+Line X=65.75236 Y=13.60244
+Line X=65.75691 Y=13.59905
+Line X=67.79776
+Line X=67.80095 Y=13.60224
+Line Y=14.09776
+Line X=67.79776 Y=14.10095
+Line X=67.64456
+Arc CW X=67.60777 Y=14.12547 dX=0 dY=0.04
+Arc CCW X=67.57098 Y=14.15 dX=-0.04 dY=-0.02
+Line X=65.39848
+Line X=65.51592 Y=14.00158
+Arc CW X=65.53112 Y=13.9782 dX=-0.12 dY=-0.09
+Line X=65.65812 Y=13.7362
+Arc CW X=65.66897 Y=13.70963 dX=-0.13 dY=-0.07
+Line X=65.71688 Y=13.55
+Line X=67.85
+Line Y=14.15
+Line X=67.57098
+Feed Approach
+Line Y=14 Z=-0.085
+Rapid Z=15
+Rapid X=57.72044 Y=9.85515
+Rapid Z=5
+Feed Plunge
+Line Z=2.5
+Line Z=-0.1
+Feed Roughing
+Line X=57.70201 Y=9.83672
+Line Y=9.83226
+Line X=59.43559 Y=8.09869
+Line X=59.44438 Y=8.09505
+Line X=59.51827
+Line X=59.51932 Y=8.09759
+Line X=57.74333 Y=9.87358
+Line X=57.73887
+Line X=57.72044 Y=9.85515
+Arc CW X=57.67713 Y=9.84649 dX=-0.03 dY=0.03
+Arc CCW X=57.63382 Y=9.83783 dX=-0.02 dY=-0.04
+Line X=57.63272 Y=9.83672
+Line Y=9.83226
+Line X=59.4153 Y=8.04969
+Line X=59.42409 Y=8.04605
+Line X=59.63657
+Line X=59.63762 Y=8.04859
+Line X=57.74333 Y=9.94288
+Line X=57.73887
+Line X=57.63382 Y=9.83783
+Arc CW X=57.60627 Y=9.82838 dX=-0.02 dY=0.02
+Arc CCW X=57.59016 Y=9.80713 dX=0 dY=-0.02
+Arc CCW X=57.59346 Y=9.80222 dX=0.01 dY=0.01
+Line X=59.395 Y=8.00069
+Line X=59.40379 Y=7.99705
+Line X=59.75486
+Line X=59.75592 Y=7.99959
+Line X=57.74333 Y=10.01218
+Line X=57.73887
+Line X=57.56342 Y=9.83672
+Line Y=9.83226
+Line X=57.59346 Y=9.80222
+Arc CW X=57.60212 Y=9.75891 dX=-0.03 dY=-0.03
+Arc CCW X=57.61079 Y=9.7156 dX=0.04 dY=-0.02
+Line X=59.37471 Y=7.95169
+Line X=59.3835 Y=7.94805
+Line X=59.87316
+Line X=59.87421 Y=7.95059
+Line X=57.74333 Y=10.08147
+Line X=57.73887
+Line X=57.49413 Y=9.83672
+Line Y=9.83226
+Line X=57.61079 Y=9.7156
+Arc CW X=57.61945 Y=9.67229 dX=-0.03 dY=-0.03
+Arc CCW X=57.62811 Y=9.62898 dX=0.04 dY=-0.02
+Line X=59.35441 Y=7.90269
+Line X=59.3632 Y=7.89905
+Line X=59.99146
+Line X=59.99251 Y=7.90159
+Line X=57.74333 Y=10.15077
+Line X=57.73887
+Line X=57.42483 Y=9.83672
+Line Y=9.83226
+Line X=57.62811 Y=9.62898
+Arc CW X=57.63678 Y=9.58563 dX=-0.03 dY=-0.03
+Arc CCW X=57.64545 Y=9.54227 dX=0.04 dY=-0.02
+Line X=59.33773 Y=7.85
+Line X=60.11347
+Line X=57.7411 Y=10.22237
+Line X=57.35323 Y=9.83449
+Line X=57.64545 Y=9.54227
+Feed Approach
+Line X=57.75152 Y=9.64834 Z=-0.085
+Rapid Z=15
+MoveToSafetyPosition
+ToolCompensation Off
+   
+$$$ SEQUENCE_Kontur__4
+Spindle On
+Smoothing On allowedDeviation=0.0024
+Dynamic = 5
+PrePositioning X=12.5687 Y=14.46109 Z=15
+Rapid Z=5
+Feed Approach
+Line Z=1
+Feed Plunge
+Line Z=0.5
+Feed Ramp
+Arc CCW X=7.21825 Y=10.62799 Z=0.22208 dX=-1.57 dY=-3.46
+Arc CCW X=13.21304 Y=7.91092 Z=-0.05585 dX=3.78 dY=0.37
+Arc CCW X=12.5687 Y=14.46109 Z=-0.33377 dX=-2.21 dY=3.09
+Arc CCW X=7.21825 Y=10.62799 Z=-0.6117 dX=-1.57 dY=-3.46
+Arc CCW X=13.21304 Y=7.91092 Z=-0.88962 dX=3.78 dY=0.37
+Arc CCW X=12.5687 Y=14.46109 Z=-1.16754 dX=-2.21 dY=3.09
+Arc CCW X=7.21825 Y=10.62799 Z=-1.44547 dX=-1.57 dY=-3.46
+Arc CCW X=13.21304 Y=7.91092 Z=-1.72339 dX=3.78 dY=0.37
+Arc CCW X=12.5687 Y=14.46109 Z=-2.00132 dX=-2.21 dY=3.09
+Arc CCW X=7.21825 Y=10.62799 Z=-2.27924 dX=-1.57 dY=-3.46
+Arc CCW X=13.21304 Y=7.91092 Z=-2.55716 dX=3.78 dY=0.37
+Arc CCW X=12.5687 Y=14.46109 Z=-2.83509 dX=-2.21 dY=3.09
+Arc CCW X=7.2 Y=11 Z=-3.1 dX=-1.57 dY=-3.46
+Feed Finishing
+Arc CCW X=12.9 Y=7.7091 dX=3.8 dY=0
+Arc CCW Y=14.2909 dX=-1.9 dY=3.29
+Arc CCW X=7.2 Y=11 dX=-1.9 dY=-3.29
+Arc CCW X=12.975 Y=7.6658 dX=3.85 dY=0
+Arc CCW X=14.9 Y=11 dX=-1.92 dY=3.33
+Arc CCW X=9.05 Y=14.3775 dX=-3.9 dY=0
+Arc CCW X=7.1 Y=11 dX=1.95 dY=-3.38
+Arc CCW X=13.025 Y=7.5792 dX=3.95 dY=0
+Arc CCW X=15 Y=11 dX=-1.97 dY=3.42
+Arc CCW X=9 Y=14.4641 dX=-4 dY=0
+Arc CCW Y=7.5359 dX=2 dY=-3.46
+Arc CCW X=15 Y=11 dX=2 dY=3.46
+Feed Approach
+Line X=14.24 Z=-3.024
+Line Z=5
+Rapid Z=15
+MoveToSafetyPosition
+ToolCompensation Off
+   
+$$$ SEQUENCE_Kontur2__5
+Spindle On
+Smoothing On allowedDeviation=0.0024
+Dynamic = 5
+PrePositioning X=75.614 Y=2.78821 Z=15
+Rapid Z=5
+Feed Approach
+Line Z=1
+Feed Plunge
+Line Z=0.5
+Feed Ramp
+Arc CW X=68 Y=-0.1985 Z=0.45459 dX=-7.61 dY=8.21
+Line X=11 Z=0.14541
+Arc CW X=1.19586 Y=16.41184 Z=0.01936 dX=0 dY=11.2
+Arc CW X=1.89113 Y=17.5144 Z=0.01229 dX=9.96 dY=-5.51
+Arc CW X=11 Y=22.1985 Z=-0.04541 dX=9.11 dY=-6.51
+Line X=68 Z=-0.35459
+Arc CW X=77.69819 Y=5.40075 Z=-0.4818 dX=0 dY=-11.2
+Arc CW X=68 Y=-0.1985 Z=-0.54541 dX=-9.7 dY=5.6
+Line X=11 Z=-0.85459
+Arc CW X=1.19586 Y=16.41184 Z=-0.98064 dX=0 dY=11.2
+Arc CW X=1.89113 Y=17.5144 Z=-0.98771 dX=9.96 dY=-5.51
+Arc CW X=11 Y=22.1985 Z=-1.04541 dX=9.11 dY=-6.51
+Line X=68 Z=-1.35459
+Arc CW X=77.69819 Y=5.40075 Z=-1.4818 dX=0 dY=-11.2
+Arc CW X=68 Y=-0.1985 Z=-1.54541 dX=-9.7 dY=5.6
+Line X=11 Z=-1.85459
+Arc CW X=1.19586 Y=16.41184 Z=-1.98064 dX=0 dY=11.2
+Arc CW X=1.89113 Y=17.5144 Z=-1.98771 dX=9.96 dY=-5.51
+Arc CW X=11 Y=22.1985 Z=-2.04541 dX=9.11 dY=-6.51
+Line X=68 Z=-2.35459
+Arc CW X=77.69819 Y=5.40075 Z=-2.4818 dX=0 dY=-11.2
+Arc CW X=68 Y=-0.1985 Z=-2.54541 dX=-9.7 dY=5.6
+Line X=39.5 Z=-2.7
+Feed Roughing
+Line X=11
+Arc CW X=1.19586 Y=16.41184 dX=0 dY=11.2
+Arc CW X=1.89113 Y=17.5144 dX=9.96 dY=-5.51
+Arc CW X=11 Y=22.1985 dX=9.11 dY=-6.51
+Line X=68
+Arc CW X=77.69819 Y=5.40075 dX=0 dY=-11.2
+Arc CW X=68 Y=-0.1985 dX=-9.7 dY=5.6
+Line X=39.5
+Arc CW X=39.42575 Y=-0.149 dX=0 dY=0.08
+Arc CCW X=39.3515 Y=-0.0995 dX=-0.07 dY=-0.03
+Line X=11
+Arc CW X=1.28249 Y=16.36392 dX=0 dY=11.1
+Arc CW X=1.9716 Y=17.45674 dX=9.87 dY=-5.46
+Arc CW X=11 Y=22.0995 dX=9.03 dY=-6.46
+Line X=68
+Arc CW X=77.61245 Y=5.45025 dX=0 dY=-11.1
+Arc CW X=68 Y=-0.0995 dX=-9.61 dY=5.55
+Line X=39.3515
+Arc CW X=39.27687 Y=-0.04975 dX=0 dY=0.08
+Arc CCW X=39.20225 Y=0 dX=-0.07 dY=-0.03
+Feed Finishing
+Line X=11
+Arc CW X=1.47372 Y=16.5 dX=0 dY=11
+Arc CW X=11 Y=22 dX=9.53 dY=-5.5
+Line X=68
+Arc CW X=77.52628 Y=5.5 dX=0 dY=-11
+Arc CW X=68 Y=0 dX=-9.53 dY=5.5
+Line X=39.20225
+Line X=38.20225
+Feed Approach
+Line Y=-0.76 Z=-2.624
+Rapid Z=15
+MoveToSafetyPosition
+ToolCompensation Off
+   
+$$$ SEQUENCE_Fase__6
+Spindle On
+Smoothing On allowedDeviation=0.0024
+Dynamic = 5
+PrePositioning X=67.6 Y=-0.5 Z=10
+Rapid Z=5
+Feed Approach
+Line Z=1
+Feed Plunge
+Line Z=-0.5
+Line X=67.60768 Z=-0.57804
+Line X=67.63045 Z=-0.65307
+Line X=67.66741 Z=-0.72223
+Line X=67.71716 Z=-0.78284
+Line X=67.77777 Z=-0.83259
+Line X=67.84693 Z=-0.86955
+Line X=67.92196 Z=-0.89231
+Line X=68 Z=-0.9
+Feed Approach
+Line X=68.4
+Arc CCW X=68 Y=-0.1 dX=-0.4 dY=0
+Feed Finishing
+Line X=11
+Arc CW X=1.38712 Y=16.55 dX=0 dY=11.1
+Arc CW X=11 Y=22.1 dX=9.61 dY=-5.55
+Line X=68
+Arc CW X=77.61288 Y=5.45 dX=0 dY=-11.1
+Arc CW X=68 Y=-0.1 dX=-9.61 dY=5.55
+Feed Approach
+Arc CCW X=67.6 Y=-0.5 dX=0 dY=-0.4
+Line X=68
+Line X=68.07804 Z=-0.89231
+Line X=68.15307 Z=-0.86955
+Line X=68.22223 Z=-0.83259
+Line X=68.28284 Z=-0.78284
+Line X=68.33259 Z=-0.72223
+Line X=68.36955 Z=-0.65307
+Line X=68.39232 Z=-0.57804
+Line X=68.4 Z=-0.5
+Rapid Z=5
+Rapid X=14.5 Y=11.4
+Feed Approach
+Line Z=1
+Feed Plunge
+Line Z=-0.5
+Line Y=11.39231 Z=-0.57804
+Line Y=11.36955 Z=-0.65307
+Line Y=11.33259 Z=-0.72223
+Line Y=11.28284 Z=-0.78284
+Line Y=11.22223 Z=-0.83259
+Line Y=11.15307 Z=-0.86955
+Line Y=11.07804 Z=-0.89231
+Line Y=11 Z=-0.9
+Feed Approach
+Line Y=10.6
+Arc CCW X=14.9 Y=11 dX=0 dY=0.4
+Feed Finishing
+Arc CCW X=9.05 Y=14.3775 dX=-3.9 dY=0
+Arc CCW Y=7.6225 dX=1.95 dY=-3.38
+Arc CCW X=14.9 Y=11 dX=1.95 dY=3.38
+Feed Approach
+Arc CCW X=14.5 Y=11.4 dX=-0.4 dY=0
+Line Y=11
+Line Y=10.92196 Z=-0.89231
+Line Y=10.84693 Z=-0.86955
+Line Y=10.77777 Z=-0.83259
+Line Y=10.71716 Z=-0.78284
+Line Y=10.66741 Z=-0.72223
+Line Y=10.63045 Z=-0.65307
+Line Y=10.60769 Z=-0.57804
+Line Y=10.6 Z=-0.5
+Rapid Z=10
+MoveToSafetyPosition
+ToolCompensation Off
+

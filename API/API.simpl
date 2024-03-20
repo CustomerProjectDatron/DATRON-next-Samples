@@ -1,0 +1,90 @@
+﻿module API
+
+@ MeasuringSystem = "Metric" @
+
+using Base
+import Http
+import CommonTypes
+
+structure UserPw (username:string, password:string)
+token = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBcGlCYXNpYyI6InRydWUiLCJBcGlBdXRvbWF0aW9uIjoidHJ1ZSIsIkNvY2twaXRBcHAiOiJ0cnVlIiwiQ2FtZXJhQXBwIjoidHJ1ZSIsIkFsZXJ0QXBwIjoiZmFsc2UiLCJSZW1vdGVMaW5rQXBwIjoidHJ1ZSIsInN1YiI6ImJlbmphbWluIiwiZXhwIjoxNzA0Njk4NzY5LCJpc3MiOiJsb2NhbGhvc3QiLCJhdWQiOiJsb2NhbGhvc3QifQ.zvN9gqanXX7xqw1GMScElJet1w2QzYMtRi3LOrYHyU0"
+tokenHeader:CommonTypes::StringPair[] = {{"Authorization",token}}
+
+ip = "localhost"
+#ip= "172.18.2.72"
+
+export program Main
+    GetToken
+    GetWorkpieces
+
+    GetVariable
+    GetMachine
+    exit 
+
+    # Send request with Authentifikation 
+    token = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJBcGlCYXNpYyI6InRydWUiLCJBcGlBdXRvbWF0aW9uIjoidHJ1ZSIsIkNvY2twaXRBcHAiOiJ0cnVlIiwiQ2FtZXJhQXBwIjoidHJ1ZSIsIkFsZXJ0QXBwIjoiZmFsc2UiLCJSZW1vdGVMaW5rQXBwIjoidHJ1ZSIsInN1YiI6ImJlbmphbWluIiwiZXhwIjoxNzA0Njk4NzY5LCJpc3MiOiJsb2NhbGhvc3QiLCJhdWQiOiJsb2NhbGhvc3QifQ.zvN9gqanXX7xqw1GMScElJet1w2QzYMtRi3LOrYHyU0"
+    storedString = "StoredData"
+    savevalueof storedString
+    
+ 
+endprogram
+
+program GetToken
+    # Get Token
+    user:UserPw = {"benjamin", "benjamin"}
+    jsonPW = ValueToJson("test", user)
+
+    resultToken = Http::HttpSend( 
+        requestUri=ip +"/api/User/CreateToken" 
+        Post 
+        verifyServerCertificates=false 
+        content=jsonPW)   
+
+    a=1
+endprogram
+
+program GetVariable
+   
+    params:CommonTypes::StringPair[] = {
+    {"name","storedString"}}
+    
+    warum = Http::HttpSend( 
+        requestUri=ip + "/api/Variable/StringVariable?name=storedString" 
+  #      uriParameter=params
+        Get 
+        verifyServerCertificates=false
+        httpHeader=tokenHeader       
+        )
+        
+    a=1
+endprogram
+program GetWorkpieces
+     
+    params:CommonTypes::StringPair[] = {
+    {"name","storedString"}}
+    
+    warum = Http::HttpSend( 
+        requestUri=ip + "/api/Machine/Licenses" 
+        Get 
+        verifyServerCertificates=false
+      
+        useInSimulation
+        httpHeader=tokenHeader       
+        )
+        
+    a=1
+endprogram
+
+program GetMachine
+    
+    warum = Http::HttpSend( 
+        requestUri=ip + "/api/Machine/MachineNumber" 
+        Get 
+        verifyServerCertificates=false
+        httpHeader=tokenHeader
+        )
+ 
+   a=1
+endprogram
+
+end

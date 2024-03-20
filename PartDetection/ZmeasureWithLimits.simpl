@@ -1,0 +1,48 @@
+﻿module PartExist
+# copy this file to the "Library" Folder of the machine and refresh the library.
+
+@ MeasuringSystem = "Metric" @
+
+using AxisSystem
+using LinearAlgebraHelper
+using MeasuringCyclesExecutor
+import System
+import Machine
+using String
+import XyzSensor
+import LinearAlgebra
+import CommonTypes
+
+structure measureLimitResult (zHeigth:number, partExist:boolean)
+result : measureLimitResult
+
+@doc: With this program you can check the existence of a part.
+It drives relative to the current Position the Z Axis with the defined searchDistance down.
+If the probe hits a part it returns "true" otherwise "false"  @
+export program CheckPart searchDistance:number returns measureLimitResult
+    ExecuteMeasuringCycle cycle=CheckPartCycle(searchDistance=searchDistance) 
+    return result
+endprogram
+
+program CheckPartCycle searchDistance:number
+    StartPos = GetRcsPosition
+    
+    tipRadius = XyzSensor::GetProbeTipRadius   
+    measureResult = Measure(
+        feed=1000 
+        Z=StartPos.Z - searchDistance + tipRadius
+        distanceAfterMeasuring=5
+        acceptMeasuringWithoutDetection
+        ignoreMissingAxes)
+        
+    measuringResultVector:CommonTypes::MeasuringResultVector = {
+        NewPos(measureResult.X,measureResult.Y, measureResult.Z),
+        NewPos(0,0,-1), measureResult.MeasuringDetected}
+               
+    zPlane = LinearAlgebra::CreatePlaneFromMeasuringResultVector(measuringResultVector, GetRcsMatrix)
+    
+    result =  {zPlane.basePoint.Z, measureResult.MeasuringDetected}    
+    Rapid targetPosition=StartPos
+endprogram
+
+end

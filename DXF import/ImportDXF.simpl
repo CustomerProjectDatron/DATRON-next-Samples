@@ -10,7 +10,7 @@ import CommonEnumerations
 import LinearAlgebraHelper
 using SimulationPrimitives
 
-# decalre the circle commands 
+# declare the circle DXF codes 
 circleEntity = "CIRCLE"
 xPosGroupCode = "10"
 yPosGroupCode = "20"
@@ -32,8 +32,10 @@ endprogram
 @
 export program ParseDxfCircles rows:string[] returns Circle[]
 
+    # create the result list
     circles:Circle[] = {}
 
+    # set the circle to empty
     currentCircle = GetEmptyCircle()
     for rowIndex from 0 to sizeof  rows -1
         row = rows[rowIndex]

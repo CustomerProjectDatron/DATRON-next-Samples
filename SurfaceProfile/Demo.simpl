@@ -1,0 +1,57 @@
+﻿module Demo
+
+@ MeasuringSystem = "Metric" @
+
+using Base
+import MeasureCorner
+import CommonTypes
+import MeasureSurfaceCompensationZGrid
+
+wcsList:string[] = {"teil1","teil2"}
+
+export program Main
+    # measure all parts
+    PrepareXyzSensor
+    foreach part in wcsList   
+        SetupPart wcsName=part  
+    endforeach
+    UnprepareXyzSensor
+    
+    # mill all parts
+    foreach part in wcsList
+        SurfaceCompensationDataLoad(
+         name=part)
+        
+        Mill
+        SurfaceCompensation Off
+    endforeach 
+endprogram
+
+program SetupPart wcsName:string
+    LoadWcs name=wcsName
+    
+    SafeRapid X=0 Y=0 Z=15
+    CornerMeasure FrontLeft Outside yMeasureXOffsetForRotation=50
+       
+    
+    # begin auto generated code : [SurfaceCompensationCameraMeasuring]
+    SafeRapid X=0 Y=0
+    measurePixelActives:boolean[] = { true, true, true, true, true, true, true, true, true }
+    measurePoints:CommonTypes::MeasuringInputVector[] = { { { 11.670446064155 , 3.12221727025974 , 14.9697 , 0 , 0 , 0 } , { 0 , 0 , -1 , 0 , 0 , 0 } , 15 }, { { 11.6704459276917 , 41.6437457299319 , 14.9697 , 0 , 0 , 0 } , { 0 , 0 , -1 , 0 , 0 , 0 } , 15 }, { { 11.6704457912284 , 80.1652741896039 , 14.9697 , 0 , 0 , 0 } , { 0 , 0 , -1 , 0 , 0 , 0 } , 15 }, { { 64.6406136605184 , 3.12221745790753 , 14.9697 , 0 , 0 , 0 } , { 0 , 0 , -1 , 0 , 0 , 0 } , 15 }, { { 64.6406135240556 , 41.6437459175795 , 14.9697 , 0 , 0 , 0 } , { 0 , 0 , -1 , 0 , 0 , 0 } , 15 }, 
+{ { 64.6406133875925 , 80.1652743772516 , 14.9697 , 0 , 0 , 0 } , { 0 , 0 , -1 , 0 , 0 , 0 } , 15 }, { { 117.610781256883 , 3.1222176455552 , 14.9697 , 0 , 0 , 0 } , { 0 , 0 , -1 , 0 , 0 , 0 } , 15 }, { { 117.610781120419 , 41.6437461052273 , 14.9697 , 0 , 0 , 0 } , { 0 , 0 , -1 , 0 , 0 , 0 } , 15 }, { { 117.610780983956 , 80.1652745648994 , 14.9697 , 0 , 0 , 0 } , { 0 , 0 , -1 , 0 , 0 , 0 } , 15 } }
+    MeasureSurfaceCompensationZGrid::SurfaceCompensationZGridMeasureCommandClipboard ( measurePixelActives=measurePixelActives measurePoints=measurePoints retractDistance=15 minZDistance=-50 referenceZ=0 extrapolationAreaZ=5 extrapolationAreaXY=17.5482981531417 setAsInitialValue=true countX=3 countY=3 skipPositioning=true)
+    # end auto generated code
+    SurfaceCompensation Off
+    SurfaceCompensationDataSave name=wcsName
+endprogram
+
+program Mill
+    SafeRapid X=50 Y=50 Z=15
+    CircleFromMid(
+    diameter=40
+    Inside
+    depth=1
+    strokeRapidZ=10)
+
+endprogram
+end

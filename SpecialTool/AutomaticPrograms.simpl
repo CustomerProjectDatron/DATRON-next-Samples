@@ -1,0 +1,177 @@
+﻿# This is an exemplary module defining automatic programs.
+# To enable automatic programs, a module whose name
+# EXACTLY matches the name of this exmaple module, i.e. AutomaticPrograms
+# must be present in the Machine/Library folder or a subfolder of it.
+# Note that the Filename of the .simpl file containing the module
+# DOES NOT MATTER
+# Note that the names of the programs to be excuted automatically must 
+# EXACTLY match the names of the programs in this example. Otherwise, they will not be excuted
+# It is perfectly reasobale to omit any of the automatic programs, if they ars not needed.
+
+module AutomaticPrograms
+
+using Base, HandlerUtilities
+import SpecialTool
+
+# This program is executed BEFORE any machining program,
+# which is not a library program, is started
+#
+# When a machining program is started from an editor window via 'run from Label',
+# this program is executed before the execution from label is being prepared
+# 
+export program OnStart
+    # This displays a dialog that allows to cancel execution
+    Dialog Ok Cancel message="External gadget will be switched on
+    
+Click Ok to continue
+Click Cancel to abort execution."
+
+    # This activates an external gadget via a digital output 
+    SwitchOnExternalGadget
+
+    # the following line has the effect, that a specific IdleHandler is registered
+    # before any machnining program is started.
+    #
+    # Generally, an IdleHandler is ONLY executed if exeution of the machining program 
+    # has been aborted, once the machine was reactivated and is ready to run programs.
+    # The IdleHandler is NOT executed if the machining program runs to it's end normally.
+    #
+    # Note that any number of IdleHandlers may be added and also removed during program
+    # execution. If an IdleHandler is added in the OnStart program, it will be excuted 
+    # AFTER any other IdleHandler which has been added by the actual machining program
+    # or by any library program that has been called from it
+    #
+    AddIdleHandler handler=ShowMessageOnIdle
+    
+    # the following line has the effect, that a specific ErrorHandler is registered
+    # before any machnining program is started.
+    #
+    # Generally, an ErrorHandler is ONLY executed if exeution of the machining program 
+    # has been aborted, immediately once the abort has happened. This implies, that the 
+    # programs that may be executed in the ErrorHandler are VERY restricted. 
+    # One of the few things that ARE allowed in an ErrorHandler is 
+    # switching digital outputs, like in this example.
+    #
+    # Note that any number of ErrorHandlers may be added and also removed during program
+    # execution. If an ErrorHandler is added in the OnStart program, it will be excuted 
+    # AFTER any other ErrorHandler which has been added by the actual machining program
+    # or by any library program that has been called from it.
+    #
+    AddErrorHandler handler=SwitchOffExternalGadget
+
+endprogram
+
+# This program is executed AFTER any machining program,
+# which is not a library program, has been executed without errors.
+#
+# When a machining program is started from an editor window via 'run from Label',
+# this program is executed only if the label has been found. 
+#
+export program OnEnd
+    Dialog Ok message="External gadget will be switched off"
+    SwitchOffExternalGadget
+endprogram
+
+# This program is executed whenever a reference run has been executed successfully
+#
+export program OnReferenced
+    result = Dialog Yes No message="Machine was referenced successfully
+    
+Click Yes to move to park position.
+Click No to proceed without moving to park position"
+
+    if result == DialogResult.Yes
+        MoveToParkPosition  askForRestore=false
+    endif
+endprogram
+
+# This program is executed whenever the machine has benn switched to the 'ON' state 
+# after power up
+#
+export program OnInitialized
+    Dialog Ok message="Machine was initialized successfully"
+endprogram
+
+# This program is always executed before a tool measurement starts.
+# If neeeded: Add an IdleHandler or ErrorHandler to handle an aborted tool measurement.
+#
+export program BeforeToolMeasuring
+    Dialog Ok message="Tool measurement will be started"
+endprogram
+
+# This program is always executed after a tool measurement ends successfully.
+# If neeeded: Remove any IdleHandler or ErrorHandler added before tool measurement.
+#
+export program AfterToolMeasuring
+    Dialog Ok message="Tool measurement finished successfully"
+endprogram
+
+# This program is always executed before a tool change starts.
+# If neeeded: Add an IdleHandler or ErrorHandler to handle an aborted tool change.
+#
+export program BeforeToolChanging
+    # VOr dem WZ Wechsel muss hier aufgeräumt werden um eventuelle Schlitten usw.
+    # wieder nach oben zu fahrne um bei normalen WZ Wechseln keine kollision im 
+    # WZ Wechsler zu erzeugen
+    
+    # Diese Programmme sollten in einer Library definiert werden und 
+    # im Libraray ordner abgelegt werden
+    MovePickAndPlaceSLiderUp
+    DeaktivateVacuum
+    # ........
+endprogram
+
+# This program is always executed after a tool change ends successfully.
+# If neeeded: Remove any IdleHandler or ErrorHandler added before tool change.
+#
+export program AfterToolChanging
+    # Hier kann geprüft werden ob ein "specialTool" eingewechselt wurde
+    # So kann hier der Schlitten nach unten gefahren werden oder andere Aktion
+    # ausgelöst werden
+      
+    # Diese Programmme sollten in einer Library definiert werden und 
+    # im Libraray ordner abgelegt werden
+    if SpecialTool::IsSpecialTool()
+        MovePickAndPlaceSLiderDown
+        ActivateVacuum  
+        
+    endif
+  
+    # ......
+endprogram
+
+# This program is always executed before a measuring cycle starts.
+# If neeeded: Add an IdleHandler or ErrorHandler to handle an aborted measuring cycle.
+#
+export program BeforeMeasuringCycle
+    Dialog Ok message="Measuring cycle will be started"
+endprogram
+
+# This program is always executed after a measuring cycle ends successfully.
+# If neeeded: Remove any IdleHandler or ErrorHandler added before measuring cycle.
+#
+export program AfterMeasuringCycle
+    Dialog Ok message="Measuring cycle finished successfully"
+endprogram
+
+# this program is installed as general IdleHandler in program OnStart above
+# Note that the name of this program DOES NOT MATTER
+export program ShowMessageOnIdle
+    Dialog Ok message="Machine has been reactivated"
+endprogram
+
+# this program is installed as  general ErrorHandler in program OnStart above,
+# and also called from OnEnd
+# Note that the name of this program DOES NOT MATTER
+export program SwitchOffExternalGadget
+    SetUserOutput OUTPUT_1 Off 
+endprogram
+
+# this program is called from program OnStart above,
+# Note that the name of this program DOES NOT MATTER
+export program SwitchOnExternalGadget
+    SetUserOutput OUTPUT_1 On
+endprogram
+
+end
+

@@ -1,0 +1,85 @@
+﻿module SurfaceProfile
+
+@ MeasuringSystem = "Metric" @
+
+using Base
+import MeasureCircle
+import CommonTypes
+import MeasureSurfaceCompensationZGrid
+
+wcsNames:string[] = {"Circle1","Circle2"}
+
+export program Main
+    foreach clampingPos in wcsNames                                                                                                                                                                                                                                                                                                         
+       MeasurePart  wcsName=clampingPos
+    endforeach
+    
+    foreach clampingPos in wcsNames
+        LoadWcs name=clampingPos
+        PriorMainProgramFromCAM
+    endforeach
+    
+    SurfaceCompensation Off
+endprogram
+
+program MeasurePart optional wcsName:string
+    
+    if wcsName hasvalue
+      LoadWcs name=wcsName  
+    endif
+
+    PrepareXyzSensor
+    SurfaceCompensation Off
+    # begin auto generated code : [Camera measured Circle]
+    SafeRapid X=3.099 Y=-1.545
+    circleMeasureVectors:CommonTypes::MeasuringInputVector[] = { { { -9.46902491863753 , 0.885090568564648 , -0.500000000000014 , 0 , 0 , 0 } , { 0.999959420178403 , 0.0090087733056687 , 0 , 0 , 0 , 0 } , 3.65878313390464 } , { { 1.80465652875798 , 12.3637510243506 , -0.500000000000014 , 0 , 0 , 0 } , { 0.00900877330567421 , -0.999959420178402 , 0 , 0 , 0 , 0 } , 3.65878313390464 } , { { 13.2833169845439 , 1.09006957695508 , -0.500000000000014 , 0 , 0 , 0 } , { -0.999959420178403 , -0.00900877330567413 , 0 , 0 , 0 , 0 } , 3.65878313390464 } , { { 2.0096355371484 , -10.3885908788309 , -0.500000000000014 , 0 , 0 , 0 } , { -0.00900877330567419 , 0.999959420178403 , 0 , 0 , 0 , 0 } , 3.65878313390464 } }
+    secondCircleMeasureVectors:CommonTypes::MeasuringInputVector[] = {  }
+    MeasureCircle::CircleMeasureCommandClipboard ( initialPosition=Position = { 3.09880043775453 , -1.54476266263978 , 15 , 0 , 0 , 0 } originalZHeight=0 circleMeasureVectors=circleMeasureVectors  secondCircleMeasureVectors=secondCircleMeasureVectors view=MeasuringView.Outside resultCs=CsType.Wcs originShift=Position = { 0 , 0 , 0 , 0 , 0 , 0 } retractDistance=15 name="Camera measured Circle" skipPositioning=true forceSafeHeight=false skipZMeasureResult=false skipZMeasure=false)
+    # end auto generated code
+
+    # begin auto generated code : [SurfaceCompensationCameraMeasuring]
+    SafeRapid X=0 Y=0
+    measurePixelActives:boolean[] = { false, true, false, true, true, true, false, true, false }
+    measurePoints:CommonTypes::MeasuringInputVector[] = { 
+        { { -8.95859956224546 , -9.08639609220513 , 14.9999 , 0 , 0 , 0 } , { 0 , 0 , -1 , 0 , 0 , 0 } , 15 }, 
+        { { -8.95859956224546 , 0.695337337360227 , 14.9999 , 0 , 0 , 0 } , { 0 , 0 , -1 , 0 , 0 , 0 } , 15 }, 
+        { { -8.95859956224546 , 10.4770707669256 , 14.9999 , 0 , 0 , 0 } , { 0 , 0 , -1 , 0 , 0 , 0 } , 15 }, 
+        { { 1.06240674898814 , -9.08639609220513 , 14.9999 , 0 , 0 , 0 } , { 0 , 0 , -1 , 0 , 0 , 0 } , 15 }, 
+        { { 1.06240674898814 , 0.695337337360227 , 14.9999 , 0 , 0 , 0 } , { 0 , 0 , -1 , 0 , 0 , 0 } , 15 }, 
+        { { 1.06240674898814 , 10.4770707669256 , 14.9999 , 0 , 0 , 0 } , { 0 , 0 , -1 , 0 , 0 , 0 } , 15 },
+        { { 11.0834130602217 , -9.08639609220513 , 14.9999 , 0 , 0 , 0 } , { 0 , 0 , -1 , 0 , 0 , 0 } , 15 }, 
+        { { 11.0834130602217 , 0.695337337360227 , 14.9999 , 0 , 0 , 0 } , { 0 , 0 , -1 , 0 , 0 , 0 } , 15 }, 
+        { { 11.0834130602217 , 10.4770707669256 , 14.9999 , 0 , 0 , 0 } , { 0 , 0 , -1 , 0 , 0 , 0 } , 15 } }
+    MeasureSurfaceCompensationZGrid::SurfaceCompensationZGridMeasureCommandClipboard ( 
+        measurePixelActives=measurePixelActives 
+        measurePoints=measurePoints 
+        retractDistance=15 
+        minZDistance=-50 
+        referenceZ=0 
+        extrapolationAreaZ=5 
+        extrapolationAreaXY=8.03556662630093 
+        setAsInitialValue=true 
+        countX=3 
+        countY=3 
+        skipPositioning=true)
+    # end auto generated code
+
+    UnprepareXyzSensor
+    if wcsName hasvalue
+        SurfaceCompensationDataSave name=wcsName    
+    endif
+endprogram
+
+program PriorMainProgramFromCAM
+    
+    SafeRapid X=0 Y=0 Z=15
+    CircleFromMid( 
+        diameter=20
+        Inside
+        strokeRapidZ=10
+        strokeCuttingZ=1
+        depth=2)
+
+endprogram
+
+end

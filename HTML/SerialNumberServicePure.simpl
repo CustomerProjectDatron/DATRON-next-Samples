@@ -1,0 +1,103 @@
+﻿module HTML_Report
+
+@ MeasuringSystem = "Metric" @
+
+using Base
+using String
+using File
+
+cr = "
+"
+
+export program Main
+    htmlTemplate = FileRead( filename="HTMLTemplate.html")
+     
+    htmlResult = StringFormat(
+        baseString=htmlTemplate
+        p0="Nur die harten"
+        p1=CreateHtmlTable(dataTable=CreateTestData))
+    
+    FileDelete filename="Reslt.html"
+    FileWrite filename="Reslt.html" value=htmlResult
+endprogram
+
+export program CreateHtmlTable dataTable:string[][] returns string
+
+    htmlTable = "<div class=""table-responsive"">" + cr
+    htmlTable = " <thead class=""thead-dark"">" + cr
+    htmlTable = htmlTable + "<table class=""table table-hover table-responsive table-striped"">" + cr
+         
+    foreach row in dataTable
+        htmlTable = htmlTable + "<tr>"
+        
+        foreach col in row
+            htmlTable = htmlTable + StringFormat(
+                baseString="<th>{0}</th>" + cr
+                p0=col)
+        endforeach
+               
+        htmlTable = htmlTable + "</tr>" + cr
+    endforeach
+    
+    htmlTable = htmlTable + "</table>" + cr
+    htmlTable = htmlTable + "</thead>" + cr
+    htmlTable = htmlTable + "</div>" + cr
+ 
+    return htmlTable
+endprogram
+
+export program CreateMdTable dataTable:string[][] returns string
+    mdTable:string
+    
+    for rowIndex from 1 to sizeof dataTable
+        row = dataTable[rowIndex]
+        mdTable = mdTable + "<tr>"
+        
+        foreach col in row
+            mdTable = mdTable + StringFormat(
+                baseString="|{0}"
+                p0=col)
+        endforeach
+        mdTable = mdTable + "|"
+        mdTable = mdTable + "
+"
+    endfor
+    
+    return mdTable
+endprogram
+
+export program CreateCsvTable dataTable:string[][] returns string
+
+    htmlTable = "<div class=""table-responsive"">"
+    htmlTable = " <thead class=""thead-dark"">"
+    htmlTable = htmlTable + "<table class=""table table-hover table-responsive table-striped"">"
+         
+    foreach row in dataTable
+        htmlTable = htmlTable + "<tr>"
+        
+        foreach col in row
+            htmlTable = htmlTable + StringFormat(
+                baseString="<th>{0}</th>"
+                p0=col)
+        endforeach
+               
+        htmlTable = htmlTable + "</tr>"
+    endforeach
+    
+    htmlTable = htmlTable + "</table>"
+    htmlTable = htmlTable + "</thead>"
+    htmlTable = htmlTable + "</div>"
+ 
+    return htmlTable
+endprogram
+
+program CreateTestData returns string[][]
+    data:string[][] = {}     
+    append string[] = {"diameter","measured","difference"} to data
+    append string[] = {"12","12.001","0.001"} to data
+    append string[] = {"20","19.9","-0.1"} to data
+    append string[] = {"13","13.2","0.2"} to data
+    return data
+endprogram
+
+end

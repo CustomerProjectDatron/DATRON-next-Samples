@@ -1,0 +1,69 @@
+﻿module Spielwiese
+
+@ MeasuringSystem = "Metric" @
+
+using Base
+import System
+using LinearAlgebraHelper
+import CommonEnumerations
+using SimulationPrimitives
+import PathMath
+using Visualization
+import LinearAlgebra
+
+
+
+@cell:plot
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+@
+
+export program Main
+    postions:Position[]={
+        NewPos(0,0,0),
+        NewPos(100,0,0),
+        NewPos(100,100,0),
+        NewPos(0,0,0)
+    }    
+
+    circle1 = GetCirclePositions(diameter=5)
+
+    testTab = PathMath::PositionListToTable positions=circle1
+    
+    secondPos = TransformPositions positions=postions transformation=LinearAlgebra::CreateTranslation(NewPos(150,200,0))
+     testTab2 = PathMath::PositionListToTable positions=secondPos
+  
+    mySeries:Series[]={
+        {"test", testTab, "x", "y",Red,"dsf" },
+        {"test", testTab2, "x", "y",Green,"dsf"}        
+    }
+    
+    ShowSeries cellName="plot" series=mySeries 
+endprogram
+
+program GetCirclePositions diameter:number returns Position[]
+    resultPositions:Position[]={}
+    for gamma from 0 to 2 * Pi step Pi / 20
+        nextPos = NewPos(
+            diameter / 2 * Cos(gamma),
+            diameter / 2 * Sin(gamma),
+            0
+        )
+        append nextPos to resultPositions
+    endfor
+    
+    return resultPositions
+endprogram
+
+end

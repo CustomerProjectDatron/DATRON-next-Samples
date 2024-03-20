@@ -1,0 +1,147 @@
+﻿module Process
+
+@ MeasuringSystem = "Metric" @
+
+using Base
+import Pattern
+using File
+using String
+
+structure FileReader (rows:string[], currentRowNumber:number, output:string[])
+structure Token (isToken:boolean, keyName:string, content:string)
+operationNames:string[]={}
+
+export program Main
+    externalModulName = "AnhängerOberseite2.simpl" 
+    newFilename = "Test.simpl"
+
+    RewriteProgram filename=externalModulName newFilename=newFilename
+
+    # Laden der exportierten Operation aus dem externen Programm 
+    # Das wird über "savevalueof" gemacht da wir keine Rückgabewerte bei "RunExternalProgram" haben
+    # So können wir es dann einfach hier laden
+    RunExternalProgram(
+        modulePath=newFilename
+        simulation 
+        programName="ExportOperations")
+
+    # Der Name "operations" muss genauso heißen wie der gespeicherte im Fräsprogramm
+    operations:string[]
+    loadvalueof operations
+    
+    # Nun beginnt der Spaß mit der Ausführung  
+    SafeZHeightForWorkpiece = 20 
+    foreach prg in operations
+        Pattern::RectanglePattern( 
+            xCount=4 
+            yCount=3 
+            deltaX=100 
+            deltaY=30 
+            callProgram=(
+                RunExternalProgram(
+                    modulePath=newFilename
+                    simulation 
+                    programName=prg)))
+    endforeach    
+endprogram
+
+
+####################################################################################
+
+program RewriteProgram filename:string newFilename:string
+    fileContent = FileRead( filename=filename)
+    rows = StringSplit(fileContent, "
+")
+    reader:FileReader  = {rows, 0,{}}
+    ParseFile reader=ref reader
+    WriteFile reader=ref reader resultFilename=newFilename
+    
+   # WriteMarkdownFile reader=ref reader    
+endprogram
+
+program ParseFile ref reader:FileReader
+    handeld= false
+    while reader.currentRowNumber < sizeof reader.rows 
+        ParsePrograms reader=ref reader
+        ParseEnd  reader=ref reader
+
+        if      reader.currentRowNumber < sizeof reader.rows
+            append reader.rows[reader.currentRowNumber] to reader.output       
+            reader.currentRowNumber = reader.currentRowNumber + 1           
+        endif
+        
+    endwhile  
+endprogram
+
+program ParseEnd  ref reader:FileReader
+    content = KeyWordContent(row=reader.rows[reader.currentRowNumber] keyWord="end" firstWord)
+    if content.isToken and content.content == ""
+        append "export program ExportOperations" to reader.output
+        append "    operations:string[]={" to reader.output
+        
+        for operationIndex from 0 to sizeof operationNames -1
+            operation = operationNames[operationIndex]
+            operationLine = "    """ + operation + """"
+            if operationIndex < sizeof operationNames - 1
+                operationLine = operationLine +","
+            endif
+            
+            append operationLine to reader.output    
+            
+        endfor
+           
+        append "    }" to reader.output    
+        append "    savevalueof operations" to reader.output         
+        append "endprogram" to reader.output
+         
+    endif        
+endprogram
+
+program ParsePrograms ref reader:FileReader
+    content = KeyWordContent(row=reader.rows[reader.currentRowNumber] keyWord="program" firstWord)
+    if content.isToken
+        append StringReplace(reader.rows[reader.currentRowNumber],"program", "export program") to reader.output
+        append content.content to operationNames
+        reader.currentRowNumber = reader.currentRowNumber + 1           
+    endif
+endprogram
+
+program KeyWordContent row:string keyWord:string optional firstWord:boolean returns Token
+    if not firstWord hasvalue
+        firstWord = false
+    endif
+    
+    row = StringTrim(row)
+    keywordIndex = StringIndexOf(StringToLower(row), StringToLower(keyWord))
+    
+    if firstWord and keywordIndex <> 0
+        return Token={false,keyWord,""}    
+    endif
+    
+    if keywordIndex <> -1
+        startIndex = keywordIndex + StringLength(keyWord)
+        content = StringSubString(
+            row,
+            startIndex,
+            StringLength(row) - startIndex)
+        content = StringTrim(content)
+        return Token={true,keyWord,content}
+    endif
+    
+    return Token={false,keyWord,""}
+endprogram
+
+program WriteFile ref reader:FileReader resultFilename:string
+    fileContent = ""
+    foreach row in reader.output
+        fileContent = fileContent + row + "
+"
+    endforeach    
+     
+    if FileExists(filename=resultFilename)
+        FileDelete filename=resultFilename
+    endif
+    FileWrite filename=resultFilename value=fileContent
+endprogram
+
+end

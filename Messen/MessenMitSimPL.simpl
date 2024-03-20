@@ -1,0 +1,166 @@
+﻿module MessenMitSimPL
+
+@ MeasuringSystem = "Metric" @
+
+using Base
+import ToolParameter
+import CommonTypes
+using LinearAlgebraHelper
+using String
+import Math
+cr = "
+"
+
+export program Main
+ #   ShapeTolerance
+    PositionTolerance
+endprogram
+
+@doc: These Funktion are ready to use for measuring shape tolerances@
+program ShapeTolerance
+    # Rectangles
+    rectRes = RectangleMeasure dimensionX=20 dimensionY=20 None
+    width = rectRes.DimensionX
+    height = rectRes.DimensionY
+    
+    #Circle
+    circRes = CircleMeasure(diameter=20 measurePointCount=9 None)
+    diameter = circRes.DimensionX  # Here you can use both DimensionX or DimensionY     
+endprogram
+
+program ShapeToleranceStatistic
+endprogram
+
+   @image:LageToleranz.png
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    @
+@doc: for setup the origin and rotation of the part must be measured@
+program PositionTolerance
+    # define the hole position
+    expectedPosition = NewPos(10,25,0)
+    expectedDiameter = 20
+    
+    # setup part for accurate delta of the hole
+    SafeRapid X=0 Y=0 Z=15
+    CornerMeasure(
+        FrontLeft
+        Outside
+        xMeasureYOffsetForRotation=100)
+    
+    # Drive to start position
+    SafeRapid X=expectedPosition.X Y=expectedPosition.Y Z=expectedPosition.Z + 15
+
+    # measure Circle
+    measResult = CircleMeasure(
+        diameter=expectedDiameter
+        Inside
+        None
+        measurePointCount=6)
+
+    # get the result pos of the circle as position
+    measuredCenter = NewPos(
+        measResult.MeasuredPosition.X,
+        measResult.MeasuredPosition.Y,
+        measResult.MeasuredPosition.Z)
+        
+    # calculate the deviation
+    deltaPos = SubPosition(measuredCenter, expectedPosition)
+    deltaDiameter = measResult.DimensionX - expectedDiameter
+    absDeltaPos = AbsPosition(deltaPos)
+    
+    # simple use of the result
+    if Math::Abs(deltaDiameter) > 0.05
+        Dialog message="Diameter out of tolerance" Warning 
+        #exit
+    endif
+    # simple use of the result
+    if absDeltaPos > 0.05
+        Dialog message="Position out of tolerance" Warning 
+        #exit
+    endif
+    
+    # make a clean output, in Markdown the new buddy in the hood
+    # MD Header of the table
+    mdTable:string[] = {}
+    append "|Element|expected|measured|delta|" to mdTable
+    append "|--|--|--|--|" to mdTable
+    append StringFormat(
+        baseString="|{0:f3}|{1:f3}|{2:f3}|{3:f3}|" 
+        p0="xPos"
+        p1=expectedPosition.X
+        p2=measuredCenter.X
+        p3=deltaPos.X ) to mdTable
+   append StringFormat(
+        baseString="|{0:f3}|{1:f3}|{2:f3}|{3:f3}|" 
+        p0="yPos"
+        p1=expectedPosition.Y
+        p2=measuredCenter.Y
+        p3=deltaPos.Y ) to mdTable
+   append StringFormat(
+        baseString="|{0:f3}|{1:f3}|{2:f3}|{3:f3}|" 
+        p0="zPos"
+        p1=expectedPosition.Z
+        p2=measuredCenter.Z
+        p3=deltaPos.Z ) to mdTable
+   append StringFormat(
+        baseString="|{0:f3}|{1:f3}|{2:f3}|{3:f3}|" 
+        p0="diameter"
+        p1=expectedDiameter
+        p2=measResult.DimensionX
+        p3=deltaDiameter ) to mdTable
+ 
+    # combine all rows
+    message = ""
+    foreach element in mdTable
+        message = message + element + cr
+    endforeach
+    
+    # show result
+    Dialog message=message caption="Measure Result" enableMarkdown
+    
+endprogram
+
+program CalculatePositionTolerance(
+    expectedPos:Position
+    measureResult:MeasuringDataWithInfo
+    optional expectedDimensionX:number
+    optional expectedDimensionY:number
+)
+
+    # create a Position form the measure result
+    measuredPos = NewPos(
+        measureResult.MeasuredTransformation.TranslationX,
+        measureResult.MeasuredTransformation.TranslationY,
+        measureResult.MeasuredTransformation.TranslationZ)
+
+    # calculate the difference
+    deltaPos = SubPosition(measuredPos,expectedPos)
+    
+    # calculate the total position error the "abs" of a vector 
+    # is ith`s length
+    delta = AbsPosition(deltaPos)
+endprogram
+
+end
