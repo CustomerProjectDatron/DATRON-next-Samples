@@ -1,0 +1,237 @@
+﻿module VisionUserLibrary
+
+@ MeasuringSystem = "Metric" @
+
+using Base, String
+
+import AxisSystem, System, Vision
+
+export enumeration DialogActivation (Yes, No)
+export enumeration ScaleActivation (withScale, withoutScale)
+
+strCRLF:string = "
+"
+strTAB:string = "   "
+
+setResultWcs:CsType = CsType.Wcs
+
+Zpos:number = 0
+
+export program Vision3Points (
+    optional WcsName:string @doc: Optional WCS call and save measurement to@
+    Xpos1:number @doc: X-Position 1@
+    Ypos1:number @doc: Y-Position 1@
+    Xpos2:number @doc: X-Position 2@
+    Ypos2:number @doc: Y-Position 2@
+    Xpos3:number @doc: X-Position 3@
+    Ypos3:number @doc: Y-Position 3@
+    ID1:number @doc: ID number of first fiducial@
+    optional ID2:number @doc: ID number of second fiducial (in the best case it should be the same ID #performance)@
+    optional ID3:number @doc: ID number of third fiducial (in the best case it should be the same ID #performance)@
+    optional ResultDialog:DialogActivation
+    Scale:ScaleActivation
+    )
+    
+    scaling:boolean = false
+    
+    if not ID2 hasvalue
+        ID2 = ID1
+    endif
+    
+    if not ID3 hasvalue
+        ID3 = ID1
+    endif
+    
+    if not Scale hasvalue
+        scaling = true
+    else
+        if Scale == ScaleActivation.withScale
+            scaling = false
+        else
+            scaling = true
+        endif
+    endif
+    
+    if not ResultDialog hasvalue
+        ResultDialog = DialogActivation.No
+    endif
+
+    pos1=Vision::NewVisionPosition (Xpos1, Ypos1, Zpos, ID1)
+    pos2=Vision::NewVisionPosition (Xpos2, Ypos2, Zpos, ID2)
+    pos3=Vision::NewVisionPosition (Xpos3, Ypos3, Zpos, ID3)
+    
+    SafeZHeightForWorkpiece = 15
+    
+    result1 = Vision::VisionMeasureDualPosition(
+                                targetPosition1=pos1 
+                                targetPosition2=pos2  
+                                supressScale = scaling
+                                skipPositioning
+                                )
+    
+    # Store actual measured Scale in X
+    actScaleX = AxisSystem::GetWcs.scaleX
+
+    result2 = Vision::VisionMeasureDualPosition(
+                                targetPosition1=pos1 
+                                targetPosition2=pos3 
+                                supressScale = scaling
+                                supressRotation = true
+                                skipPositioning
+                                )
+    
+    # Store actual measured Scale in Y and actual WCS               
+    actScaleY = AxisSystem::GetWcs.scaleY
+    actWcs = AxisSystem::GetWcs
+               
+    if ResultDialog == DialogActivation.Yes
+        Dialog (
+            message = (
+                GetFormattedString(p0="Offset" p1="X" p2=result1.MeasuredPosition.X p3="mm") +
+                GetFormattedString(p0="Offset" p1="Y" p2=result1.MeasuredPosition.Y p3="mm") +
+                GetFormattedString(p0="Rotation" p2=result1.MeasuredTransformation.RotationZ p3="°") +
+                GetFormattedString(p0="Scale" p1="X" p2=actScaleX p3="") +
+                GetFormattedString(p0="Scale" p1="Y" p2=actScaleY p3=""))
+            Info 
+            caption="DATRON Vision"
+        )
+    endif
+    
+    # Set actual wcs based on stored data from above
+    SetWcs (
+        X=actWcs.X
+        Y=actWcs.Y
+        Z=actWcs.Z
+        scaleX=actScaleX 
+        scaleY=actScaleY
+        alpha=actWcs.alpha
+        beta=actWcs.beta
+        gamma=result1.MeasuredTransformation.RotationZ
+        )
+    
+    
+    SetWcsInitial
+    
+    if WcsName hasvalue
+        SetCurrentWcs name=WcsName
+    endif
+
+endprogram
+
+@doc: Measure two points and return shift value@
+export program Vision2Points (
+    optional WcsName:string @doc: Optional WCS call and save measurement to@
+    Xpos1:number @doc: X-Position 1@
+    Ypos1:number @doc: Y-Position 1@
+    Xpos2:number @doc: X-Position 2@
+    Ypos2:number @doc: Y-Position 2@
+    ID1:number @doc: ID number of first fiducial@
+    optional ID2:number @doc: ID number of second fiducial (in the best case it should be the same ID #performance)@
+    optional ResultDialog:DialogActivation
+    ) returns MeasuringDataWithInfo
+    
+    if not ID2 hasvalue
+        ID2 = ID1
+    endif
+    
+    if not ResultDialog hasvalue
+        ResultDialog = DialogActivation.No
+    endif
+
+    pos1=Vision::NewVisionPosition (Xpos1, Ypos1, Zpos, ID1)
+    pos2=Vision::NewVisionPosition (Xpos2, Ypos2, Zpos, ID2)
+    
+    SafeZHeightForWorkpiece = 15
+    
+    result = Vision::VisionMeasureDualPosition(
+                                targetPosition1=pos1 
+                                targetPosition2=pos2  
+                                resultCs=setResultWcs
+                                skipPositioning
+                                forceSafeHeight
+                                retractDistance = 10
+                                )
+               
+    if ResultDialog == DialogActivation.Yes
+        Dialog (
+            message = (
+                GetFormattedString(p0="Offset" p1="X" p2=result.MeasuredPosition.X p3="mm") +
+                GetFormattedString(p0="Offset" p1="Y" p2=result.MeasuredPosition.Y p3="mm") +
+                GetFormattedString(p0="Rotation" p2=result.MeasuredTransformation.RotationZ p3="°"))
+            Info 
+            caption="DATRON Vision"
+        )
+    endif
+
+    if WcsName hasvalue
+        SetCurrentWcs name=WcsName
+    endif
+
+    return result
+endprogram
+
+@doc: Measure one point and return shift value@
+export program Vision1Point (
+    optional WcsName:string @doc: Optional WCS call and save measurement to@
+    Xpos1:number @doc: X-Position 1@
+    Ypos1:number @doc: Y-Position 1@
+    ID1:number @doc: ID number of first fiducial@
+    optional ResultDialog:DialogActivation
+    ) returns MeasuringDataWithInfo
+    
+    if WcsName hasvalue
+        LoadWcs name=WcsName
+        setResultWcs = CsType.Wcs
+    endif
+    
+    if not ResultDialog hasvalue
+        ResultDialog = DialogActivation.No
+    endif
+    
+    pos1 = Vision::NewVisionPosition (Xpos1, Ypos1, Zpos, ID1)
+    
+    result = Vision::VisionMeasureSinglePosition(
+                                targetPosition = pos1 
+                                Wcs
+                                )
+
+    if ResultDialog == DialogActivation.Yes
+        Dialog (
+            message = (
+                GetFormattedString(p0="Offset" p1="X" p2=result.MeasuredPosition.X p3="mm") +
+                GetFormattedString(p0="Offset" p1="Y" p2=result.MeasuredPosition.Y p3="mm"))
+            Info 
+            caption="DATRON Vision"
+        )
+    endif
+
+    if WcsName hasvalue
+        SetCurrentWcs name=WcsName
+    endif
+    
+    return result
+endprogram
+
+program GetFormattedString (p0:string optional p1:string p2:number p3:string) returns string
+    stringTemplate:string = "{0}: {1} = {2} {3}"
+    newString:string = ""
+    
+    if not p1 hasvalue
+        p1 = ""
+    endif
+    
+    newString = StringFormat (baseString=stringTemplate p0=p0 p1=p1 p2=GetRoundedResultAsString(result=p2) p3=p3) + strCRLF + strCRLF  
+    return newString
+endprogram
+
+program GetRoundedResultAsString (result:number) returns string
+    value = ValueToString(RoundDecimals(result, 3))
+    return value
+endprogram
+
+program SetCurrentWcs (name:string)
+    SaveWcs name=name
+    LoadWcs name=name
+endprogram
+
+end

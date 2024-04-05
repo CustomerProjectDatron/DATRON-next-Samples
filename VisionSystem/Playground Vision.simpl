@@ -1,0 +1,32 @@
+﻿module Process
+
+using Base
+using Vision
+using MeasuringCommonValues
+using Http
+import AxisSystem
+import VisionUserLibrary
+
+export program Main
+
+    LoadWcs name="VisionTest"
+
+    VisionUserLibrary::Vision3Points(
+        Xpos1 = 65
+        Ypos1 = 5
+        Xpos2 = 165
+        Ypos2 = 5
+        Xpos3 = 65
+        Ypos3 = 95
+        ID1 = 1992
+        WcsName="MyWcsName"
+        withScale
+        )
+
+    LoadWcs name="MyWcsName"
+    
+    a = 1
+    
+endprogram
+
+end
