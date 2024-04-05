@@ -1,10 +1,6 @@
 ﻿module Process
 
 using Base
-using Vision
-using MeasuringCommonValues
-using Http
-import AxisSystem
 import VisionUserLibrary
 
 export program Main
