@@ -1,0 +1,192 @@
+﻿module DeepLTranslation
+
+@ MeasuringSystem = "Metric" @
+@ Author = "Benjamin Böck" @
+@ Comment = "This module allow the translation of text with the DeepL api. " @
+
+<--
+# DeepL translation in simpl
+
+This module can be used to translate texts in SimPL. This enables automated localization of texts within the control system.
+To use it, an account must be created at DeepL to obtain a key. 
+
+The free key allows the translation of 500 000 characters / month. It is therefore advisable to run the translation only once and save the result. 
+
+This module need the next option "Rest API automation". For testing it is possible to archive a sample key from DATRON.
+
+## Installation
+
+To be able to use the module, it should be copied into the "Machine/Library" folder and this should be updated. Then the methods from other SimPL programs can be used. 
+
+## Usage 
+
+After the module has been installed, the commands can be used as follows:
+
+```
+sourceText = string[]={"Die DATRON AG grüßt seine Kunden und wünscht ihnen Erfolg."}                
+translatedText = DeepLTranslate text=sourceText ZH
+
+```
+-->
+
+using Base
+using CommonTypes
+using String
+
+# This module need the option "Rest API automation"
+# for testing it is possible to archive a sample key from DATRON
+import Http
+
+# define structures to extract the result json into simpl structures
+structure Content (text:string[], target_lang:string)
+structure TranslationElement (
+    detected_source_language:string,
+    text:string)
+
+structure DeepLTranslationResult (
+    translations:TranslationElement[])
+ 
+structure DeepLLanguageResult (
+    language:string,
+    name:string)   
+    
+structure LanguageContainer (
+    languages:DeepLLanguageResult[]
+)
+    
+export enumeration DeepLLanguages (BG,CS,DA,DE,EL,EN,ES,ET,FI,FR,HU,ID,IT,JA,KO,LT,LV,NB,NL,PL,PT,RO,RU,SK,SL,SV,TR,UK,ZH)    
+
+# insert your api key fromm DeepL
+# Follow the instruction on this link to create a account with an API key
+# https://developers.deepl.com/docs/getting-started/auth
+# insert your key in the following style:
+# apiKey = "aeadfb7a-95eb-4f3e-9234-455f5dad540b:fx"
+
+apiKey = "[Your Key]"
+
+# If you use the paid version use the other route:
+baseRoute = "https://api-free.deepl.com/v2" # Free
+#baseRoute = "https://api.deepl.com/v2" # Paid Deepl account
+
+export program Main
+    DeepLTranslationUsageSample
+endprogram
+
+@doc: A sample to show the usage of the translation module@
+export program DeepLTranslationUsageSample
+    suportedLanguages = DeepLSupportedLanguages showDialog
+
+    sourceText = string[]={"Die DATRON AG grüßt seine Kunden und wünscht ihnen Erfolg."}                
+    translatedText = DeepLTranslate text=sourceText ZH
+
+    message = StringFormat(baseString="# source text
+    
+{0}
+
+# translated text
+
+{1}" 
+        p0=ValueToString(sourceText) 
+        p1=ValueToString(transatedText))
+        
+    Dialog message=message caption="DeepL translated Text" enableMarkdown
+endprogram
+
+@doc: Translate a given text[] in the defined language.@
+export program DeepLTranslate(
+    text:string[]   @doc: Text to be translated. The language is auto recognized by the DeeplL api @
+    optional language:DeepLLanguages    @doc: Definition of the target language. Default: EN@
+    ) returns string[]
+    
+    if not language hasvalue
+        language = DeepLLanguages.EN
+    endif    
+    
+    data:Content = {text,ValueToString(language)}
+    
+    headerParameter:StringPair[] = {}
+      
+    # create authentication parameter
+    authParam:StringPair = {"Authorization","DeepL-Auth-Key " + apiKey}    
+    append  authParam to headerParameter
+    
+    jsonResult = Http::HttpSend(
+        requestUri=baseRoute + "/translate"
+        httpHeader=headerParameter        
+        content=ValueToJson("data",data)
+        Post        
+        )
+    
+    CheckHttpResponse result=jsonResult
+    
+    targetObject:DeepLTranslationResult
+    deserializevalueof withjson targetObject from jsonResult
+    
+    results:string[] = {}
+    foreach translation  in  targetObject.translations
+        append translation.text to results
+    endforeach
+    
+    return results
+endprogram
+
+@doc: Get all supported languages from the api@
+export program DeepLSupportedLanguages(
+    optional showDialog:boolean @doc: Shows a dialog with all supported languages.@
+    ) returns DeepLLanguageResult[]
+    
+    headerParameter:StringPair[] = {}
+      
+    # create authentication parameter
+    authParam:StringPair = {"Authorization","DeepL-Auth-Key " + apiKey}    
+    append  authParam to headerParameter
+    
+
+    jsonResult = Http::HttpSend(
+        requestUri=baseRoute + "/languages?type=source"
+        httpHeader=headerParameter 
+        Get            
+        )
+    
+    CheckHttpResponse result=jsonResult
+    
+    jsonResult = "{""languages"":" + jsonResult + "}"
+    
+    targetObject:LanguageContainer
+    deserializevalueof withjson targetObject from jsonResult
+       
+    if not showDialog hasvalue
+        showDialog = false
+    endif    
+    if showDialog
+        markdownTable = ""
+        rowTemplate = "|{0}|{1}|
+"
+        markdownTable = markdownTable + StringFormat(baseString=rowTemplate p0="name" p1="language") 
+        markdownTable = markdownTable + StringFormat(baseString=rowTemplate p0="--" p1="--") 
+        
+        foreach language  in  targetObject.languages
+            markdownTable = markdownTable + StringFormat(baseString=rowTemplate p0=language.name p1=language.language) 
+        endforeach
+        
+        Dialog message=markdownTable enableMarkdown   caption="Supported languages"  
+    endif
+    
+    return targetObject.languages
+endprogram
+
+program CheckHttpResponse result:string
+    # check     
+    responseCode = Http::HttpGetResponseCode 
+    if responseCode <> 200
+        message = StringFormat(baseString="Error during Translation
+Http error code: {0}
+Return value:
+{1}"    
+            p0=responseCode p1=result)
+
+        Dialog message=message Error caption="Error during Translation"
+    endif
+endprogram
+
+end
