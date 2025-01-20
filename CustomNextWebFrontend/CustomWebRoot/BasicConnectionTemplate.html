@@ -1,0 +1,85 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>API Status Viewer</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+      }
+      #status {
+        margin-top: 20px;
+        padding: 10px;
+        border: 1px solid #ccc;
+        background-color: #f9f9f9;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>API Status Viewer</h1>
+
+    <section id="status"></section>
+
+    <h2>Custom Content</h2>
+    <p>
+      This is a basic HTML template that fetches machine status and status light
+      from an API endpoint. The status light is displayed as the background
+      color
+    </p>
+    <p>
+      With this template, you can establish a connection to the machine and use
+      the token to make further API requests.
+    </p>
+
+    <div id="WorkingWithVariables"></div>
+    <div id="Execute"></div>
+
+    <script>
+   
+      function loadScript(src) {
+        return new Promise((resolve, reject) => {
+          const script = document.createElement("script");
+          script.src = src;
+          script.onload = () => resolve(script);
+          script.onerror = () =>
+            reject(new Error(`Failed to load script ${src}`));
+          document.body.appendChild(script);
+        });
+      }
+
+      async function loadTemplate(src, id) {
+        const response = await fetch(src);
+        const template = await response.text();
+        document.getElementById(id).innerHTML = template;
+      }
+
+      loadTemplate("StatusTemplate.html", "status").then(() => {
+        loadScript("ConnectToApi.js").then(() => {          
+          // Ensure the updateMachineStatus function is available
+          if (typeof updateMachineStatus === "function") {
+            pollingInterval = setInterval(updateMachineStatus, 1000); // Fetch status every 1 second
+          } else {
+            console.error("updateMachineStatus function is not available.");
+          }
+        });
+      });
+
+      loadTemplate("WorkingWithVariables.html", "WorkingWithVariables").then(
+        () => {
+          loadScript("WorkingWithVariables.js");
+        }
+      );
+
+      loadTemplate("Execute/Execute.html", "Execute").then(
+        () => {
+          loadScript("Execute/Execute.js");
+        }
+      );
+
+      // // Start polling machine status
+      // startPolling();
+    </script>
+  </body>
+</html>

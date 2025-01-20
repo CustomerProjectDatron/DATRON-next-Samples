@@ -1,0 +1,107 @@
+<h2>Get String Variable</h2>
+<p>
+  You can get a string variable by entering the variable name below and
+  clicking the "Fetch Variable" button.
+</p>
+<p>
+  These variables can be read from SimPL using savevalueof and loadvalueof. This
+  allows communication with the program being executed.
+</p>
+
+<img
+  src="http://localhost/custom/PersistedValues.png"
+  alt="Persisted Value Image"
+  style="max-width: 600px"
+/>
+
+<div id="stringVariableSection">
+  <label for="getVariableName">Variable Name:</label>
+  <input type="text" id="getVariableName" placeholder="Enter variable name" />
+  <button id="getVariable">Get Variable</button>
+  <div>
+    <strong>Variable Value:</strong>
+    <span id="getVariableValue">N/A</span>
+  </div>
+</div>
+
+<h2>Set String Variable</h2>
+<p>
+  You can set a string variable by entering the variable name and value below
+  and clicking the "Set Variable" button.
+</p>
+<div id="setStringVariableSection">
+  <label for="setVariableName">Variable Name:</label>
+  <input type="text" id="setVariableName" placeholder="Enter variable name" />
+  <label for="setVariableValue">Variable Value:</label>
+  <input type="text" id="setVariableValue" placeholder="Enter variable value" />
+  <button id="setVariable">Set Variable</button>
+  <div>
+    <strong>Set Result:</strong>
+    <span id="setResult">N/A</span>
+  </div>
+</div>
+
+<p>
+  <details>
+    <summary>working with structures</summary>
+
+    <p>
+      For more complex requirements, it may be useful to exchange structures.
+      These need to be manually serialized as JSON, as there is no standard
+      interface for this. The code example shows how this could look.
+    </p>
+
+    <pre
+      id="codeSnippet"
+      style="
+        background-color: #f4f4f4;
+        padding: 10px;
+        border: 1px solid #ccc;
+        font-family: monospace;
+      "
+    >
+  <code>
+    module SerialisationSample
+
+    @ MeasuringSystem = "Metric" @
+
+    using Base
+
+    # declaration of the structure
+    structure myStructure (width:number, height:number, depth:number, mill:boolean)
+
+    export program Main
+        # init structure
+        myStructureValue:myStructure = {30, 20, 5, true}
+        
+        # save value
+        myJsonSerializedValue = ValueToJson("", myStructureValue)
+        savevalueof myJsonSerializedValue
+        
+        # load value
+        loadvalueof myJsonSerializedValue
+        deserializevalueof withjson myStructureValue from myJsonSerializedValue    
+    endprogram
+
+    end
+  </code>
+  </pre>
+    <button id="copyCode">Copy Code</button>
+
+    <script>
+      document
+        .getElementById("copyCode")
+        .addEventListener("click", function () {
+          const codeSnippet = document.getElementById("codeSnippet").innerText;
+          navigator.clipboard.writeText(codeSnippet).then(
+            function () {
+              alert("Code copied to clipboard!");
+            },
+            function (err) {
+              console.error("Could not copy text: ", err);
+            }
+          );
+        });
+    </script>
+  </details>
+</p>
