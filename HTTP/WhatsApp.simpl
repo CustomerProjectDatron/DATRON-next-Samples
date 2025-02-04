@@ -11,7 +11,7 @@ cr="
 "
 
 export program Main
-    #SetReciever phoneNumber=4915161423585 apiKey=4043160
+    #SetReciever phoneNumber=123456789 apiKey=1234567
     answer = SendWhatsapp message="Hey Jo"  
     Dialog message=answer
 endprogram
