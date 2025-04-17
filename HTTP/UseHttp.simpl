@@ -1,0 +1,56 @@
+﻿module UseHttp
+<-- This is a simple example of how to use the Http library to make a GET request to an external API and parse the JSON response.
+This example uses the official joke API to get a random joke and display it in a dialog box. 
+-->
+
+@ MeasuringSystem = "Metric" @
+
+using Base
+import Http
+import String
+
+structure JokeResultType (
+    type:string,
+    setup:string,
+    punchline:string,
+    id:number)
+
+export program Main
+    # Mak a simple call to an external API
+    result = Http::HttpSend requestUri="https://official-joke-api.appspot.com/random_joke" Get 
+  
+    <--
+    the result looks like this:
+    {
+        "type": "general",
+        "setup": "How do hens stay fit?",
+        "punchline": "They always egg-cercise!",
+        "id": 118
+    }
+    
+    to use this json object, we need to parse it first.
+    for this we need to declare the structure of the json object.
+    this is done by creating a structure like the result in the header of the program
+    -->
+
+    # now we can deserialize the json object into a variable of the type we just created
+    # this is done by using the function deserializevalueof withjson
+    jokeResult:JokeResultType
+    deserializevalueof withjson jokeResult from result
+    
+    # now we can use the values of the json object like a normal variable
+    jokeType = jokeResult.type
+    
+    # lets format the output with markdown
+    dialogMassage = String::StringFormat(
+        baseString="**Type:** {0}
+**setup:** {1}
+**punchline:** {2}"
+        p0=jokeResult.type
+        p1=jokeResult.setup
+        p2=jokeResult.punchline)
+    
+    Dialog message=dialogMassage caption="Random joke result" enableMarkdown
+endprogram
+
+end
